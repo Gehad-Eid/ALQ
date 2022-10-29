@@ -7,4 +7,4 @@ const kTextColor = Color(0xFF023047);
 const kTextLightColor = Color(0xFF747474);
 const kBlueColor = Color(0xFF40BAD5);
 
-const kDefaultPadding = 20.1;
+const kDefaultPadding = 23.0;
