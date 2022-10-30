@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 const cBackground = Color.fromARGB(255, 245, 243, 237);
@@ -9,4 +7,4 @@ const kTextColor = Color(0xFF023047);
 const kTextLightColor = Color(0xFF747474);
 const kBlueColor = Color(0xFF40BAD5);
 
-const kDefaultPadding = 25.0;
+const kDefaultPadding = 20.0;
