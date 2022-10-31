@@ -7,8 +7,7 @@ import 'screens/chapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-);
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -21,7 +20,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      //under the "home" property
+      //for testing sign in & up : WelcomeScreen()
+      //for testing Chapters & profile & whatever else : header()
+      home: header(),
     );
   }
 }
