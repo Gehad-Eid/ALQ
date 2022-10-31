@@ -12,7 +12,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
-}
+} //test if it is working
 
 class MyApp extends StatelessWidget {
   @override
