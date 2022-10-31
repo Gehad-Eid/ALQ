@@ -13,6 +13,7 @@ void main() async {
   );
   runApp(MyApp());
 } //test if it is working
+//propreties
 
 class MyApp extends StatelessWidget {
   @override
