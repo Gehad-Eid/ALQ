@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'screens/chapters.dart';
 
+
 // Import the generated file
 import 'firebase_options.dart';
 
