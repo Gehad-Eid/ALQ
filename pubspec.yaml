@@ -40,6 +40,8 @@ dependencies:
   cloud_firestore: ^4.0.3
   firebase_core: ^2.1.1
   toast: ^0.3.0
+  email_validator: ^2.1.17
+  fluttertoast: ^8.1.1
 
 
 dev_dependencies:

@@ -1,4 +1,3 @@
-import 'package:alqgp/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {
@@ -60,10 +59,17 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text("Logout"),
-            onTap: () => print("logout"),
+            onTap: () => logout(context),
           ),
         ],
       ),
     );
+  }
+
+  // the logout function
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => WelcomeScreen()));
   }
 }
