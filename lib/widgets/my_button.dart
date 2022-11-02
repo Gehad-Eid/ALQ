@@ -13,17 +13,20 @@ class MyButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Material(
         elevation: 5,
+        borderRadius: BorderRadius.circular(30),
         color: color,
-        borderRadius: BorderRadius.circular(10),
         child: MaterialButton(
-          onPressed: onPressed,
-          minWidth: 200,
-          height: 42,
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+            padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            minWidth: MediaQuery.of(context).size.width,
+            onPressed: onPressed,
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            )),
       ),
     );
   }

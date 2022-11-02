@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
 
       routes: {
         WelcomeScreen.screenRout: (context) => WelcomeScreen(),
-        SignInScreen.screenRout: (context) => const SignInScreen(),
-        //RegistrationScreen.screenRout: (context) => const RegistrationScreen(),
-        sign_up.screenRout: (context) => const sign_up(),
+        LoginScreen.screenRout: (context) => const LoginScreen(),
+        RegistrationScreen.screenRout: (context) => const RegistrationScreen(),
+        //sign_up.screenRout: (context) => const sign_up(),
         //here will be the :
         //profile
         header.screenRout: (context) => const header(),

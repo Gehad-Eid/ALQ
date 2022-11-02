@@ -110,17 +110,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(height: 30),
             MyButton(
               color: Color.fromARGB(255, 156, 22, 22)!,
-              title: 'Sign in',
+              title: 'Log in',
               onPressed: () {
-                Navigator.pushNamed(context, SignInScreen.screenRout);
+                Navigator.pushNamed(context, LoginScreen.screenRout);
               },
             ),
             MyButton(
               color: Color.fromARGB(255, 22, 70, 124)!,
-              title: 'Register',
+              title: 'Sign up',
               onPressed: () {
-                //Navigator.pushNamed(context, RegistrationScreen.screenRout);
-                Navigator.pushNamed(context, sign_up.screenRout);
+                Navigator.pushNamed(context, RegistrationScreen.screenRout);
+                //Navigator.pushNamed(context, sign_up.screenRout);
               },
             )
           ],

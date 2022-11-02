@@ -1,237 +1,16 @@
-import 'package:alqgp/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
-
-class sign_up extends StatefulWidget {
-  //prop
-  static const String screenRout = 'signup';
-  const sign_up({super.key});
-
-  @override
-  State<sign_up> createState() => _sign_upState();
-}
-
-class _sign_upState extends State<sign_up> {
-  TextEditingController fname = TextEditingController();
-  TextEditingController lastname = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirm = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    ToastContext().init(context);
-  }
-
-  sign_up() {
-    CollectionReference db = FirebaseFirestore.instance.collection("student");
-    db.doc().set({
-      "FIRST_NAME": fname.text,
-      "LAST_NAME": lastname.text,
-      "EMAIL": email.text,
-      "PASSWORD": password.text,
-    }).then((value) {
-      Toast.show("Account Registered",
-          duration: Toast.lengthShort, gravity: Toast.bottom);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (BuildContext context) {
-        return WelcomeScreen();
-      }));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 177, 217),
-      appBar: AppBar(
-        title: Text("Sign Up"),
-        backgroundColor: Colors.pinkAccent,
-      ),
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          alignment: Alignment.center,
-          child: Center(
-            child: Column(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Image.asset(
-                      "images/logo.jpeg",
-                      width: 120,
-                      height: 120,
-                    )),
-                Container(
-                  margin: EdgeInsets.only(top: 50),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Text(
-                            "FIRST NAME :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(10)),
-                          width: 200,
-                          child: TextField(
-                            controller: fname,
-                            decoration:
-                                InputDecoration(hintText: " First Name"),
-                          ),
-                        )
-                      ]),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Text(
-                            "LAST NAME :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(10)),
-                          width: 200,
-                          child: TextField(
-                            controller: lastname,
-                            decoration: InputDecoration(hintText: " Last Name"),
-                          ),
-                        )
-                      ]),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Text(
-                            "EMAIL :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(10)),
-                          width: 200,
-                          child: TextField(
-                            controller: email,
-                            decoration:
-                                InputDecoration(hintText: " Email Address"),
-                          ),
-                        )
-                      ]),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Text(
-                            "PASSWORD :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(10)),
-                          width: 200,
-                          child: TextField(
-                            controller: password,
-                            decoration: InputDecoration(hintText: " Password"),
-                          ),
-                        )
-                      ]),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Text(
-                            "CONFIRM PASSWORD :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(10)),
-                          width: 200,
-                          child: TextField(
-                            controller: confirm,
-                            decoration:
-                                InputDecoration(hintText: " Confirm Password"),
-                          ),
-                        )
-                      ]),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  width: 150,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      sign_up();
-                    },
-                    child: Text("Register"),
-                    style: ElevatedButton.styleFrom(primary: Colors.pinkAccent),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-/*
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:alqgp/models/user_model.dart';
-import 'package:alqgp/widgets/my_button.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:toast/toast.dart';
-import 'chapters.dart';
+import '../models/user_model.dart';
 import 'home.dart';
+import 'package:alqgp/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
+
   //prop
   static const String screenRout = 'signup';
-
-  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -240,288 +19,221 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
 
-  late String fname;
-  late String lname;
-  late String email;
-  late String pass;
-
   // string for displaying the error Message
   String? errorMessage;
 
-  // form key
+  // our form key
   final _formKey = GlobalKey<FormState>();
+  // editing Controller
+  final firstNameEditingController = new TextEditingController();
+  final secondNameEditingController = new TextEditingController();
+  final emailEditingController = new TextEditingController();
+  final passwordEditingController = new TextEditingController();
+  final confirmPasswordEditingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    //first name field
+    final firstNameField = TextFormField(
+        autofocus: false,
+        controller: firstNameEditingController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{3,}$');
+          if (value!.isEmpty) {
+            return ("First Name cannot be Empty");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid name(Min. 3 Character)");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          firstNameEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.account_circle),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "First Name",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //second name field
+    final secondNameField = TextFormField(
+        autofocus: false,
+        controller: secondNameEditingController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Second Name cannot be Empty");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          secondNameEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.account_circle),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Second Name",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //email field
+    final emailField = TextFormField(
+        autofocus: false,
+        controller: emailEditingController,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          firstNameEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //password field
+    final passwordField = TextFormField(
+        autofocus: false,
+        controller: passwordEditingController,
+        obscureText: true,
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
+        onSaved: (value) {
+          firstNameEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.vpn_key),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //confirm password field
+    final confirmPasswordField = TextFormField(
+        autofocus: false,
+        controller: confirmPasswordEditingController,
+        obscureText: true,
+        validator: (value) {
+          if (confirmPasswordEditingController.text !=
+              passwordEditingController.text) {
+            return "Password don't match";
+          }
+          return null;
+        },
+        onSaved: (value) {
+          confirmPasswordEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.vpn_key),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Confirm Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //signup button
+    final signUpButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Color.fromARGB(255, 22, 70, 124),
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            signUp(emailEditingController.text, passwordEditingController.text);
+          },
+          child: Text(
+            "SignUp",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: 180,
-              child: Image.asset('images/logo.jpeg'),
-            ),
-            SizedBox(height: 50),
-            TextFormField(
-              //textAlign: TextAlign.center,
-              validator: (value) {
-                RegExp regex = new RegExp(r'^.{3,}$');
-                if (value!.isEmpty) {
-                  return ("First Name cannot be Empty");
-                }
-                if (!regex.hasMatch(value)) {
-                  return ("Enter Valid name(Min. 3 Character)");
-                }
-                return null;
-              },
-              onChanged: (value) {
-                fname = value.trim();
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.account_circle),
-                hintText: 'First name',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+      /*appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.red),
+          onPressed: () {
+            // passing this to our root
+            Navigator.of(context).pop();
+          },
+        ),
+      ),*/
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                        height: 180,
+                        child: Image.asset(
+                          "images/logo.jpeg",
+                          fit: BoxFit.contain,
+                        )),
+                    SizedBox(height: 45),
+                    firstNameField,
+                    SizedBox(height: 20),
+                    secondNameField,
+                    SizedBox(height: 20),
+                    emailField,
+                    SizedBox(height: 20),
+                    passwordField,
+                    SizedBox(height: 20),
+                    confirmPasswordField,
+                    SizedBox(height: 20),
+                    signUpButton,
+                    SizedBox(height: 15),
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 8),
-            TextFormField(
-              //textAlign: TextAlign.center,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return ("Last Name cannot be Empty");
-                }
-                return null;
-              },
-              onChanged: (value) {
-                lname = value.trim();
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.account_circle),
-                hintText: 'Last name',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              //textAlign: TextAlign.center,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return ("Please Enter Your Email");
-                }
-                // reg expression for email validation
-                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                    .hasMatch(value)) {
-                  return ("Please Enter a valid email");
-                }
-                return null;
-              },
-              onChanged: (value) {
-                email = value.trim();
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.mail),
-                hintText: 'Email',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              obscureText: true,
-              //textAlign: TextAlign.center,
-              validator: (value) {
-                RegExp regex = new RegExp(r'^.{6,}$');
-                if (value!.isEmpty) {
-                  return ("Password is required for login");
-                }
-                if (!regex.hasMatch(value)) {
-                  return ("Enter Valid Password(Min. 6 Character)");
-                }
-              },
-              onChanged: (value) {
-                pass = value.trim();
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.key),
-                hintText: 'Password',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              obscureText: true,
-              //textAlign: TextAlign.center,
-              validator: (value) {
-                if (value != pass) {
-                  return "Password don't match";
-                }
-                return null;
-              },
-              onChanged: (value) {
-                //con_pass = value.trim();
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.key),
-                hintText: 'Confirem Password',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            MyButton(
-              color: Colors.blue[800]!,
-              title: 'register',
-              onPressed: () {
-                /*try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email, password: pass);
-                  Navigator.pushNamed(context, header.screenRout);
-                } catch (e) {
-                  print(e);
-                }*/
-
-                signUp(email, pass);
-
-                /*print(email);
-                print(pass);
-                print(lname);
-                print(fname);*/
-              },
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -566,6 +278,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -574,14 +290,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     // writing all the values
     userModel.email = user!.email;
     userModel.uid = user.uid;
-    userModel.firstName = fname;
-    userModel.secondName = lname;
+    userModel.firstName = firstNameEditingController.text;
+    userModel.secondName = secondNameEditingController.text;
+    userModel.score = 0;
 
     await firebaseFirestore
         .collection("student")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
+    Fluttertoast.showToast(msg: "Account created successfully");
 
     Navigator.pushAndRemoveUntil(
         (context),
@@ -589,4 +306,3 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         (route) => false);
   }
 }
-*/
