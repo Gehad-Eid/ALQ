@@ -46,8 +46,7 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text("Profile"),
-            onTap: () => print("Profile"),
-            onLongPress: () {
+            onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfileScreen()));
             }, // go to profile
