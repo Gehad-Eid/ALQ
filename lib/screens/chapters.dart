@@ -72,6 +72,9 @@ import 'package:flutter/material.dart';
 import 'package:alqgp/navBar.dart';
 
 class header extends StatefulWidget {
+  //prop
+  static const String screenRout = 'chapters';
+
   const header({super.key});
 
   @override
