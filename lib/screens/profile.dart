@@ -14,8 +14,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String? firstName = '';
-  String? lastName = '';
   String? name = '';
   String? email = '';
   String? image = '';
@@ -30,8 +28,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .then((snapshot) async {
       if (snapshot.exists) {
         setState(() {
-          firstName = snapshot.data()!["FIRST_NAME"];
-          lastName = snapshot.data()!["LAST_NAME"];
           name = snapshot.data()!["FIRST_NAME"] +
               ' ' +
               snapshot.data()!["LAST_NAME"];
@@ -57,14 +53,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-            colors: [Color(0xFF40BAD5), Color(0xFFfcca46)],
+            colors: [
+              Color.fromARGB(255, 245, 153, 156),
+              Color.fromARGB(255, 159, 233, 247)
+            ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             stops: const [0.2, 0.9],
           )),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 245, 243, 237),
+        backgroundColor: Color.fromARGB(255, 229, 214, 168),
         title: const Center(
           child: Text(
             'Profile',
@@ -90,7 +89,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFfcca46), Color(0xFF023047)],
+            colors: [
+              Color.fromARGB(255, 222, 156, 77),
+              Color.fromARGB(255, 136, 208, 239)
+            ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             stops: const [0.2, 0.9],
@@ -102,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                // shoe image
+                // show image
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -124,26 +126,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   'Name: ' + name!,
-                  //'Last name: ' + lastName!,
                   style: const TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(
+                /*IconButton(
                   onPressed: () {
                     //display text input
                   },
                   icon: Icon(Icons.edit),
-                ),
+                ),*/ // to edit
               ],
             ),
             const SizedBox(
               height: 10.0,
             ),
             Text(
-              'Your email: ' + email!,
+              'Email: ' + email!,
               style: const TextStyle(
                 fontSize: 20.0,
                 color: Colors.black,
@@ -153,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 10.0,
             ),
             Text(
-              "Your score= " + score.toString(),
+              "Score= " + score.toString(),
               style: const TextStyle(
                 fontSize: 20.0,
                 color: Colors.black,
