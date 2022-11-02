@@ -14,16 +14,28 @@ class chaptersContent extends State<chapterContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: const Body2(),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/backgraund4.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Body2(),
+        ],
+      ),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 196, 93, 83),
       elevation: 0,
       leading: IconButton(
-        icon: Image.asset("images/backArrow2.png"),
+        icon: Image.asset("images/backArrow3.png"),
         onPressed: () {
           Navigator.push(
             context,

@@ -37,13 +37,25 @@ class _headerState extends State<header> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Body(),
+      body: Stack(
+      children: [
+         Container(decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/backgraund4.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: null /* add child content here */,
+      ), 
+         Body(),
+      ],
+    ),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 196, 93, 83),
       elevation: 0,
       /*
       logo
@@ -59,20 +71,20 @@ class _headerState extends State<header> {
       ),
       */
       title: Center(
-        child: Text(
-          "ALQ",
-          style: TextStyle(
-            fontSize: 23,
-            color: Colors.black,
+      child: const Text(
+        "ALQ",
+        style: TextStyle(
+        fontSize: 23,
+        color: Colors.white,
           ),
         ),
       ),
       actions: [
-        IconButton(
-          icon: Image.asset('images/profile2.png'),
-          onPressed: () => null, //go to profile page
-        ),
-      ],
+      IconButton(
+        icon: Image.asset('images/profile3.png'),
+        onPressed: () => null,//go to profile page 
+      ),
+    ],
     );
   }
 }
