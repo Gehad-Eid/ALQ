@@ -1,9 +1,7 @@
+import 'package:alqgp/screens/lessons/lessonsList.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/screens/chapters.dart';
 import 'package:alqgp/screens/chapterContent.dart';
-
-
-
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -13,7 +11,7 @@ class Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(left:60, bottom: 50, right: 60, top:70),
+          padding: EdgeInsets.only(left: 60, bottom: 50, right: 60, top: 70),
           child: Text(
             "Welcame to ALQ",
             style: TextStyle(
@@ -24,8 +22,8 @@ class Body extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left:20, bottom: 0, right: 20, top:0),
-            child: Wrap(
+              padding: EdgeInsets.only(left: 20, bottom: 0, right: 20, top: 0),
+              child: Wrap(
                 alignment: WrapAlignment.start,
                 children: [
                 //chapter1 size
@@ -285,7 +283,6 @@ class Body extends StatelessWidget {
   }
 }
 
-
 class Body2 extends StatelessWidget {
   const Body2({super.key});
   @override
@@ -294,19 +291,16 @@ class Body2 extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(left:60, bottom: 70, right: 60, top:70),
+          padding: EdgeInsets.only(left: 60, bottom: 70, right: 60, top: 70),
           child: Text(
-            "Chapter number ?",//name of the chapter
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.black
-            ),
+            "Chapter number ?", //name of the chapter
+            style: TextStyle(fontSize: 30, color: Colors.black),
           ),
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left:20, bottom: 0, right: 20, top:0),
-            child: Wrap(
+              padding: EdgeInsets.only(left: 20, bottom: 0, right: 20, top: 0),
+              child: Wrap(
                 alignment: WrapAlignment.start,
                 children: [
                 //chapter1 size
