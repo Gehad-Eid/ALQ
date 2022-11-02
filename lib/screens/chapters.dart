@@ -1,4 +1,74 @@
 import 'package:flutter/material.dart';
+//import 'package:alqgp/navBar.dart';
+import 'package:alqgp/screens/body.dart';
+
+
+class header extends StatefulWidget {
+  const header({super.key});
+
+  @override
+  State<header> createState() => HomeScreen();
+  
+}
+
+class HomeScreen extends State<header> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildAppBar(),
+      body: Body(),
+    );
+  }
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      /*
+      logo
+      leading: IconButton(
+        iconSize: 100,
+        icon: Image.asset("images/logo.jpeg"),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const header()),
+          );
+        },
+      ),
+      */
+      title: Center(
+      child: Text(
+        "ALQ",
+        style: TextStyle(
+        fontSize: 23,
+        color: Colors.black,
+          ),
+        ),
+      ),
+      actions: [
+      IconButton(
+        icon: Image.asset('images/profile2.png'),
+        onPressed: () => null,//go to profile page 
+      ),
+    ],
+    );
+  }
+}
+
+//padding: EdgeInsets.only(left:90, bottom: 70, right: 50, top:70),
+
+/*
+title: const Text(
+        "ALQ",
+        style: TextStyle(
+          fontSize: 23,
+          color: Colors.black,
+        ),
+      ),
+Image.asset(
+          "images/profile2.PNG",
+        ),
+import 'package:flutter/material.dart';
 import 'package:alqgp/navBar.dart';
 
 class header extends StatefulWidget {
@@ -59,3 +129,4 @@ class _headerState extends State<header> {
 }
 
 
+*/
