@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:alqgp/screens/chapters.dart';
 import 'package:alqgp/screens/body.dart';
 
-
 class chapterContent extends StatefulWidget {
   const chapterContent({super.key});
 
   @override
   State<chapterContent> createState() => chaptersContent();
-  
 }
 
 class chaptersContent extends State<chapterContent> {
@@ -19,6 +17,7 @@ class chaptersContent extends State<chapterContent> {
       body: const Body2(),
     );
   }
+
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
@@ -33,20 +32,20 @@ class chaptersContent extends State<chapterContent> {
         },
       ),
       title: Center(
-      child: Text(
-        "ALQ",
-        style: TextStyle(
-        fontSize: 23,
-        color: Colors.black,
+        child: Text(
+          "ALQ",
+          style: TextStyle(
+            fontSize: 23,
+            color: Colors.black,
           ),
         ),
       ),
       actions: <Widget>[
-      IconButton(
-        icon: Image.asset('images/profile2.png'),
-        onPressed: () => null,//go to profile page 
-      ),
-    ],
+        IconButton(
+          icon: Image.asset('images/profile2.png'),
+          onPressed: () => null, //go to profile page
+        ),
+      ],
     );
   }
 }
