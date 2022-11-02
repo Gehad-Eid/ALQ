@@ -1,3 +1,4 @@
+import 'package:alqgp/screens/lessons/lessonsList.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +29,18 @@ class MyApp extends StatelessWidget {
       initialRoute: WelcomeScreen.screenRout,
 
       routes: {
+        //home
         WelcomeScreen.screenRout: (context) => WelcomeScreen(),
+        //login
         LoginScreen.screenRout: (context) => const LoginScreen(),
+        //signup
         RegistrationScreen.screenRout: (context) => const RegistrationScreen(),
-        //sign_up.screenRout: (context) => const sign_up(),
-        //here will be the :
         //profile
+
+        //chapters
         header.screenRout: (context) => const header(),
         //lessons
+        Lessons.screenRout: (context) => const Lessons(),
       },
     );
   }
