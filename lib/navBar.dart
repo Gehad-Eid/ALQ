@@ -1,3 +1,4 @@
+import 'package:alqgp/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {
@@ -44,6 +45,10 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.account_circle),
             title: Text("Profile"),
             onTap: () => print("Profile"),
+            onLongPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+            }, // go to profile
           ),
           Divider(),
           ListTile(
