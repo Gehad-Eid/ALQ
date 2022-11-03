@@ -1,10 +1,12 @@
+import 'package:alqgp/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:alqgp/navBar.dart';
 import 'package:alqgp/screens/body.dart';
 
 import '../models/user_model.dart';
+//import '../navBar.dart';
+import '../navBar/naviigation_drawer.dart';
 
 class header extends StatefulWidget {
   //prop
@@ -36,20 +38,22 @@ class _headerState extends State<header> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: buildAppBar(),
       body: Stack(
-      children: [
-         Container(decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("images/backgraund4.png"),
-            fit: BoxFit.cover,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/backgraund4.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: null /* add child content here */,
           ),
-        ),
-        child: null /* add child content here */,
-      ), 
-         Body(),
-      ],
-    ),
+          Body(),
+        ],
+      ),
     );
   }
 
@@ -70,21 +74,24 @@ class _headerState extends State<header> {
         },
       ),
       */
-      title: Center(
-      child: const Text(
-        "ALQ",
-        style: TextStyle(
-        fontSize: 23,
-        color: Colors.white,
+      title: const Center(
+        child: Text(
+          "ALQ",
+          style: TextStyle(
+            fontSize: 23,
+            color: Colors.white,
           ),
         ),
       ),
       actions: [
-      IconButton(
-        icon: Image.asset('images/profile3.png'),
-        onPressed: () => null,//go to profile page 
-      ),
-    ],
+        IconButton(
+          icon: Image.asset('images/profile3.png'),
+          onPressed: () => {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()))
+          }, //go to profile page
+        ),
+      ],
     );
   }
 }

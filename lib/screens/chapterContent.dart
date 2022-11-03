@@ -1,3 +1,4 @@
+import 'package:alqgp/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/screens/chapters.dart';
 import 'package:alqgp/screens/body.dart';
@@ -34,7 +35,7 @@ class chaptersContent extends State<chapterContent> {
     return AppBar(
       backgroundColor: Color.fromARGB(255, 196, 93, 83),
       elevation: 0,
-      leading: IconButton(
+      /*leading: IconButton(
         icon: Image.asset("images/backArrow3.png"),
         onPressed: () {
           Navigator.push(
@@ -42,7 +43,7 @@ class chaptersContent extends State<chapterContent> {
             MaterialPageRoute(builder: (context) => const header()),
           );
         },
-      ),
+      ),*/
       title: Center(
         child: Text(
           "ALQ",
@@ -54,8 +55,11 @@ class chaptersContent extends State<chapterContent> {
       ),
       actions: <Widget>[
         IconButton(
-          icon: Image.asset('images/profile2.png'),
-          onPressed: () => null, //go to profile page
+          icon: Image.asset('images/profile3.png'),
+          onPressed: () => {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()))
+          }, //go to profile page
         ),
       ],
     );

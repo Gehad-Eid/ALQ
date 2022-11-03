@@ -1,5 +1,5 @@
 import 'package:alqgp/screens/home.dart';
-import 'package:alqgp/screens/login.dart';
+import 'package:alqgp/screens/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +46,10 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text("Profile"),
-            onTap: () => print("Profile"),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+            }, // go to profile
           ),
           Divider(),
           ListTile(
