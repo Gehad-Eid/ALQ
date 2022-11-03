@@ -2,11 +2,11 @@ import 'package:alqgp/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:alqgp/navBar.dart';
 import 'package:alqgp/screens/body.dart';
 
 import '../models/user_model.dart';
-import '../navBar.dart';
+//import '../navBar.dart';
+import '../navBar/naviigation_drawer.dart';
 
 class header extends StatefulWidget {
   //prop
@@ -38,7 +38,7 @@ class _headerState extends State<header> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
+      drawer: NavigationDrawer(),
       appBar: buildAppBar(),
       body: Stack(
         children: [
@@ -74,8 +74,8 @@ class _headerState extends State<header> {
         },
       ),
       */
-      title: Center(
-        child: const Text(
+      title: const Center(
+        child: Text(
           "ALQ",
           style: TextStyle(
             fontSize: 23,
