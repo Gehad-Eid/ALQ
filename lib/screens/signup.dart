@@ -293,6 +293,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondNameEditingController.text;
     userModel.score = 0;
+    userModel.level = 1;
 
     await firebaseFirestore
         .collection("student")
@@ -306,3 +307,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         (route) => false);
   }
 }
+
+
+//https://www.youtube.com/watch?v=DthKmtjth1k&t=0s

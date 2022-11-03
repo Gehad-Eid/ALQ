@@ -4,9 +4,15 @@ class UserModel {
   String? firstName;
   String? secondName;
   int? score;
+  int? level;
 
   UserModel(
-      {this.uid, this.email, this.firstName, this.secondName, this.score});
+      {this.uid,
+      this.email,
+      this.firstName,
+      this.secondName,
+      this.score,
+      this.level});
 
   // receiving data from server
   factory UserModel.fromMap(map) {
@@ -27,6 +33,7 @@ class UserModel {
       'firstName': firstName,
       'secondName': secondName,
       'score': score,
+      'level': level,
     };
   }
 }
