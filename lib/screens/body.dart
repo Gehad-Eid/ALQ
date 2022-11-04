@@ -347,7 +347,9 @@ class Body2 extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const chapterContent()),
+                                builder: (context) => chapterContent(
+                                      4,
+                                    )),
                           );
                         },
                         child: Text("AR")),
@@ -389,7 +391,9 @@ class Body2 extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const chapterContent()),
+                              builder: (context) => const chapterContent(
+                                    4,
+                                  )),
                         );
                       },
                       child: Text("Quiz")),

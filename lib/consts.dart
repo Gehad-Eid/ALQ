@@ -15,3 +15,9 @@ const kBlueColor = Color(0xFF817DC0);
 const kShadowColor = Color(0xFFE6E6E6);
 
 const kDefaultPadding = 20.0;
+
+
+//Color.fromARGB(255, 156, 22, 22)
+//Color.fromARGB(255, 22, 70, 124)
+//Color.fromARGB(255, 223, 115, 115)
+//backgroundColor: Color.fromARGB(255, 156, 203, 247),

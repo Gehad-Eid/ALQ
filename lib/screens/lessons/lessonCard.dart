@@ -14,16 +14,48 @@ class Lcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
       child: Card(
-        child: ListTile(
-          title: Text("${_lesson.id}"),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LessonContent(_lesson)));
-          },
+        color: Color.fromARGB(255, 240, 111, 111),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Column(children: [
+            ListTile(
+              title: Center(
+                child: Text(
+                  "${_lesson.id}",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LessonContent(_lesson)));
+              },
+            ),
+          ]),
         ),
       ),
     );
   }
+
+  // return Padding(
+  //   padding: EdgeInsets.symmetric(vertical: 4.0),
+  //   child: Container(
+  //     height: 90,
+  //     color: Colors.blue,
+  //     child: ListTile(
+  //       title: Center(child: Text("${_lesson.id}")),
+  //       onTap: () {
+  //         Navigator.of(context).push(MaterialPageRoute(
+  //             builder: (context) => LessonContent(_lesson)));
+  //       },
+  //     ),
+  //   ),
+  // );
 }

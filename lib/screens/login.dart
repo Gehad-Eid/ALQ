@@ -1,4 +1,5 @@
 import 'package:alqgp/screens/chapters.dart';
+import 'package:alqgp/screens/welcome.dart';
 import 'home.dart';
 import 'chapters.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -89,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Color.fromARGB(255, 156, 22, 22),
+      color: Color.fromARGB(255, 156, 203, 247),
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -171,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => header())),
+                      MaterialPageRoute(builder: (context) => home())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

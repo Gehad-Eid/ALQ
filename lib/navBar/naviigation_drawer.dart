@@ -1,3 +1,4 @@
+import 'package:alqgp/screens/welcome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       child: Material(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24.0, 80, 24, 0),
+          padding: const EdgeInsets.fromLTRB(24.0, 50, 24, 0),
           child: Column(
             children: [
               headerWidget(),
@@ -47,12 +48,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 40,
               ),
               const Divider(
-                thickness: 1,
+                thickness: 0,
                 height: 10,
                 color: Colors.black,
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               DrawerItem(
                 name: 'Home',
@@ -60,14 +61,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onPressed: () => onItemPressed(context, index: 0),
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               DrawerItem(
                   name: 'My Profile',
                   icon: Icons.account_box_rounded,
                   onPressed: () => onItemPressed(context, index: 1)),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               const Divider(
                 thickness: 1,
@@ -75,14 +76,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 color: Colors.grey,
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               DrawerItem(
                   name: 'Setting',
                   icon: Icons.settings,
                   onPressed: () => onItemPressed(context, index: 2)),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               DrawerItem(
                 name: 'Log out',
@@ -102,7 +103,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => header()));
+            context, MaterialPageRoute(builder: (context) => home()));
         break;
     }
   }
@@ -123,12 +124,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('${loggedInUser.firstName} ${loggedInUser.secondName}',
-                style: TextStyle(fontSize: 14, color: Colors.black)),
+                style: TextStyle(fontSize: 20, color: Colors.black)),
             SizedBox(
               height: 10,
             ),
             Text('${loggedInUser.email}',
-                style: TextStyle(fontSize: 14, color: Colors.black))
+                style: TextStyle(fontSize: 15, color: Colors.black))
           ],
         )
       ],

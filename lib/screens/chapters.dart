@@ -9,6 +9,8 @@ import '../models/user_model.dart';
 //import '../navBar.dart';
 import '../navBar/naviigation_drawer.dart';
 import '../widgets/CardWidget.dart';
+import 'chapterCards.dart';
+import 'chapterContent.dart';
 
 class header extends StatefulWidget {
   //prop
@@ -114,30 +116,115 @@ class _headerState extends State<header> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      drawer: NavigationDrawer(),
-      appBar: buildAppBar(),
-      body: Body(),
-      // Stack(
-      //   children: [
-      //     // Container(
-      //     //   decoration: BoxDecoration(
-      //     //     image: DecorationImage(
-      //     //       image: AssetImage("images/backgraund4.png"),
-      //     //       fit: BoxFit.cover,
-      //     //     ),
-      //     //   ),
-      //     //   child: null /* add child content here */,
-      //     // ),
-      //     Body(),
-      //   ],
-      // ),
-    );
+        backgroundColor: Color.fromARGB(255, 156, 203, 247),
+        //drawer: NavigationDrawer(),
+        appBar: buildAppBar(),
+        body: //Body(),
+            SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 22,
+                ),
+                Text.rich(
+                  (TextSpan(
+                      text: 'Hello, ${loggedInUser.firstName}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30.0),
+                      children: [
+                        TextSpan(
+                          text: ' lets have fun, and learn ✨',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 30.0),
+                        )
+                      ])),
+                  //style: TextStyle(fontSize: 30.0),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                ////////////
+                ///
+                Container(
+                  height: 3000,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                    itemCount: storeItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => chapterContent(
+                                    index + 1,
+                                  )));
+                        },
+                        child: Card(
+                          child: Stack(
+                            alignment: FractionalOffset.bottomCenter,
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage(storeItems[index].itemImage),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 40.0,
+                                color: Color.fromARGB(255, 223, 115, 115),
+                                child: Text(
+                                  storeItems[index].itemName,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0,
+                                      color: Colors.white),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+
+        // Stack(
+        //   children: [
+        //     // Container(
+        //     //   decoration: BoxDecoration(
+        //     //     image: DecorationImage(
+        //     //       image: AssetImage("images/backgraund4.png"),
+        //     //       fit: BoxFit.cover,
+        //     //     ),
+        //     //   ),
+        //     //   child: null /* add child content here */,
+        //     // ),
+        //     Body(),
+        //   ],
+        // ),
+        );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 196, 93, 83),
+      iconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Color.fromARGB(255, 156, 203, 247),
+      //Color.fromARGB(255, 223, 115, 115)
       elevation: 0,
       /*
       logo
@@ -156,7 +243,7 @@ class _headerState extends State<header> {
         "ALQ",
         style: TextStyle(
           fontSize: 23,
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
       centerTitle: true,

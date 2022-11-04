@@ -196,7 +196,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             gradient: LinearGradient(
               colors: [
                 Color.fromARGB(255, 219, 106, 98),
-                Color.fromARGB(255, 85, 98, 199),
+                Color.fromARGB(255, 156, 203, 247),
+                //Color.fromARGB(255, 219, 106, 98), //Color.fromARGB(255, 235, 87, 87)
+                //Color.fromARGB(255, 85, 98, 199),
               ],
               begin: FractionalOffset.bottomCenter,
               end: FractionalOffset.topCenter,

@@ -27,8 +27,20 @@ class _LessonsState extends State<Lessons> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 156, 203, 247),
       appBar: AppBar(
-        title: Text("Lessons"),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Color.fromARGB(255, 156, 203, 247),
+        //Color.fromARGB(255, 223, 115, 115)
+        elevation: 0,
+        title: const Text(
+          "Lessons",
+          style: TextStyle(
+            fontSize: 23,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
           child: ListView.builder(
