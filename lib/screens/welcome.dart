@@ -49,7 +49,9 @@ class _homeState extends State<home> {
               Text.rich(
                 (TextSpan(
                     text: 'Welcom, ${loggedInUser.firstName} ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                     children: [
                       TextSpan(
                         text: 'shall we go! 🤩',
@@ -66,7 +68,7 @@ class _homeState extends State<home> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
-                  color: Color.fromARGB(255, 28, 148, 247),
+                  color: Color.fromARGB(255, 223, 115, 115),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
@@ -95,7 +97,7 @@ class _homeState extends State<home> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
-                  color: Color.fromARGB(255, 235, 87, 87),
+                  color: Color.fromARGB(255, 223, 115, 115),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(

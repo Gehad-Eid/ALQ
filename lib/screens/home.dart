@@ -95,7 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 Container(
                   height: 180,
-                  child: Image.asset('images/logo.jpeg'),
+                  child: Image.asset('images/logo2.png'),
                 ),
                 const Text(
                   'ALQ',
