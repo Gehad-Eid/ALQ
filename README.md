@@ -1,12 +1,7 @@
-# alqgp
+ Project title: ALQ عَلَق
+ 
+Introduction: In this project, we will provide an augmented reality mobile application that provides suitable resources to young learners aging about 10-15 years old about human anatomy and organs.
 
-A new Flutter project for our Graduation Project 
+Technology: Flutter framework in Dart (the language), with Visual Studio Code application.
 
-
-Strudents :
-
-- Gehad Eid 
-- Hajar ALomar
-- Haifa Alzaid
-- Amirah
-- Jwaher
+Launching instructions (briefly):
