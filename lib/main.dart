@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         //chapters
         header.screenRout: (context) => const header(),
         //lessons
-        Lessons.screenRout: (context) => const Lessons(),
+        //Lessons.screenRout: (context) => const Lessons(),
       },
     );
   }

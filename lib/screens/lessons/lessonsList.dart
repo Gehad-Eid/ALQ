@@ -6,22 +6,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/lesson_model.dart';
 
 class Lessons extends StatefulWidget {
-  const Lessons({super.key});
+  final int chpNum;
+  const Lessons(this.chpNum, {super.key});
 
 //prop
   static const String screenRout = 'lessonsList';
 
   @override
-  State<Lessons> createState() => _LessonsState();
+  State<Lessons> createState() => _LessonsState(chpNum);
 }
 
 class _LessonsState extends State<Lessons> {
   List<Object> _lessonsList = [];
+  int chapNum = 0;
+
+  _LessonsState(int chpNum) {
+    chapNum = chpNum;
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    getLessonsList();
+    getLessonsList(chapNum);
   }
 
   @override
@@ -51,12 +57,12 @@ class _LessonsState extends State<Lessons> {
     );
   }
 
-  Future getLessonsList() async {
+  Future getLessonsList(chpNum) async {
     //final uid = auth(
 
     var data = await FirebaseFirestore.instance
         .collection('chapters')
-        .doc('Chapter 4')
+        .doc('Chapter ${chpNum}')
         .collection('Lessons')
         .orderBy('name')
         .get();

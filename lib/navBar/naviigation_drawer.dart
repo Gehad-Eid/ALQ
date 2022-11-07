@@ -8,7 +8,7 @@ import '../screens/home.dart';
 import '../screens/profile.dart';
 import 'drawer_item.dart';
 
-//cgange the padding a lettel + the text font & color
+//change the padding a lettel + the text font & color
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({super.key});
@@ -56,8 +56,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 20,
               ),
               DrawerItem(
-                name: 'Home',
-                icon: Icons.home,
+                name: 'Learning',
+                icon: Icons.menu_book_outlined,
                 onPressed: () => onItemPressed(context, index: 0),
               ),
               const SizedBox(
@@ -103,7 +103,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => home()));
+            context, MaterialPageRoute(builder: (context) => header()));
+        break;
+      case 1:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProfileScreen()));
         break;
     }
   }
@@ -118,7 +122,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           backgroundImage: NetworkImage(url),
         ),
         const SizedBox(
-          width: 20,
+          width: 10,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

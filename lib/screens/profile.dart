@@ -277,7 +277,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       '${loggedInUser.firstName} ${loggedInUser.secondName}',
                                       style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
-                                        fontFamily: 'Nunito',
+                                        //fontFamily: 'Nunito',
                                         fontSize: 37,
                                       ),
                                     ),
@@ -294,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               'Score',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
+                                                //fontFamily: 'Nunito',
                                                 fontSize: 25,
                                               ),
                                             ),
@@ -303,7 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
-                                                fontFamily: 'Nunito',
+                                                //fontFamily: 'Nunito',
                                                 fontSize: 25,
                                               ),
                                             ),
@@ -330,7 +330,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               'level',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
+                                                //fontFamily: 'Nunito',
                                                 fontSize: 25,
                                               ),
                                             ),
@@ -339,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
-                                                fontFamily: 'Nunito',
+                                                //fontFamily: 'Nunito',
                                                 fontSize: 25,
                                               ),
                                             ),
@@ -397,11 +397,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 20,
                           ),
                           Text(
-                            'My Achievements',
+                            'Scoreboard',
                             style: TextStyle(
                               color: Color.fromRGBO(39, 105, 171, 1),
                               fontSize: 27,
-                              fontFamily: 'Nunito',
+                              //fontFamily: 'Nunito',
                             ),
                           ),
                           Divider(
@@ -458,11 +458,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 20,
                           ),
                           Text(
-                            'Scoreboard',
+                            'My Achievements',
                             style: TextStyle(
                               color: Color.fromRGBO(39, 105, 171, 1),
                               fontSize: 27,
-                              fontFamily: 'Nunito',
+                              //fontFamily: 'Nunito',
                             ),
                           ),
                           Divider(

@@ -22,6 +22,7 @@ class UserModel {
       firstName: map['firstName'],
       secondName: map['secondName'],
       score: map['score'],
+      level: map['level'],
     );
   }
 

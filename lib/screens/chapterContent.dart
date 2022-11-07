@@ -7,15 +7,23 @@ import 'package:alqgp/screens/body.dart';
 import 'chapterCards.dart';
 import 'lessons/lessonsList.dart';
 
-class chapterContent extends StatefulWidget {
+class chapterContent extends StatelessWidget {
   final int chapter;
   const chapterContent(this.chapter, {super.key});
 
-  @override
-  State<chapterContent> createState() => chaptersContent();
-}
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Container();
 
-class chaptersContent extends State<chapterContent> {
+// class chapterContent extends StatefulWidget {
+//   final int chapter;
+//   const chapterContent(this.chapter, {super.key});
+
+//   @override
+//   State<chapterContent> createState() => chaptersContent();
+// }
+
+// class chaptersContent extends State<chapterContent> {
 // String? _chapterName;
 
 //   @override
@@ -42,12 +50,12 @@ class chaptersContent extends State<chapterContent> {
                 ),
                 Text.rich(
                   (TextSpan(
-                      text: 'Hello, ',
+                      text: 'Chapter ${chapter}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 30.0),
                       children: [
                         TextSpan(
-                          text: ' lets have fun, and learn ✨',
+                          text: ' ✨',
                           style: TextStyle(
                               fontWeight: FontWeight.normal, fontSize: 30.0),
                         )
@@ -73,7 +81,7 @@ class chaptersContent extends State<chapterContent> {
                       return GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Lessons()));
+                              builder: (context) => Lessons(chapter)));
                         },
                         child: Card(
                           child: Stack(
@@ -188,6 +196,7 @@ class chaptersContent extends State<chapterContent> {
   }
 }
 
+
 //  Future getChapter() async {
 //     //final uid = auth(
 
@@ -254,3 +263,6 @@ class chaptersContent extends State<chapterContent> {
 //   }
 // }
 //chpters
+
+
+//https://www.youtube.com/watch?v=dx3gj5hz6HU
