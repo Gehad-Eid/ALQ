@@ -1,12 +1,7 @@
- Project title: ALQ عَلَق
+Hello and welcome to ALQ عَلَق!
  
-In this project, we will provide an augmented reality mobile application that provides suitable resources to young learners aging about 10-15 years old about human anatomy and organs.
+In this project, we will develop an augmented reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.
 
-Technology: Flutter framework in Dart (the language), with Visual Studio Code application.
+The Flutter framework in Dart (the language) is utilized in this project, together with the Visual Studio Code application.
 
-Launching instructions: 
-Use must sign up in order to have an account then the user can log in. 
-When the user log in welcome page appears and the user choose to start learning or Go to profile.
-If the user start learning then humane body system chapets will apear and the user can choose a chapte and take lessons and see 3D model, view AR, or take qiuz.
-If the user go to profile then the user can see his/her information, score, and achievements.
-When the user is done learning the user can log out.
+To launch the application, the user must first sign up in order to have an account, then log in. When the user logs in, a welcome page appears, and the user can choose to start learning or go to their profile. If the user starts learning, then human body systems chapters will appear, and the user can choose a chapter and take lessons and see a 3D model, view AR, or take a quiz. If the user goes to their profile, they can see their information, score, and achievements. When the user has finished learning, they can log out.
