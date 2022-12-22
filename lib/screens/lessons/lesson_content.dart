@@ -85,7 +85,7 @@ class LessonContent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 50, right: 50),
             child: Text(
-              'How dose the organs of this system work together?',
+              'How dose the organs of this system work together? ',
               //textAlign: TextAlign.left,
               style: TextStyle(
               fontStyle: FontStyle.italic,
