@@ -42,6 +42,7 @@ dependencies:
   toast: ^0.3.0
   email_validator: ^2.1.17
   fluttertoast: ^8.1.1
+  easy_web_view2: ^0.0.3
 
 
 dev_dependencies:
