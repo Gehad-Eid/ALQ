@@ -184,13 +184,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 */
-  /* editProfile({required String currentUserId}) {
+  editProfile({required String currentUserId}) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
                 editProfile(currentUserId: '${loggedInUser.uid}')));
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
