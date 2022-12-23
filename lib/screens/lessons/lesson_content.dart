@@ -300,3 +300,62 @@ body: Column(children: [
 
 
 */
+/*
+Padding(
+
+            padding: EdgeInsets.only(left: 50, right: 50),
+
+            child: Text(
+
+              'The main functions',
+
+              //textAlign: TextAlign.left,
+
+              style: TextStyle(
+
+              fontStyle: FontStyle.italic,
+
+              fontSize: 20,
+
+              fontWeight: FontWeight.bold,
+
+              //foreground: Paint()
+
+              color: Color.fromARGB(255, 223, 115, 115),
+
+            ),
+
+          ),
+
+          ),
+
+           SizedBox(
+
+            height: 10,
+
+          ),
+
+          Padding(
+
+            padding: EdgeInsets.only(left: 10, right: 10),
+
+            child: Text(
+
+              'Functions of the urinary system include; elimination of body waste, regulation of blood volume and blood pressure, regulation of electrolyte levels and blood pH.',
+
+              //textAlign: TextAlign.left,
+
+              style: TextStyle(
+
+              fontSize: 20,
+
+              fontWeight: FontWeight.bold,
+
+              //foreground: Paint()
+
+              color: Color.fromARGB(255, 156, 203, 247),
+
+            ),
+
+          ),
+*/
