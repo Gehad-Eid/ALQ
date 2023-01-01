@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:alqgp/navBar.dart';
 
 import '../models/user_model.dart';
+import 'edit_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -183,6 +184,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 */
+  editProfile({required String currentUserId}) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                editProfile(currentUserId: '${loggedInUser.uid}')));
+  }
 
   @override
   Widget build(BuildContext context) {
