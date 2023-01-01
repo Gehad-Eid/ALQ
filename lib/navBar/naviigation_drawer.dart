@@ -113,13 +113,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Widget headerWidget() {
-    const url =
-        'https://is3-ssl.mzstatic.com/image/thumb/Purple22/v4/66/48/78/66487872-fcce-74ab-5fa0-d442ab2de959/pr_source.png/750x750bb.jpeg';
+    const url = 'images/5b8f3d9f30460aeedbe6a235e2d001d3.jpg';
     return Row(
       children: [
         const CircleAvatar(
           radius: 40,
-          backgroundImage: NetworkImage(url),
+          backgroundImage: AssetImage(url),
         ),
         const SizedBox(
           width: 10,

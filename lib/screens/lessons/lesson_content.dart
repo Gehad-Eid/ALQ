@@ -34,7 +34,7 @@ class LessonContent extends StatelessWidget {
             height: 22,
           ),
           Text(
-            'Unary System',
+            '${data.title}',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 22.0,

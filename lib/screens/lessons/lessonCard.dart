@@ -17,7 +17,7 @@ class Lcard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Card(
-        color: Color.fromARGB(255, 240, 111, 111),
+        color: Color.fromARGB(255, 223, 115, 115),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: const EdgeInsets.all(0.0),

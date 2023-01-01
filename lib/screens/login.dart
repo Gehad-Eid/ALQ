@@ -1,5 +1,6 @@
 import 'package:alqgp/screens/chapters.dart';
 import 'package:alqgp/screens/welcome.dart';
+import '../Main/home.dart';
 import 'home.dart';
 import 'chapters.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -170,9 +171,9 @@ class _LoginScreenState extends State<LoginScreen> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Fluttertoast.showToast(msg: "Loged in Successfuly"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => home())),
+                      MaterialPageRoute(builder: (context) => homePage())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

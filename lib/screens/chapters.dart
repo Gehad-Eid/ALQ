@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/screens/body.dart';
 
+import '../models/chapter_model.dart';
 import '../models/user_model.dart';
 //import '../navBar.dart';
 import '../navBar/naviigation_drawer.dart';
 import '../widgets/CardWidget.dart';
-import 'chapterCards.dart';
 import 'chapterContent.dart';
 
 class header extends StatefulWidget {

@@ -195,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 219, 106, 98),
+                Color.fromARGB(255, 223, 115, 115),
                 Color.fromARGB(255, 156, 203, 247),
                 //Color.fromARGB(255, 219, 106, 98), //Color.fromARGB(255, 235, 87, 87)
                 //Color.fromARGB(255, 85, 98, 199),

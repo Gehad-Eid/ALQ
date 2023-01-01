@@ -3,8 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/screens/chapters.dart';
 import 'package:alqgp/screens/body.dart';
-
-import 'chapterCards.dart';
+import '../models/chapter_model.dart';
 import 'lessons/lessonsList.dart';
 
 class chapterContent extends StatelessWidget {
@@ -84,33 +83,33 @@ class chapterContent extends StatelessWidget {
                               builder: (context) => Lessons(chapter)));
                         },
                         child: Card(
-                          child: Stack(
-                            alignment: FractionalOffset.bottomCenter,
-                            children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          chapItems[index].itemImage),
-                                      fit: BoxFit.fitHeight),
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 30.0,
-                                color: Color.fromARGB(255, 223, 115, 115),
-                                child: Text(
-                                  chapItems[index].itemName,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16.0,
-                                      color: Colors.white),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                            //   child: Stack(
+                            //     alignment: FractionalOffset.bottomCenter,
+                            //     children: <Widget>[
+                            //       Container(
+                            //         decoration: BoxDecoration(
+                            //           borderRadius: BorderRadius.circular(20),
+                            //           image: DecorationImage(
+                            //               image: AssetImage(
+                            //                   chapItems[index].itemImage),
+                            //               fit: BoxFit.fitHeight),
+                            //         ),
+                            //       ),
+                            //       Container(
+                            //         alignment: Alignment.center,
+                            //         height: 30.0,
+                            //         color: Color.fromARGB(255, 223, 115, 115),
+                            //         child: Text(
+                            //           chapItems[index].itemName,
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.w700,
+                            //               fontSize: 16.0,
+                            //               color: Colors.white),
+                            //         ),
+                            //       )
+                            //     ],
+                            //   ),
+                            ),
                       );
                     },
                   ),
