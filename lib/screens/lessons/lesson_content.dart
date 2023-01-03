@@ -36,7 +36,7 @@ class LessonContent extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: EasyWebView(
                 src: "${data.id!.split(",")[1]}",
                 onLoaded: () {}, // Try to convert to flutter widgets
