@@ -13,7 +13,7 @@ class _bookMarkState extends State<bookMark> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Bookmarks',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),

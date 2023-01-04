@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueChangeObserver<bool>(
       cacheKey: setting.darkMoodKey,
-      defaultValue: true,
+      defaultValue: false,
       builder: (_, isDarkMood, __) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ALQ',

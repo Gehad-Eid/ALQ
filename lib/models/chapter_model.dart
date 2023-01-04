@@ -1,48 +1,37 @@
-class Store {
-  String itemName;
-  String itemImage, photo;
-  Store.items({
-    required this.itemImage,
-    required this.itemName,
+class Chapter {
+  String chapterName;
+  String chapterImage, photo;
+  Chapter.items({
+    required this.chapterImage,
+    required this.chapterName,
     required this.photo,
   });
 }
 
-List<Store> storeItems = [
-  Store.items(
-    itemName: "Circulatory system",
-    itemImage: 'images/heart.png',
+List<Chapter> chapterList = [
+  Chapter.items(
+    chapterName: "Circulatory system",
+    chapterImage: 'images/heart.png',
     photo: 'images/Picture4.png',
   ),
-  Store.items(
-    itemName: "Respiratory system",
-    itemImage: 'images/lung.png',
+  Chapter.items(
+    chapterName: "Respiratory system",
+    chapterImage: 'images/lung.png',
     photo: 'images/Picture1.png',
   ),
-  Store.items(
-    itemName: "Digestive system",
-    itemImage: 'images/digestive-system(1).png',
+  Chapter.items(
+    chapterName: "Digestive system",
+    chapterImage: 'images/digestive-system(1).png',
     photo: 'images/Picture2.png',
   ),
-  Store.items(
-    itemName: "Urinary system",
-    itemImage: 'images/urinary.png',
+  Chapter.items(
+    chapterName: "Urinary system",
+    chapterImage: 'images/urinary.png',
     photo: 'images/Picture5.png',
   ),
-  Store.items(
-    itemName: "Muscular system",
-    itemImage: 'images/muscular.png',
+  Chapter.items(
+    chapterName: "Muscular system",
+    chapterImage: 'images/muscular.png',
     photo: 'images/Picture3.png',
   ),
 ];
-
-// List<Store> chapItems = [
-//   Store.items(
-//     itemName: "Lessons",
-//     itemImage: 'images/icons8-storytelling-100.png',
-//   ),
-//   Store.items(
-//     itemName: "AR",
-//     itemImage: 'images/icons8-ar-100.png',
-//   ),
-// ];

@@ -1,7 +1,4 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
-
 import '../models/achive_modle.dart';
 import '../models/chapter_model.dart';
 import 'chapterContent.dart';
@@ -47,7 +44,7 @@ class chapters extends StatelessWidget {
                     childAspectRatio: 0.75,
                   ),
                   itemBuilder: ((context, index) =>
-                      chiCard(chi: storeItems[index], indx: index))),
+                      chapterCard(chapter: chapterList[index], indx: index))),
             ),
           ),
         ],
@@ -56,12 +53,12 @@ class chapters extends StatelessWidget {
   }
 }
 
-class chiCard extends StatelessWidget {
-  final Store chi;
+class chapterCard extends StatelessWidget {
+  final Chapter chapter;
   final int indx;
-  const chiCard({
+  const chapterCard({
     Key? key,
-    required this.chi,
+    required this.chapter,
     required this.indx,
   }) : super(key: key);
   @override
@@ -71,7 +68,7 @@ class chiCard extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => chapCont(
-                    chap: storeItems[indx],
+                    chapter: chapterList[indx],
                   ))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +81,7 @@ class chiCard extends StatelessWidget {
               color: Colors.purple.shade200,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Image.asset(chi.itemImage),
+            child: Image.asset(chapter.chapterImage),
           ),
           // Padding(
           //   padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -95,7 +92,7 @@ class chiCard extends StatelessWidget {
           // ),
           Center(
             child: Text(
-              chi.itemName,
+              chapter.chapterName,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),

@@ -49,7 +49,7 @@ class chapterContent extends StatelessWidget {
                 ),
                 Text.rich(
                   (TextSpan(
-                      text: 'Chapter ${chapter}',
+                      text: 'Chapter $chapter',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 30.0),
                       children: [
@@ -72,9 +72,10 @@ class chapterContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
                     itemCount: 2,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
@@ -82,7 +83,7 @@ class chapterContent extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Lessons(chapter)));
                         },
-                        child: Card(
+                        child: const Card(
                             //   child: Stack(
                             //     alignment: FractionalOffset.bottomCenter,
                             //     children: <Widget>[
@@ -114,7 +115,7 @@ class chapterContent extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
@@ -123,8 +124,8 @@ class chapterContent extends StatelessWidget {
                       child: Container(
                     alignment: Alignment.center,
                     height: 30.0,
-                    color: Color.fromARGB(255, 161, 161, 161),
-                    child: Text(
+                    color: const Color.fromARGB(255, 161, 161, 161),
+                    child: const Text(
                       'Quiz',
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -157,8 +158,8 @@ class chapterContent extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
-      backgroundColor: Color.fromARGB(255, 156, 203, 247),
+      iconTheme: const IconThemeData(color: Colors.black),
+      backgroundColor: const Color.fromARGB(255, 156, 203, 247),
       //Color.fromARGB(255, 223, 115, 115)
       elevation: 0,
       /*

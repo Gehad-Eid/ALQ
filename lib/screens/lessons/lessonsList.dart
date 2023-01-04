@@ -62,7 +62,7 @@ class _LessonsState extends State<Lessons> {
 
     var data = await FirebaseFirestore.instance
         .collection('chapters')
-        .doc('Chapter ${chpNum}')
+        .doc('Chapter $chpNum')
         .collection('Lessons')
         .orderBy('name')
         .get();

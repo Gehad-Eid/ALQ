@@ -11,7 +11,16 @@ class _lessonsState extends State<lessons> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      appBar: AppBar(
+        elevation: 0,
+        title: const Text(
+          'Lessons (chande it)',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Column(),
     );
   }
 }

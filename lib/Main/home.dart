@@ -3,7 +3,10 @@ import 'package:alqgp/Lessons/boookmarks.dart';
 import 'package:alqgp/Main/homePage.dart';
 import 'package:alqgp/Settings/settings.dart';
 import 'package:alqgp/User/profile.dart';
+import 'package:alqgp/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class homePage extends StatefulWidget {
@@ -22,6 +25,22 @@ class _homePageState extends State<homePage> {
     profile(),
     setting(),
   ];
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("student")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      //setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

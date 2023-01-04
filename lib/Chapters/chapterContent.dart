@@ -6,8 +6,8 @@ import '../Lessons/summary.dart';
 import '../models/chapter_model.dart';
 
 class chapCont extends StatelessWidget {
-  final Store chap;
-  const chapCont({super.key, required this.chap});
+  final Chapter chapter;
+  const chapCont({super.key, required this.chapter});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,14 @@ class chapCont extends StatelessWidget {
       //   backgroundColor: Colors.transparent,
       // ),
       body: Body(
-        chap: chap,
+        chap: chapter,
       ),
     );
   }
 }
 
 class Body extends StatelessWidget {
-  final Store chap;
+  final Chapter chap;
   const Body({
     Key? key,
     required this.chap,
@@ -45,7 +45,7 @@ class Body extends StatelessWidget {
             photo: chap.photo,
           ),
           TitleAndPrice(
-            title: "${chap.itemName}",
+            title: chap.chapterName,
             //photo: "${chap.itemImage}",
           ),
           //SizedBox(height: 20.0),
@@ -74,7 +74,7 @@ class Body extends StatelessWidget {
               Expanded(
                 child: TextButton(
                   onPressed: () {},
-                  child: Text("Quiz"),
+                  child: const Text("Quiz"),
                 ),
               ),
             ],
@@ -105,14 +105,14 @@ class ImageAndIcons extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0 * 3),
+                padding: const EdgeInsets.symmetric(vertical: 20.0 * 3),
                 child: Column(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        icon: Icon(Icons.arrow_back_rounded),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        icon: const Icon(Icons.arrow_back_rounded),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -123,9 +123,10 @@ class ImageAndIcons extends StatelessWidget {
                       height: 71,
                     ),
                     const IconCard(
-                        icon: "images/icons8-ar-100 (1).png", page: lessons()),
+                        icon: "images/icons8-ar-100 (1).png", page: AR()),
                     const IconCard(
-                        icon: "images/icons8-elearning-64.png", page: AR()),
+                        icon: "images/icons8-elearning-64.png",
+                        page: lessons()),
                     const IconCard(
                       icon: "images/icons8-marker-100 (2).png",
                       page: summary(),
@@ -145,9 +146,10 @@ class ImageAndIcons extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(0, 10),
+                    offset: const Offset(0, 10),
                     blurRadius: 60,
-                    color: Color.fromARGB(255, 79, 178, 249).withOpacity(0.29),
+                    color: const Color.fromARGB(255, 79, 178, 249)
+                        .withOpacity(0.29),
                   ),
                 ],
                 image: DecorationImage(
@@ -184,15 +186,15 @@ class IconCard extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: size.height * 0.03),
-        padding: EdgeInsets.all(20.0 / 2),
-        height: 80,
-        width: 80,
+        padding: const EdgeInsets.all(20.0 / 2),
+        height: 65,
+        width: 65,
         decoration: BoxDecoration(
           color: Colors.purple.shade200,
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 15),
+              offset: const Offset(0, 15),
               blurRadius: 22,
               color: Colors.purple.withOpacity(0.22),
             ),
@@ -221,7 +223,7 @@ class TitleAndPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: <Widget>[
           RichText(
@@ -243,7 +245,7 @@ class TitleAndPrice extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           // Text(
           //   "\$$price",
           //   style: Theme.of(context)

@@ -157,7 +157,7 @@ class _headerState extends State<header> {
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),
-                    itemCount: storeItems.length,
+                    itemCount: chapterList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
@@ -174,8 +174,8 @@ class _headerState extends State<header> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
-                                    image:
-                                        AssetImage(storeItems[index].itemImage),
+                                    image: AssetImage(
+                                        chapterList[index].chapterImage),
                                   ),
                                 ),
                               ),
@@ -184,7 +184,7 @@ class _headerState extends State<header> {
                                 height: 40.0,
                                 color: Color.fromARGB(255, 223, 115, 115),
                                 child: Text(
-                                  storeItems[index].itemName,
+                                  chapterList[index].chapterName,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16.0,
