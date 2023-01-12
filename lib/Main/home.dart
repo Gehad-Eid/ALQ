@@ -17,52 +17,53 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-  int index = 2;
-  final pages = [
-    bookMark(),
-    chapters(),
-    homey(),
-    profile(),
-    setting(),
-  ];
-
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
   @override
   void initState() {
-    super.initState();
     FirebaseFirestore.instance
         .collection("student")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
+      loggedInUser = UserModel.fromMap(value.data());
       //setState(() {});
     });
+    super.initState();
   }
+
+  int index = 2;
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      const bookMark(),
+      const chapters(),
+      homey(loggedInUser.firstName),
+      const profile(),
+      const setting(),
+    ];
+
     final itList = <Widget>[
-      Icon(Icons.bookmark_rounded, size: 30),
-      Icon(Icons.auto_stories_rounded, size: 30),
-      Icon(Icons.home_rounded, size: 30),
-      Icon(Icons.person_rounded, size: 30),
-      Icon(Icons.settings_rounded, size: 30),
+      const Icon(Icons.bookmark_rounded, size: 30),
+      const Icon(Icons.auto_stories_rounded, size: 30),
+      const Icon(Icons.home_rounded, size: 30),
+      const Icon(Icons.person_rounded, size: 30),
+      const Icon(Icons.settings_rounded, size: 30),
     ];
     return Scaffold(
       extendBody: true,
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       // appBar: AppBar(
       //   elevation: 0,
       // ),
       body: pages[index],
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Color.fromARGB(255, 243, 247, 248),
+        backgroundColor: const Color.fromARGB(255, 243, 247, 248),
         color: Colors.indigo.shade200,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 350),
+        animationDuration: const Duration(milliseconds: 350),
         height: 60,
         index: index,
         items: itList,
@@ -70,7 +71,6 @@ class _homePageState extends State<homePage> {
       ),
     );
   }
-
   // Widget getSelectedWidget({required int index}) {
   //   Widget widget;
   //   switch (index) {

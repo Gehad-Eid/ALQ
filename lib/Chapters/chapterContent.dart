@@ -1,4 +1,5 @@
 import 'package:alqgp/Lessons/lesson.dart';
+import 'package:alqgp/consts.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../AR/AR.dart';
@@ -12,15 +13,15 @@ class chapCont extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   // title: Text(
-      //   //   'Learning',
-      //   //   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-      //   // ),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.transparent,
-      // ),
+      appBar: AppBar(
+        elevation: 0,
+        // title: Text(
+        //   'Learning',
+        //   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        // ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+      ),
       body: Body(
         chap: chapter,
       ),
@@ -43,8 +44,9 @@ class Body extends StatelessWidget {
           ImageAndIcons(
             size: size,
             photo: chap.photo,
+            chapterNum: chap.chapNum,
           ),
-          TitleAndPrice(
+          Title(
             title: chap.chapterName,
             //photo: "${chap.itemImage}",
           ),
@@ -90,17 +92,19 @@ class ImageAndIcons extends StatelessWidget {
     Key? key,
     required this.size,
     required this.photo,
+    required this.chapterNum,
   }) : super(key: key);
 
   final Size size;
   final String photo;
+  final int chapterNum;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0 * 3),
       child: SizedBox(
-        height: size.height * 0.8,
+        height: size.height * 0.7,
         child: Row(
           children: <Widget>[
             Expanded(
@@ -108,25 +112,25 @@ class ImageAndIcons extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0 * 3),
                 child: Column(
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        icon: const Icon(Icons.arrow_back_rounded),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.topLeft,
+                    //   child: IconButton(
+                    //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    //     icon: const Icon(Icons.arrow_back_rounded),
+                    //     onPressed: () {
+                    //       Navigator.pop(context);
+                    //     },
+                    //   ),
+                    // ),
                     //Spacer(),
-                    const SizedBox(
-                      height: 71,
+                    SizedBox(
+                      height: size.height * 0.02,
                     ),
                     const IconCard(
                         icon: "images/icons8-ar-100 (1).png", page: AR()),
-                    const IconCard(
+                    IconCard(
                         icon: "images/icons8-elearning-64.png",
-                        page: lessons()),
+                        page: lessons(chapterNum)),
                     const IconCard(
                       icon: "images/icons8-marker-100 (2).png",
                       page: summary(),
@@ -148,8 +152,7 @@ class ImageAndIcons extends StatelessWidget {
                   BoxShadow(
                     offset: const Offset(0, 10),
                     blurRadius: 60,
-                    color: const Color.fromARGB(255, 79, 178, 249)
-                        .withOpacity(0.29),
+                    color: kTextColor.withOpacity(0.29),
                   ),
                 ],
                 image: DecorationImage(
@@ -211,8 +214,8 @@ class IconCard extends StatelessWidget {
   }
 }
 
-class TitleAndPrice extends StatelessWidget {
-  const TitleAndPrice({
+class Title extends StatelessWidget {
+  const Title({
     Key? key,
     required this.title,
     // required this.photo,

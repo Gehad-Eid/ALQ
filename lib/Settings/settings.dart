@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-
-import '../screens/constants.dart';
 import '../screens/home.dart';
 
 class setting extends StatelessWidget {
@@ -76,26 +74,27 @@ class setting extends StatelessWidget {
   Widget logout(BuildContext path) => SimpleSettingsTile(
         title: 'Logout',
         subtitle: '',
-        leading: CustomIcon(icon: Icons.logout_rounded, color: Colors.grey),
+        leading:
+            const CustomIcon(icon: Icons.logout_rounded, color: Colors.grey),
         onTap: () => logingout(path),
       );
   Widget deleteAccount() => SimpleSettingsTile(
         title: 'Delete Account',
         subtitle: '',
-        leading:
-            CustomIcon(icon: Icons.delete_forever_rounded, color: Colors.red),
+        leading: const CustomIcon(
+            icon: Icons.delete_forever_rounded, color: Colors.red),
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget reportBug() => SimpleSettingsTile(
         title: 'Report A Bug',
         subtitle: '',
-        leading: CustomIcon(icon: Icons.bug_report, color: Colors.teal),
+        leading: const CustomIcon(icon: Icons.bug_report, color: Colors.teal),
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget sendFeedback() => SimpleSettingsTile(
         title: 'Send Feedback',
         subtitle: '',
-        leading: CustomIcon(
+        leading: const CustomIcon(
             icon: Icons.thumbs_up_down_rounded, color: Colors.deepPurpleAccent),
         //onTap: () => Utils.showSnackBar(context),
       );
@@ -103,15 +102,16 @@ class setting extends StatelessWidget {
         //TextInputSettingsTile
         title: 'Change Password',
         subtitle: '',
-        leading:
-            CustomIcon(icon: Icons.password_rounded, color: Colors.blueAccent),
+        leading: const CustomIcon(
+            icon: Icons.password_rounded, color: Colors.blueAccent),
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget aboutUs() => SimpleSettingsTile(
         //TextInputSettingsTile
         title: 'About Us',
         subtitle: '',
-        leading: CustomIcon(icon: Icons.campaign_rounded, color: Colors.lime),
+        leading:
+            const CustomIcon(icon: Icons.campaign_rounded, color: Colors.lime),
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget faq() => SimpleSettingsTile(

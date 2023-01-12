@@ -6,7 +6,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../models/achive_modle.dart';
 
 class homey extends StatelessWidget {
-  const homey({super.key});
+  final String? name;
+  const homey(this.name, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +82,17 @@ class homey extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(
-            'Hi Sarah',
+            'Hi $name',
             style: Theme.of(context)
                 .textTheme
                 .headline4
                 ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Spacer(),
-          Image.asset('images/logo2.png'),
+          Image.asset(
+            'images/logo2.png',
+            width: size.width * 0.3,
+          ),
         ],
       ),
     );

@@ -8,50 +8,45 @@ class LessonContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
-        height: 10000,
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.black),
-            backgroundColor: Color.fromARGB(255, 156, 203, 247),
+            iconTheme: const IconThemeData(color: Colors.black),
+            backgroundColor: const Color.fromARGB(255, 156, 203, 247),
             //Color.fromARGB(255, 223, 115, 115)
             elevation: 0,
             title: Text(
-              "${data.id?.split(",")[0]}",
-              style: TextStyle(
+              '${data.id?.split(",")[0]}',
+              style: const TextStyle(
                 fontSize: 23,
                 color: Colors.black,
               ),
             ),
             centerTitle: true,
           ),
-          // appBar: AppBar(
-          //   title: Text('${data.id}'),
-          // ),
           body: Column(children: [
-            SizedBox(
-              height: 22,
-            ),
+            // const SizedBox(
+            //   height: 22,
+            // ),
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: size.height * 0.4,
               child: EasyWebView(
-                src: "${data.id!.split(",")[1]}",
+                src: data.id!.split(",")[1],
                 onLoaded: () {}, // Try to convert to flutter widgets
-                // width: 100,
-                // height: 100,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               height: 50,
             ),
             Text(
               '${data.title}',
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.bold,
                 //foreground: Paint()
