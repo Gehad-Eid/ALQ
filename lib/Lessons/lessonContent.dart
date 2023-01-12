@@ -68,16 +68,16 @@ class lessonCont extends StatelessWidget {
               width: double.infinity,
               height: 30,
             ),
-            Text(
-              lesson.id!.split(",")[0],
-              textAlign: TextAlign.left,
-              style: const TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-                //foreground: Paint()
-                color: kTextColor,
-              ),
-            ),
+            // Text(
+            //   lesson.id!.split(",")[0],
+            //   textAlign: TextAlign.left,
+            //   style: const TextStyle(
+            //     fontSize: 22.0,
+            //     fontWeight: FontWeight.bold,
+            //     //foreground: Paint()
+            //     color: kTextColor,
+            //   ),
+            // ),
             Container(
               decoration: BoxDecoration(
                 color: kLightTextColor,
