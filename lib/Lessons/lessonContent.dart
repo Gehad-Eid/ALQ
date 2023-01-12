@@ -60,10 +60,7 @@ class lessonCont extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(
-              color: Colors.black,
-              //thickness: 0.80,
-            ),
+            const Divider(),
             const SizedBox(
               width: double.infinity,
               height: 30,
