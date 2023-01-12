@@ -9,7 +9,6 @@ class lessonCont extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 243, 247, 248),
       appBar: AppBar(
@@ -76,26 +75,62 @@ class lessonCont extends StatelessWidget {
             //   ),
             // ),
             Container(
-              decoration: BoxDecoration(
-                color: kLightTextColor,
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              width: size.width * 0.85,
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(Icons.bookmark),
-                      Icon(Icons.volume_up),
-                    ],
-                  ),
-                  Text('data'),
-                ],
-              ),
+              height: 300,
+              child:
+                  PageView(scrollDirection: Axis.horizontal, children: const [
+                lessonCard(
+                  title: 'title1',
+                  content: 'content 1 kter',
+                ),
+                lessonCard(
+                  title: 'title2',
+                  content: 'content 2 kter',
+                ),
+                lessonCard(
+                  title: 'title3',
+                  content: 'content 3 kter',
+                ),
+              ]),
             )
           ]),
+        ),
+      ),
+    );
+  }
+}
+
+class lessonCard extends StatelessWidget {
+  final String title, content;
+  const lessonCard({
+    Key? key,
+    required this.title,
+    required this.content,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: kLightTextColor,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        width: size.width * 0.85,
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Icon(Icons.bookmark),
+                Icon(Icons.volume_up),
+              ],
+            ),
+            Text(title),
+            Text(content),
+          ],
         ),
       ),
     );
