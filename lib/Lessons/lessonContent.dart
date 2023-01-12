@@ -81,14 +81,14 @@ class lessonCont extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
               ),
               width: size.width * 0.85,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Icon(Icons.bookmark),
-                      Icon(Icons.headset),
+                      Icon(Icons.volume_up),
                     ],
                   ),
                   Text('data'),
