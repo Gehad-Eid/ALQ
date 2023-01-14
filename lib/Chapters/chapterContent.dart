@@ -1,4 +1,5 @@
 import 'package:alqgp/Lessons/lesson.dart';
+import 'package:alqgp/Quizes/quiz.dart';
 import 'package:alqgp/consts.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,12 @@ class Body extends StatelessWidget {
               // ),
               Expanded(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => quiz_page(
+                              chap: chap.chapNum,
+                            )));
+                  },
                   child: const Text("Quiz"),
                 ),
               ),

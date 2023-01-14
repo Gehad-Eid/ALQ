@@ -47,6 +47,8 @@ dependencies:
   flutter_carousel_slider: ^1.1.0
   flutter_settings_screens: ^0.2.2+1
   easy_web_view2: ^0.0.3
+  quiz_view: ^1.0.5
+  timer_count_down: ^2.2.2
 
 
 dev_dependencies:

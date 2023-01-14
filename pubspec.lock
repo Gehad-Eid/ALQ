@@ -429,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+  quiz_view:
+    dependency: "direct main"
+    description:
+      name: quiz_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
   shared_preferences:
     dependency: transitive
     description:
@@ -532,6 +539,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  timer_count_down:
+    dependency: "direct main"
+    description:
+      name: timer_count_down
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.2"
   toast:
     dependency: "direct main"
     description:
