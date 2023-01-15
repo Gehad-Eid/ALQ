@@ -1,23 +1,18 @@
+import 'dart:html';
 import 'dart:math';
-
-import 'result.dart';
+import 'package:alqgp/Quizes/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_view/quiz_view.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-enum HintItem { increaseTime, deleteAnswers }
-
 class quiz_page extends StatelessWidget {
-  final int chap;
-  const quiz_page({required this.chap, super.key});
+  final chap;
+  const quiz_page({this.chap, super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool hint1Used = false;
-    bool hint2Used = false;
-    bool showTwoAnswersOnly = false;
     CollectionReference users = FirebaseFirestore.instance
         .collection('chapters')
         .doc('Chapter ${chap}')
@@ -26,6 +21,7 @@ class quiz_page extends StatelessWidget {
     CountdownController _count = CountdownController();
     int score = 0;
     int total = 0;
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 156, 203, 247),
       appBar: AppBar(
@@ -55,29 +51,7 @@ class quiz_page extends StatelessWidget {
                 _count.restart();
               }
             },
-          ),
-          PopupMenuButton<HintItem>(
-            // Callback that sets the selected popup menu item.
-            onSelected: (HintItem item) {
-              if (item == HintItem.increaseTime && !hint1Used) {
-                hint1Used = true;
-                _count.restart();
-              } else if (item == HintItem.deleteAnswers && !hint2Used) {
-                hint2Used = true;
-                showTwoAnswersOnly = true;
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<HintItem>>[
-              const PopupMenuItem<HintItem>(
-                value: HintItem.increaseTime,
-                child: Text('Increase time'),
-              ),
-              const PopupMenuItem<HintItem>(
-                value: HintItem.deleteAnswers,
-                child: Text('Delete answers'),
-              ),
-            ],
-          ),
+          )
         ],
         //Color.fromARGB(255, 223, 115, 115)
         elevation: 0,
@@ -177,25 +151,19 @@ class quiz_page extends StatelessWidget {
                           height: 500,
                           question: "${data['Q${index}']['question']}",
                           rightAnswer: "${data['Q$index']['answers'][0]}",
-                          wrongAnswers: (showTwoAnswersOnly)
-                              ? [
-                                  "${data['Q$index']['answers'][1]}",
-                                ]
-                              : [
-                                  "${data['Q$index']['answers'][1]}",
-                                  "${data['Q$index']['answers'][2]}",
-                                  "${data['Q$index']['answers'][3]}",
-                                ],
+                          wrongAnswers: [
+                            "${data['Q$index']['answers'][1]}",
+                            "${data['Q$index']['answers'][2]}",
+                            "${data['Q$index']['answers'][3]}",
+                          ],
                           onRightAnswer: () {
                             score += 1;
                             total += 1;
                             print(score);
-                            showTwoAnswersOnly = false;
                           },
                           onWrongAnswer: () {
                             random_number = Random().nextInt(10);
                             total += 1;
-                            showTwoAnswersOnly = false;
                           },
                         ),
                       );

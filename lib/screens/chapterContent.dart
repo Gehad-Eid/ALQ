@@ -1,3 +1,4 @@
+import 'package:alqgp/Quizes/quiz.dart';
 import 'package:alqgp/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -120,19 +121,26 @@ class chapterContent extends StatelessWidget {
                 ),
                 Container(
                   height: 50,
-                  child: Card(
-                      child: Container(
-                    alignment: Alignment.center,
-                    height: 30.0,
-                    color: const Color.fromARGB(255, 161, 161, 161),
-                    child: const Text(
-                      'Quiz',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16.0,
-                          color: Colors.white),
-                    ),
-                  )),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) { 
+                        return quiz_page(chap: chapter,);
+                       }));
+                    },
+                    child: Card(
+                        child: Container(
+                      alignment: Alignment.center,
+                      height: 30.0,
+                      color: const Color.fromARGB(255, 161, 161, 161),
+                      child: const Text(
+                        'Quiz',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.0,
+                            color: Colors.white),
+                      ),
+                    )),
+                  ),
                 ),
               ],
             ),
