@@ -44,7 +44,7 @@ class LessonContent extends StatelessWidget {
               height: 50,
             ),
             Text(
-              '${data.title}',
+              '${data.id}',
               textAlign: TextAlign.left,
               style: const TextStyle(
                 fontSize: 22.0,

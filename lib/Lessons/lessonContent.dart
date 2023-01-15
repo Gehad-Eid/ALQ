@@ -34,13 +34,6 @@ class lessonCont extends StatelessWidget {
                   bottomLeft: Radius.circular(29),
                   bottomRight: Radius.circular(29),
                 ),
-                // boxShadow: [
-                //   BoxShadow(
-                //     offset: const Offset(0, 10),
-                //     blurRadius: 50,
-                //     color: Color(0xFF8EA3E2).withOpacity(0.75),
-                //   )
-                // ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -64,33 +57,17 @@ class lessonCont extends StatelessWidget {
               width: double.infinity,
               height: 30,
             ),
-            // Text(
-            //   lesson.id!.split(",")[0],
-            //   textAlign: TextAlign.left,
-            //   style: const TextStyle(
-            //     fontSize: 22.0,
-            //     fontWeight: FontWeight.bold,
-            //     //foreground: Paint()
-            //     color: kTextColor,
-            //   ),
-            // ),
             Container(
               height: 300,
-              child:
-                  PageView(scrollDirection: Axis.horizontal, children: const [
-                lessonCard(
-                  title: 'title1',
-                  content: 'content 1 kter',
-                ),
-                lessonCard(
-                  title: 'title2',
-                  content: 'content 2 kter',
-                ),
-                lessonCard(
-                  title: 'title3',
-                  content: 'content 3 kter',
-                ),
-              ]),
+              child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: lesson.parts?.length,
+                itemBuilder: (context, index) {
+                  return lessonCard(
+                      title: lesson.parts!['part ${index + 1}'],
+                      content: lesson.parts!['part ${index + 1}']);
+                },
+              ),
             )
           ]),
         ),
@@ -100,7 +77,7 @@ class lessonCont extends StatelessWidget {
 }
 
 class lessonCard extends StatelessWidget {
-  final String title, content;
+  final String? title, content;
   const lessonCard({
     Key? key,
     required this.title,
@@ -123,13 +100,34 @@ class lessonCard extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Icon(Icons.bookmark),
-                Icon(Icons.volume_up),
+              children: [
+                GestureDetector(
+                  child: const Icon(Icons.bookmark),
+                  onTap: () {},
+                ),
+                GestureDetector(
+                  child: const Icon(Icons.volume_up),
+                  onTap: () {},
+                ),
               ],
             ),
-            Text(title),
-            Text(content),
+            Text(
+              title!.split('+')[0],
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+                color: kTextColor,
+              ),
+            ),
+            Text(
+              content!.split('+')[1].replaceAll("\\n", "\n"),
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontSize: 19.0,
+                color: Colors.black,
+              ),
+            ),
           ],
         ),
       ),
