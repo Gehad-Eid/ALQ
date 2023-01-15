@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 import 'package:alqgp/Quizes/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,7 +78,7 @@ class quiz_page extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(

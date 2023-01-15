@@ -34,14 +34,14 @@ class result extends StatelessWidget {
         body: //Body(),
             SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 22,
                 ),
-                Text.rich(
+                const Text.rich(
                   (TextSpan(
                       text: 'Score out of 10',
                       style: TextStyle(
@@ -55,7 +55,7 @@ class result extends StatelessWidget {
                       ])),
                   //style: TextStyle(fontSize: 30.0),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 ////////////
