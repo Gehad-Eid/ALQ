@@ -9,6 +9,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/profile.dart';
+
 class homePage extends StatefulWidget {
   const homePage({super.key});
 
@@ -38,11 +40,16 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      const bookMark(),
+      bookMark(),
+      chapters(),
+      homey(loggedInUser.firstName),
+      ProfileScreen(),
+      setting(),
+      /*const bookMark(),
       const chapters(),
       homey(loggedInUser.firstName),
       const profile(),
-      const setting(),
+      const setting(),*/
     ];
 
     final itList = <Widget>[

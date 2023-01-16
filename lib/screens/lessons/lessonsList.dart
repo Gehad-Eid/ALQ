@@ -67,9 +67,9 @@ class _LessonsState extends State<Lessons> {
         .orderBy('name')
         .get();
 
-    setState(() {
+    /*setState(() {
       _lessonsList =
           List.from(data.docs.map((e) => LessonModle.fromSnapshot(e)));
-    });
+    }); */
   }
 }

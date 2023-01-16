@@ -49,6 +49,9 @@ dependencies:
   easy_web_view2: ^0.0.3
   quiz_view: ^1.0.5
   timer_count_down: ^2.2.2
+  dots_indicator: ^2.1.0
+  carousel_slider: ^4.2.1
+  flutter_tts: ^3.6.3
 
 
 dev_dependencies:

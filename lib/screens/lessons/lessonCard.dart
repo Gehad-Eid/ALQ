@@ -25,7 +25,8 @@ class Lcard extends StatelessWidget {
             ListTile(
               title: Center(
                 child: Text(
-                  "${_lesson.id?.split(",")[0]}",
+                  //"${_lesson.id?.split(",")[0]}",
+                  "${_lesson.name?.split(",")[0]}",
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
