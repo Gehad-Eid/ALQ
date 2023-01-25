@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'result.dart';
@@ -59,7 +60,7 @@ class quiz_page extends StatelessWidget {
             },
           ),
           PopupMenuButton<HintItem>(
-            // Callback that sets the selected popup menu item.
+            //
             onSelected: (HintItem item) {
               if (item == HintItem.increaseTime && !hint1Used) {
                 hint1Used = true;
@@ -129,28 +130,7 @@ class quiz_page extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   Map<String, dynamic> data =
                       snapshot.data!.data() as Map<String, dynamic>;
-                  List<int> _data = [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19,
-                    20
-                  ];
+                  List<int> _data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
                   final random = new Random();
 
                   int item = _data[random.nextInt(data.length)];
@@ -165,48 +145,38 @@ class quiz_page extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
+                        width: 300,
+                        height: 600,
+                        child: ValueListenableBuilder(
+                            valueListenable: _notifier,
+                            builder: (BuildContext context, bool val, Widget? child) {
+                              return QuizView(
+                          showCorrect: true,
+                          tagBackgroundColor: Colors.deepOrange,
+                          questionTag: "Question:$index",
+                          tagColor: Colors.black,
+                          answerColor: Colors.white,
+                          answerBackgroundColor:
+                              Color.fromARGB(255, 255, 0, 111),
+                          questionColor: Colors.black,
                           width: 300,
-                          height: 600,
-                          child: ValueListenableBuilder(
-                              valueListenable: _notifier,
-                              builder: (BuildContext context, bool val,
-                                  Widget? child) {
-                                return QuizView(
-                                  showCorrect: true,
-                                  tagBackgroundColor: Colors.deepOrange,
-                                  questionTag: "Question:$index",
-                                  tagColor: Colors.black,
-                                  answerColor: Colors.white,
-                                  answerBackgroundColor:
-                                      Color.fromARGB(255, 255, 0, 111),
-                                  questionColor: Colors.black,
-                                  width: 300,
-                                  height: 500,
-                                  question: "${data['Q${index}']['question']}",
-                                  rightAnswer:
-                                      "${data['Q$index']['answers'][0]}",
-                                  wrongAnswers: (showTwoAnswersOnly)
-                                      ? [
-                                          "${data['Q$index']['answers'][1]}",
-                                        ]
-                                      : [
-                                          "${data['Q$index']['answers'][1]}",
-                                          "${data['Q$index']['answers'][2]}",
-                                          "${data['Q$index']['answers'][3]}",
-                                        ],
-                                  onRightAnswer: () {
-                                    score += 1;
-                                    total += 1;
-                                    print(score);
-                                    showTwoAnswersOnly = false;
-                                  },
-                                  onWrongAnswer: () {
-                                    random_number = Random().nextInt(10);
-                                    total += 1;
-                                    showTwoAnswersOnly = false;
-                                  },
-                                );
-                              }));
+                          height: 500,
+                          question: "${data['Q${index}']['question']}",
+                          rightAnswer: "${data['Q$index']['answers'][0]}",
+                          wrongAnswers: (showTwoAnswersOnly) ? ["${data['Q$index']['answers'][1]}",]: ["${data['Q$index']['answers'][1]}","${data['Q$index']['answers'][2]}","${data['Q$index']['answers'][3]}",],
+                          onRightAnswer: () {
+                            score += 1;
+                            total += 1;
+                            print(score);
+                            showTwoAnswersOnly = false;
+                          },
+                          onWrongAnswer: () {
+                            random_number = Random().nextInt(10);
+                            total += 1;
+                            showTwoAnswersOnly = false;
+                          },
+                        );})
+                      );
                     },
                   );
                 }
