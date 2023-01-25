@@ -1,10 +1,6 @@
-import 'package:alqgp/screens/lessons/lessonsList.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:toast/toast.dart';
 import 'package:alqgp/screens/login.dart';
 import 'package:alqgp/screens/signup.dart';
 import 'consts.dart';
@@ -38,7 +34,6 @@ class MyApp extends StatelessWidget {
             : ThemeData.light().copyWith(
                 accentColor: Colors.indigo.shade800,
                 primaryColor: kTextColor,
-                //accentColor: Colors.red,
                 scaffoldBackgroundColor: kBackgroundColor,
                 canvasColor: kBackgroundColor,
               ),
