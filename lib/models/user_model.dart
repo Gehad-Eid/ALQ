@@ -2,17 +2,19 @@ class UserModel {
   String? uid;
   String? email;
   String? firstName;
-  String? secondName;
+  String? secondName, image;
   int? score;
   int? level;
 
-  UserModel(
-      {this.uid,
-      this.email,
-      this.firstName,
-      this.secondName,
-      this.score,
-      this.level});
+  UserModel({
+    this.uid,
+    this.email,
+    this.firstName,
+    this.secondName,
+    this.score,
+    this.level,
+    this.image,
+  });
 
   // receiving data from server
   factory UserModel.fromMap(map) {
@@ -23,6 +25,7 @@ class UserModel {
       secondName: map['secondName'],
       score: map['score'],
       level: map['level'],
+      image: map['image'],
     );
   }
 
@@ -35,6 +38,7 @@ class UserModel {
       'secondName': secondName,
       'score': score,
       'level': level,
+      'image': image,
     };
   }
 }

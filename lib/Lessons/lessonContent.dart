@@ -92,6 +92,13 @@ class _lessonContState extends State<lessonCont> {
                   bottomLeft: Radius.circular(29),
                   bottomRight: Radius.circular(29),
                 ),
+                // boxShadow: [
+                //   BoxShadow(
+                //     offset: const Offset(0, 10),
+                //     blurRadius: 50,
+                //     color: Color(0xFF8EA3E2).withOpacity(0.75),
+                //   )
+                // ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
