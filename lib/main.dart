@@ -6,7 +6,6 @@ import 'package:alqgp/screens/signup.dart';
 import 'consts.dart';
 import 'screens/home.dart';
 import 'package:alqgp/Settings/settings.dart';
-import 'screens/chapters.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart' as sett;
 
 void main() async {
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget {
           //profile
 
           //chapters
-          header.screenRout: (context) => const header(),
+          //header.screenRout: (context) => const header(),
           //lessons
           //Lessons.screenRout: (context) => const Lessons(),
         },

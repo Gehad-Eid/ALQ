@@ -17,7 +17,7 @@ class homey extends StatelessWidget {
       child: Column(
         children: <Widget>[
           HeaderWithWelcom(size, context),
-          TitleWithLine(text: 'You Progressed'),
+          TitleWithLine(text: 'Your Progress'),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
             child: CircularPercentIndicator(

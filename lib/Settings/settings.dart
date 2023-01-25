@@ -1,3 +1,4 @@
+import 'package:alqgp/Settings/tts_settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
@@ -62,6 +63,8 @@ class setting extends StatelessWidget {
             children: <Widget>[
               const SizedBox(height: 8),
               // resetSettings(),
+              // const SizedBox(height: 2),
+              // tts_Setting(path),
               // const SizedBox(height: 2),
               logout(path),
             ],
@@ -138,6 +141,17 @@ class setting extends StatelessWidget {
   //           icon: Icons.refresh_outlined, color: Colors.deepOrange.shade300),
   //       onTap: () {
   //         Settings.clearCache();
+  //       },
+  //     );
+  // Widget tts_Setting(BuildContext path) => SimpleSettingsTile(
+  //       //TextInputSettingsTile
+  //       title: 'tts',
+  //       subtitle: '',
+  //       leading: CustomIcon(
+  //           icon: Icons.refresh_outlined, color: Colors.deepOrange.shade300),
+  //       onTap: () {
+  //         Navigator.of(path)
+  //             .push(MaterialPageRoute(builder: (context) => ttsSetting()));
   //       },
   //     );
 

@@ -46,47 +46,48 @@ class Body extends StatelessWidget {
             size: size,
             photo: chap.photo,
             chapterNum: chap.chapNum,
+            chpName: chap.chapterName,
           ),
           Title(
             title: chap.chapterName,
             //photo: "${chap.itemImage}",
           ),
           //SizedBox(height: 20.0),
-          Row(
-            children: <Widget>[
-              // SizedBox(
-              //   width: size.width / 2,
-              //   height: 84,
-              //   child: TextButton(
-              //     // shape: RoundedRectangleBorder(
-              //     //   borderRadius: BorderRadius.only(
-              //     //     topRight: Radius.circular(20),
-              //     //   ),
-              //     // ),
-              //     // color: Colors.amber,
-              //     onPressed: () {},
-              //     child: Text(
-              //       "Buy Now",
-              //       style: TextStyle(
-              //         color: Color.fromARGB(255, 165, 16, 16),
-              //         fontSize: 16,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => quiz_page(
-                              chap: chap.chapNum,
-                            )));
-                  },
-                  child: const Text("Quiz"),
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: <Widget>[
+          //     // SizedBox(
+          //     //   width: size.width / 2,
+          //     //   height: 84,
+          //     //   child: TextButton(
+          //     //     // shape: RoundedRectangleBorder(
+          //     //     //   borderRadius: BorderRadius.only(
+          //     //     //     topRight: Radius.circular(20),
+          //     //     //   ),
+          //     //     // ),
+          //     //     // color: Colors.amber,
+          //     //     onPressed: () {},
+          //     //     child: Text(
+          //     //       "Buy Now",
+          //     //       style: TextStyle(
+          //     //         color: Color.fromARGB(255, 165, 16, 16),
+          //     //         fontSize: 16,
+          //     //       ),
+          //     //     ),
+          //     //   ),
+          //     // ),
+          //     Expanded(
+          //       child: TextButton(
+          //         onPressed: () {
+          //           Navigator.of(context).push(MaterialPageRoute(
+          //               builder: (context) => quiz_page(
+          //                     chap: chap.chapNum,
+          //                   )));
+          //         },
+          //         child: const Text("Quiz"),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
@@ -99,10 +100,11 @@ class ImageAndIcons extends StatelessWidget {
     required this.size,
     required this.photo,
     required this.chapterNum,
+    required this.chpName,
   }) : super(key: key);
 
   final Size size;
-  final String photo;
+  final String photo, chpName;
   final int chapterNum;
 
   @override
@@ -136,10 +138,15 @@ class ImageAndIcons extends StatelessWidget {
                         icon: "images/icons8-ar-100 (1).png", page: AR()),
                     IconCard(
                         icon: "images/icons8-elearning-64.png",
-                        page: lessons(chapterNum)),
-                    const IconCard(
+                        page: lessons(
+                          chapterNum,
+                          chpName: chpName,
+                        )),
+                    IconCard(
                       icon: "images/icons8-marker-100 (2).png",
-                      page: summary(),
+                      page: quiz_page(
+                        chap: chapterNum,
+                      ),
                     ),
                     //IconCard(icon: "images/rating.png"),
                   ],

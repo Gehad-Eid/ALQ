@@ -375,7 +375,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Center(
                                 child: Container(
                                   child: Image.asset(
-                                    'images/5b8f3d9f30460aeedbe6a235e2d001d3.jpg',
+                                    'images/profile-icon-design-free-vector.jpg',
                                     width: innerWidth * 0.45,
                                     fit: BoxFit.fitWidth,
                                   ),

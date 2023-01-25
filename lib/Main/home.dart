@@ -4,6 +4,7 @@ import 'package:alqgp/Main/homePage.dart';
 import 'package:alqgp/Settings/settings.dart';
 import 'package:alqgp/User/profile.dart';
 import 'package:alqgp/models/user_model.dart';
+import 'package:alqgp/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +42,7 @@ class _homePageState extends State<homePage> {
       const bookMark(),
       const chapters(),
       homey(loggedInUser.firstName),
-      const profile(),
+      ProfileScreen(),
       const setting(),
     ];
 

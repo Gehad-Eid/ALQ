@@ -1,17 +1,25 @@
 import 'dart:math';
-import 'package:alqgp/Quizes/result.dart';
+
+import 'result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_view/quiz_view.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
+enum HintItem { increaseTime, deleteAnswers }
+
 class quiz_page extends StatelessWidget {
   final chap;
+
   const quiz_page({this.chap, super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool hint1Used = false;
+    bool hint2Used = false;
+    bool showTwoAnswersOnly = false;
+    ValueNotifier<bool> _notifier = ValueNotifier(false);
     CollectionReference users = FirebaseFirestore.instance
         .collection('chapters')
         .doc('Chapter ${chap}')
@@ -20,7 +28,6 @@ class quiz_page extends StatelessWidget {
     CountdownController _count = CountdownController();
     int score = 0;
     int total = 0;
-
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 156, 203, 247),
       appBar: AppBar(
@@ -50,7 +57,30 @@ class quiz_page extends StatelessWidget {
                 _count.restart();
               }
             },
-          )
+          ),
+          PopupMenuButton<HintItem>(
+            // Callback that sets the selected popup menu item.
+            onSelected: (HintItem item) {
+              if (item == HintItem.increaseTime && !hint1Used) {
+                hint1Used = true;
+                _count.restart();
+              } else if (item == HintItem.deleteAnswers && !hint2Used) {
+                hint2Used = true;
+                showTwoAnswersOnly = true;
+                _notifier.value = true;
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<HintItem>>[
+              const PopupMenuItem<HintItem>(
+                value: HintItem.increaseTime,
+                child: Text('Increase time'),
+              ),
+              const PopupMenuItem<HintItem>(
+                value: HintItem.deleteAnswers,
+                child: Text('Delete answers'),
+              ),
+            ],
+          ),
         ],
         //Color.fromARGB(255, 223, 115, 115)
         elevation: 0,
@@ -78,7 +108,7 @@ class quiz_page extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(
+          SizedBox(
             height: 20,
           ),
           Container(
@@ -135,37 +165,48 @@ class quiz_page extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        width: 300,
-                        height: 600,
-                        child: QuizView(
-                          showCorrect: true,
-                          tagBackgroundColor: Colors.deepOrange,
-                          questionTag: "Question:$index",
-                          tagColor: Colors.black,
-                          answerColor: Colors.white,
-                          answerBackgroundColor:
-                              Color.fromARGB(255, 255, 0, 111),
-                          questionColor: Colors.black,
                           width: 300,
-                          height: 500,
-                          question: "${data['Q${index}']['question']}",
-                          rightAnswer: "${data['Q$index']['answers'][0]}",
-                          wrongAnswers: [
-                            "${data['Q$index']['answers'][1]}",
-                            "${data['Q$index']['answers'][2]}",
-                            "${data['Q$index']['answers'][3]}",
-                          ],
-                          onRightAnswer: () {
-                            score += 1;
-                            total += 1;
-                            print(score);
-                          },
-                          onWrongAnswer: () {
-                            random_number = Random().nextInt(10);
-                            total += 1;
-                          },
-                        ),
-                      );
+                          height: 600,
+                          child: ValueListenableBuilder(
+                              valueListenable: _notifier,
+                              builder: (BuildContext context, bool val,
+                                  Widget? child) {
+                                return QuizView(
+                                  showCorrect: true,
+                                  tagBackgroundColor: Colors.deepOrange,
+                                  questionTag: "Question:$index",
+                                  tagColor: Colors.black,
+                                  answerColor: Colors.white,
+                                  answerBackgroundColor:
+                                      Color.fromARGB(255, 255, 0, 111),
+                                  questionColor: Colors.black,
+                                  width: 300,
+                                  height: 500,
+                                  question: "${data['Q${index}']['question']}",
+                                  rightAnswer:
+                                      "${data['Q$index']['answers'][0]}",
+                                  wrongAnswers: (showTwoAnswersOnly)
+                                      ? [
+                                          "${data['Q$index']['answers'][1]}",
+                                        ]
+                                      : [
+                                          "${data['Q$index']['answers'][1]}",
+                                          "${data['Q$index']['answers'][2]}",
+                                          "${data['Q$index']['answers'][3]}",
+                                        ],
+                                  onRightAnswer: () {
+                                    score += 1;
+                                    total += 1;
+                                    print(score);
+                                    showTwoAnswersOnly = false;
+                                  },
+                                  onWrongAnswer: () {
+                                    random_number = Random().nextInt(10);
+                                    total += 1;
+                                    showTwoAnswersOnly = false;
+                                  },
+                                );
+                              }));
                     },
                   );
                 }
