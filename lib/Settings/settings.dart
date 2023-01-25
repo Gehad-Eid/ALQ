@@ -1,8 +1,8 @@
+import 'package:alqgp/Main/welcome.dart';
 import 'package:alqgp/Settings/tts_settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import '../screens/home.dart';
 
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';

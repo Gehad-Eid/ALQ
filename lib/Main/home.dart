@@ -4,13 +4,10 @@ import 'package:alqgp/Main/homePage.dart';
 import 'package:alqgp/Settings/settings.dart';
 import 'package:alqgp/User/profile.dart';
 import 'package:alqgp/models/user_model.dart';
-import 'package:alqgp/screens/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/profile.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -44,13 +41,6 @@ class _homePageState extends State<homePage> {
       bookMark(),
       chapters(),
       homey(loggedInUser.firstName),
-      ProfileScreen(),
-      setting(),
-      /*const bookMark(),
-      const chapters(),
-      homey(loggedInUser.firstName),
-      const profile(),
-      const setting(),*/
       ProfileScreen(),
       const setting(),
     ];

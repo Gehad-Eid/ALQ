@@ -137,7 +137,6 @@
 import 'package:alqgp/Lessons/lessonContent.dart';
 import 'package:alqgp/consts.dart';
 import 'package:alqgp/models/lesson_model.dart';
-import 'package:alqgp/screens/lessons/lesson_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

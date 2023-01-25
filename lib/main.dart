@@ -1,10 +1,10 @@
+import 'package:alqgp/Main/logIn.dart';
+import 'package:alqgp/Main/signUp.dart';
+import 'package:alqgp/Main/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:alqgp/screens/login.dart';
-import 'package:alqgp/screens/signup.dart';
 import 'consts.dart';
-import 'screens/home.dart';
 import 'package:alqgp/Settings/settings.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart' as sett;
 
