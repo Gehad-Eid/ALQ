@@ -130,12 +130,13 @@ class quiz_page extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   Map<String, dynamic> data =
                       snapshot.data!.data() as Map<String, dynamic>;
-                  List<int> _data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-                  final random = new Random();
-
-                  int item = _data[random.nextInt(data.length)];
-                  print(item);
-                  var random_number = Random().nextInt(10);
+  //****************************
+                  List _data = <int>[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+      final random= new Random();
+  var item = _data.toList()..shuffle();
+        ///print(item);
+          var random_number = Random().nextInt(10);
+//***************************** */
                   return PageView.builder(
                     reverse: false,
                     pageSnapping: true,
@@ -161,9 +162,9 @@ class quiz_page extends StatelessWidget {
                           questionColor: Colors.black,
                           width: 300,
                           height: 500,
-                          question: "${data['Q${index}']['question']}",
-                          rightAnswer: "${data['Q$index']['answers'][0]}",
-                          wrongAnswers: (showTwoAnswersOnly) ? ["${data['Q$index']['answers'][1]}",]: ["${data['Q$index']['answers'][1]}","${data['Q$index']['answers'][2]}","${data['Q$index']['answers'][3]}",],
+                          question: "${data['Q${item[index]}']['question']}",
+                          rightAnswer: "${data['Q${item[index]}']['answers'][0]}",
+                          wrongAnswers: (showTwoAnswersOnly) ? ["${data['Q${item[index]}']['answers'][1]}",]: ["${data['Q${item[index]}']['answers'][1]}","${data['Q${item[index]}']['answers'][2]}","${data['Q${item[index]}']['answers'][3]}",],
                           onRightAnswer: () {
                             score += 1;
                             total += 1;
