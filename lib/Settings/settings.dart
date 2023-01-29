@@ -98,7 +98,7 @@ class setting extends StatelessWidget {
         title: 'Report A Bug',
         subtitle: '',
         leading:  
-           const CustomIcon(icon: Icons.campaign_rounded,color: Colors.teal),
+          const CustomIcon(icon: Icons.bug_report, color: Colors.teal),
         onTap: () => {Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => reportABugg())),
         }
@@ -107,7 +107,7 @@ class setting extends StatelessWidget {
         title: 'Send Feedback',
         subtitle: '',
         leading:  
-           CustomIcon(icon: Icons.campaign_rounded,color: Colors.deepPurpleAccent),
+           CustomIcon(icon: Icons.thumbs_up_down_rounded,color: Colors.deepPurpleAccent),
         onTap: () => {Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => sendffeedback())),
         }
@@ -135,7 +135,7 @@ class setting extends StatelessWidget {
         title: 'FAQ',
         subtitle: '',
         leading:  
-           CustomIcon(icon: Icons.campaign_rounded,color: Colors.pink.shade200),
+           CustomIcon(icon: Icons.question_answer_outlined,color: Colors.pink.shade200),
         onTap: () => {Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => FAQQ())),
         }
