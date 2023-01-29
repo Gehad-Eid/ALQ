@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
 import '../models/achive_modle.dart';
 
 class homey extends StatelessWidget {

@@ -1,8 +1,14 @@
 import 'package:alqgp/Main/welcome.dart';
 import 'package:alqgp/Settings/tts_settings.dart';
+import 'package:alqgp/feedBack/AboutUss.dart';
+import 'package:alqgp/feedBack/sendffeedback.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+
+import '../feedBack/FAQQ.dart';
+import '../feedBack/ReportABugg.dart';
+
 
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';
@@ -48,13 +54,13 @@ class setting extends StatelessWidget {
             title: 'Feedback',
             children: <Widget>[
               const SizedBox(height: 8),
-              aboutUs(),
+              aboutUs(path),
               const SizedBox(height: 2),
-              reportBug(),
+              reportBug(path),
               const SizedBox(height: 2),
-              sendFeedback(),
+              sendFeedback(path),
               const SizedBox(height: 2),
-              faq(),
+              faq(path),
             ],
           ),
           const SizedBox(height: 16),
@@ -88,18 +94,23 @@ class setting extends StatelessWidget {
             icon: Icons.delete_forever_rounded, color: Colors.red),
         //onTap: () => Utils.showSnackBar(context),
       );
-  Widget reportBug() => SimpleSettingsTile(
+  Widget reportBug(BuildContext context) => SimpleSettingsTile(
         title: 'Report A Bug',
         subtitle: '',
-        leading: const CustomIcon(icon: Icons.bug_report, color: Colors.teal),
-        //onTap: () => Utils.showSnackBar(context),
+        leading:  
+           const CustomIcon(icon: Icons.campaign_rounded,color: Colors.teal),
+        onTap: () => {Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => reportABugg())),
+        }
       );
-  Widget sendFeedback() => SimpleSettingsTile(
+  Widget sendFeedback(BuildContext context) => SimpleSettingsTile(
         title: 'Send Feedback',
         subtitle: '',
-        leading: const CustomIcon(
-            icon: Icons.thumbs_up_down_rounded, color: Colors.deepPurpleAccent),
-        //onTap: () => Utils.showSnackBar(context),
+        leading:  
+           CustomIcon(icon: Icons.campaign_rounded,color: Colors.deepPurpleAccent),
+        onTap: () => {Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => sendffeedback())),
+        }
       );
   Widget changePass() => SimpleSettingsTile(
         //TextInputSettingsTile
@@ -109,21 +120,25 @@ class setting extends StatelessWidget {
             icon: Icons.password_rounded, color: Colors.blueAccent),
         //onTap: () => Utils.showSnackBar(context),
       );
-  Widget aboutUs() => SimpleSettingsTile(
+  Widget aboutUs(BuildContext context) => SimpleSettingsTile(
         //TextInputSettingsTile
         title: 'About Us',
         subtitle: '',
         leading:
             const CustomIcon(icon: Icons.campaign_rounded, color: Colors.lime),
-        //onTap: () => Utils.showSnackBar(context),
+        onTap: () => {Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => aboutUss())),
+        }
       );
-  Widget faq() => SimpleSettingsTile(
+  Widget faq(BuildContext context) => SimpleSettingsTile(
         //TextInputSettingsTile
         title: 'FAQ',
         subtitle: '',
-        leading: CustomIcon(
-            icon: Icons.question_answer_outlined, color: Colors.pink.shade200),
-        //onTap: () => Utils.showSnackBar(context),
+        leading:  
+           CustomIcon(icon: Icons.campaign_rounded,color: Colors.pink.shade200),
+        onTap: () => {Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => FAQQ())),
+        }
       );
   Widget darkMood() => SwitchSettingsTile(
         settingKey: darkMoodKey,
@@ -160,6 +175,31 @@ class setting extends StatelessWidget {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => WelcomeScreen()));
   }
+
+  // Future<void> abouttUs(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => aboutUss(context)));
+  // }
+
+  // Future<void> senddFeedback(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => sendffeedback(context)));
+  // }
+
+  // Future<void> ffaq(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => FAQQ(context)));
+  // }
+
+  // Future<void> rreportABug(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => reportABugg(context)));
+  // }
+
 }
 
 class CustomIcon extends StatelessWidget {
@@ -179,3 +219,29 @@ class CustomIcon extends StatelessWidget {
     );
   }
 }
+
+
+ //onTap: () => Utils.showSnackBar(context),
+        // onTap: () {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) =>const aboutUs()
+        //     )
+        //   );
+        // },
+        // onTap: () {
+        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //     content: const Text('snack'),
+        //     duration: const Duration(seconds: 1),
+        //     action: SnackBarAction(
+        //       label: 'ACTION',
+        //       onPressed: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) =>  aboutUs()),
+        //         );
+        //       },
+        //     ),
+        //   ));
+        // },

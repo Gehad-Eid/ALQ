@@ -94,41 +94,41 @@ class _ARState extends State<AR> {
     this.arSessionManager.onInitialize(
           showFeaturePoints: false,
           showPlanes: true,
-          customPlaneTexturePath: "images/Beating heart.glb",
+          customPlaneTexturePath:"images/Beatingheart.glb",
           showWorldOrigin: true,
           handleTaps: false,
         );
     this.arObjectManager.onInitialize();
   }
 
-  Future<void> onLocalObjectButtonPressed() async {
-    if (localObjectNode != null) {
-      arObjectManager.removeNode(localObjectNode!);
-      localObjectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "images/Beating heart.glb",
-          scale: Vector3(0.2, 0.2, 0.2),
-          position: Vector3(0.0, 0.0, 0.0),
-          rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-      bool? didAddLocalNode = await arObjectManager.addNode(newNode);
-      localObjectNode = (didAddLocalNode!) ? newNode : null;
-    }
-  }
+  // Future<void> onLocalObjectButtonPressed() async {
+  //   if (localObjectNode != null) {
+  //     arObjectManager.removeNode(localObjectNode!);
+  //     localObjectNode = null;
+  //   } else {
+  //     var newNode = ARNode(
+  //         type: NodeType.localGLTF2,
+  //         uri: "images/Beatingheart.glb",
+  //         scale: Vector3(0.2, 0.2, 0.2),
+  //         position: Vector3(0.0, 0.0, 0.0),
+  //         rotation: Vector4(1.0, 0.0, 0.0, 0.0));
+  //     bool? didAddLocalNode = await arObjectManager.addNode(newNode);
+  //     localObjectNode = (didAddLocalNode!) ? newNode : null;
+  //   }
+  // }
 
-  Future<void> onWebObjectAtButtonPressed() async {
-    if (webObjectNode != null) {
-      arObjectManager.removeNode(webObjectNode!);
-      webObjectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.webGLB,
-          uri:
-              "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Fox/glTF-Binary/Fox.glb",
-          scale: Vector3(0.2, 0.2, 0.2));
-      bool? didAddWebNode = await arObjectManager.addNode(newNode);
-      webObjectNode = (didAddWebNode!) ? newNode : null;
-    }
-  }
+  // Future<void> onWebObjectAtButtonPressed() async {
+  //   if (webObjectNode != null) {
+  //     arObjectManager.removeNode(webObjectNode!);
+  //     webObjectNode = null;
+  //   } else {
+  //     var newNode = ARNode(
+  //         type: NodeType.webGLB,
+  //         uri:
+  //             "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Fox/glTF-Binary/Fox.glb",
+  //         scale: Vector3(0.2, 0.2, 0.2));
+  //     bool? didAddWebNode = await arObjectManager.addNode(newNode);
+  //     webObjectNode = (didAddWebNode!) ? newNode : null;
+  //   }
+  // }
 }
