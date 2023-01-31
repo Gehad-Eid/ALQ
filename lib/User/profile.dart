@@ -219,6 +219,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             centerTitle: true,
             backgroundColor: Colors.transparent,
             elevation: 0,
+            actions: [
+              InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return EditProfile(
+                          currentUser: loggedInUser,
+                          onLoad: () {
+                            setState(() {});
+                          },
+                        );
+                      },
+                    ));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.edit,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  )),
+            ],
           ),
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
