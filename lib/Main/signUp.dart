@@ -67,7 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         keyboardType: TextInputType.name,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Second Name cannot be Empty");
+            return ("Last Name cannot be Empty");
           }
           return null;
         },
@@ -177,7 +177,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             signUp(emailEditingController.text, passwordEditingController.text);
           },
           child: Text(
-            "SignUp",
+            "Sign up",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
