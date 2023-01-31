@@ -5,10 +5,9 @@ import 'package:alqgp/feedBack/sendffeedback.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-
+import 'package:alqgp/Settings/delete_account.dart';
 import '../feedBack/FAQQ.dart';
 import '../feedBack/ReportABugg.dart';
-
 
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';
@@ -95,23 +94,22 @@ class setting extends StatelessWidget {
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget reportBug(BuildContext context) => SimpleSettingsTile(
-        title: 'Report A Bug',
-        subtitle: '',
-        leading:  
-          const CustomIcon(icon: Icons.bug_report, color: Colors.teal),
-        onTap: () => {Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => reportABugg())),
-        }
-      );
+      title: 'Report A Bug',
+      subtitle: '',
+      leading: const CustomIcon(icon: Icons.bug_report, color: Colors.teal),
+      onTap: () => {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => reportABugg())),
+          });
   Widget sendFeedback(BuildContext context) => SimpleSettingsTile(
-        title: 'Send Feedback',
-        subtitle: '',
-        leading:  
-           CustomIcon(icon: Icons.thumbs_up_down_rounded,color: Colors.deepPurpleAccent),
-        onTap: () => {Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => sendffeedback())),
-        }
-      );
+      title: 'Send Feedback',
+      subtitle: '',
+      leading: CustomIcon(
+          icon: Icons.thumbs_up_down_rounded, color: Colors.deepPurpleAccent),
+      onTap: () => {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => sendffeedback())),
+          });
   Widget changePass() => SimpleSettingsTile(
         //TextInputSettingsTile
         title: 'Change Password',
@@ -121,25 +119,25 @@ class setting extends StatelessWidget {
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget aboutUs(BuildContext context) => SimpleSettingsTile(
-        //TextInputSettingsTile
-        title: 'About Us',
-        subtitle: '',
-        leading:
-            const CustomIcon(icon: Icons.campaign_rounded, color: Colors.lime),
-        onTap: () => {Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => aboutUss())),
-        }
-      );
+      //TextInputSettingsTile
+      title: 'About Us',
+      subtitle: '',
+      leading:
+          const CustomIcon(icon: Icons.campaign_rounded, color: Colors.lime),
+      onTap: () => {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => aboutUss())),
+          });
   Widget faq(BuildContext context) => SimpleSettingsTile(
-        //TextInputSettingsTile
-        title: 'FAQ',
-        subtitle: '',
-        leading:  
-           CustomIcon(icon: Icons.question_answer_outlined,color: Colors.pink.shade200),
-        onTap: () => {Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => FAQQ())),
-        }
-      );
+      //TextInputSettingsTile
+      title: 'FAQ',
+      subtitle: '',
+      leading: CustomIcon(
+          icon: Icons.question_answer_outlined, color: Colors.pink.shade200),
+      onTap: () => {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => FAQQ())),
+          });
   Widget darkMood() => SwitchSettingsTile(
         settingKey: darkMoodKey,
         title: 'Dark Mood',
@@ -199,7 +197,6 @@ class setting extends StatelessWidget {
   //   Navigator.of(context).pushReplacement(
   //       MaterialPageRoute(builder: (context) => reportABugg(context)));
   // }
-
 }
 
 class CustomIcon extends StatelessWidget {
