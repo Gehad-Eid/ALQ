@@ -90,8 +90,52 @@ class _DeleteAccState extends State<DeleteAcc> {
         ),
         ElevatedButton.icon(
           onPressed: () {
-            deleteUser(emailController.text, passwordController.text);
+            showDialog(
+              context: context,
+              builder: (con) {
+                return AlertDialog(
+                  title: Text('Are you sure you want to delete your account ?'),
+                  actions: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(con);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          'cancel',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        deleteUser(
+                            emailController.text, passwordController.text);
+                        Navigator.pop(con);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          'delete',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
           },
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
           icon: const Icon(Icons.delete),
           label: const Text('Delete Account'),
         ),
@@ -136,13 +180,20 @@ class _DeleteAccState extends State<DeleteAcc> {
                   color: Color.fromARGB(255, 254, 253, 253),
                 ),
               ),
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30.0,
+                  color: Colors.black,
+                ),
+              ),
             ),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                    'Are you sure you want to delete your account? If you delete it all your data will be ' +
-                        'deleted and you must sign up again'),
+                Text(' If you delete it all your data will be ' +
+                    'deleted and you must sign up again'),
                 SizedBox(
                   height: 50,
                 ),

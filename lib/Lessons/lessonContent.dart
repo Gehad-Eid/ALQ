@@ -16,12 +16,30 @@ class lessonCont extends StatefulWidget {
   State<lessonCont> createState() => _lessonContState();
 }
 
+enum TtsState { playing, stopped, paused, continued }
+
 class _lessonContState extends State<lessonCont> {
+  late FlutterTts flutterTts;
+  String? language;
+  String? engine;
+  double volume = 0.5;
+  double pitch = 1.0;
+  double rate = 0.5;
+  bool isCurrentLanguageInstalled = false;
+
+  String? _newVoiceText;
+  int? _inputLength;
+
   int currentIndex = 0;
-  bool isPlaying = false;
+  //bool isPlaying = false;
   String _currentParagraph = '';
   String get currentP => _currentParagraph;
-  FlutterTts flutterTts = FlutterTts();
+  TtsState ttsState = TtsState.stopped;
+
+  get isPlaying => ttsState == TtsState.playing;
+  get isStopped => ttsState == TtsState.stopped;
+  get isPaused => ttsState == TtsState.paused;
+  get isContinued => ttsState == TtsState.continued;
 
   @override
   void initState() {
@@ -32,19 +50,109 @@ class _lessonContState extends State<lessonCont> {
 
     flutterTts.setStartHandler(() {
       setState(() {
-        isPlaying = true;
+        ttsState = TtsState.playing;
       });
     });
 
     flutterTts.setCompletionHandler(() {
       setState(() {
-        isPlaying = false;
+        ttsState = TtsState.stopped;
       });
     });
   }
 
+  Future _setAwaitOptions() async {
+    await flutterTts.awaitSpeakCompletion(true);
+  }
+
+  Future _getDefaultEngine() async {
+    var engine = await flutterTts.getDefaultEngine;
+    if (engine != null) {
+      print(engine);
+    }
+  }
+
+  Future _getDefaultVoice() async {
+    var voice = await flutterTts.getDefaultVoice;
+    if (voice != null) {
+      print(voice);
+    }
+  }
+
   initTts() async {
     flutterTts = FlutterTts();
+    _setAwaitOptions();
+    _getDefaultEngine();
+    _getDefaultVoice();
+
+    flutterTts.setStartHandler(() {
+      setState(() {
+        print("Playing");
+        ttsState = TtsState.playing;
+      });
+    });
+    flutterTts.setInitHandler(() {
+      setState(() {
+        print("TTS Initialized");
+      });
+    });
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        print("Complete");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        print("Cancel");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setPauseHandler(() {
+      setState(() {
+        print("Paused");
+        ttsState = TtsState.paused;
+      });
+    });
+
+    flutterTts.setContinueHandler(() {
+      setState(() {
+        print("Continued");
+        ttsState = TtsState.continued;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        print("error: $msg");
+        ttsState = TtsState.stopped;
+      });
+    });
+  }
+
+  Future _speak() async {
+    await flutterTts.setVolume(volume);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setPitch(pitch);
+
+    if (currentP != null) {
+      if (currentP!.isNotEmpty) {
+        await flutterTts.speak(currentP!);
+      }
+    }
+  }
+
+  Future _stop() async {
+    var result = await flutterTts.stop();
+    if (result == 1) setState(() => ttsState = TtsState.stopped);
+  }
+
+  Future _pause() async {
+    var result = await flutterTts.pause();
+    if (result == 1) setState(() => ttsState = TtsState.paused);
   }
 
   Future _readP() async {
@@ -54,7 +162,7 @@ class _lessonContState extends State<lessonCont> {
     var result = await flutterTts.speak(currentP);
     if (result == 1) {
       setState(() {
-        isPlaying = true;
+        ttsState = TtsState.playing;
       });
     }
   }
@@ -62,7 +170,7 @@ class _lessonContState extends State<lessonCont> {
   @override
   void dispose() {
     super.dispose();
-    flutterTts.stop();
+    _stop();
   }
 
   @override
