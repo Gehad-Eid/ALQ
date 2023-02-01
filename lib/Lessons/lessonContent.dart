@@ -6,6 +6,8 @@ import 'package:easy_web_view2/easy_web_view2.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'boookmarks.dart';
+
 class lessonCont extends StatefulWidget {
   final LessonModle lesson;
   const lessonCont(this.lesson, {super.key});
@@ -161,7 +163,8 @@ class _lessonContState extends State<lessonCont> {
                                           // ),
                                           GestureDetector(
                                             child: const Icon(Icons.bookmark),
-                                            onTap: () {},
+                                            onTap: (() {
+                                            }),
                                           ),
                                           GestureDetector(
                                             child: Icon(Icons.volume_up),

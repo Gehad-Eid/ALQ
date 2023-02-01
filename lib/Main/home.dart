@@ -38,7 +38,7 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      bookMark(),
+      bookMark(loggedInUser: loggedInUser,),
       chapters(),
       homey(loggedInUser.firstName),
       ProfileScreen(),
