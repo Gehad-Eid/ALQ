@@ -173,7 +173,7 @@
 //     Size size = MediaQuery.of(context).size;
 //     return GestureDetector(
 //       onTap: () {
-//         Navigator.of(context)
+//        Nav igator.of(context)
 //             .push(MaterialPageRoute(builder: (context) => page));
 //       },
 //       child: Container(
