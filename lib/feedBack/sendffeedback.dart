@@ -23,7 +23,8 @@ class _sendffeedback extends State<sendffeedback> {
           ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -66,7 +67,7 @@ class _sendffeedback extends State<sendffeedback> {
             Text(
               'We welcome your feedback on our application!',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color:Colors.deepPurpleAccent),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color:Color.fromARGB(255, 165, 101, 234),),
             ),
             const SizedBox(height: 20,),
             Text(
@@ -105,7 +106,7 @@ Widget buildAbout2() => Container(
         child: ElevatedButton(
           child: const Text('Open feedback form'),
           style: ElevatedButton.styleFrom(
-            primary: Colors.deepPurpleAccent // Background color
+            primary: Color.fromARGB(255, 165, 101, 234), // Background color
           ),
           onPressed: () {
             showDialog(
@@ -161,14 +162,14 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         TextButton(
           child: const Text('Cancel'),
           style: TextButton.styleFrom(
-            primary: Colors.deepPurpleAccent, // Text Color
+            primary: Color.fromARGB(255, 165, 101, 234), // Text Color
           ),
           onPressed: () => Navigator.pop(context),
         ),
         TextButton(
           child: const Text('Send'),
           style: TextButton.styleFrom(
-            primary: Colors.deepPurpleAccent, // Text Color
+            primary: Color.fromARGB(255, 165, 101, 234), // Text Color
           ),
           onPressed: () async {
             // Only if the input form is valid (the user has entered text)

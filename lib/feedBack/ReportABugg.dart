@@ -23,7 +23,8 @@ class _reportABugg extends State<reportABugg> {
           ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -66,13 +67,13 @@ class _reportABugg extends State<reportABugg> {
             Text(
               'We are really sorry that you encountered an bug',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Colors.teal),
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 165, 101, 234),),
             ),
             const SizedBox(height: 10,),
             Text(
               "please let us know about it and our team will fix it for you.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, height: 1.4,color: Colors.teal),
+              style: TextStyle(fontSize: 18, height: 1.4,fontWeight: FontWeight.bold,color:Color(0xFF8EA3E2).withOpacity(0.75),),
             ),
             const SizedBox(height: 30,),
           ],
@@ -90,7 +91,7 @@ Widget buildAbout3() => Container(
                 const SizedBox(height: 100,),
                 Container(
                   height: 180,
-                  child: Image.asset('images/bug2.png'),
+                  child: Image.asset('images/bug3.png'),
                 ),
           ],
             ),
@@ -104,7 +105,7 @@ Widget buildAbout2() => Container(
         child: ElevatedButton(
           child: const Text('Open report bug form'),
           style: ElevatedButton.styleFrom(
-            primary:  Colors.teal // Background color
+            primary:  Color.fromARGB(255, 165, 101, 234), // Background color
           ),
           onPressed: () {
             showDialog(
@@ -160,14 +161,14 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         TextButton(
           child: const Text('Cancel'),
           style: TextButton.styleFrom(
-            primary:  Colors.teal, // Text Color
+            primary:  Color.fromARGB(255, 165, 101, 234), // Text Color
           ),
           onPressed: () => Navigator.pop(context),
         ),
         TextButton(
           child: const Text('Send'),
           style: TextButton.styleFrom(
-            primary:  Colors.teal, // Text Color
+            primary:  Color.fromARGB(255, 165, 101, 234), // Text Color
           ),
           onPressed: () async {
             // Only if the input form is valid (the user has entered text)

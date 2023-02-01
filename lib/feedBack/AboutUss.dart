@@ -23,7 +23,8 @@ class _aboutus extends State<aboutUss> {
           ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.lime,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -34,6 +35,7 @@ class _aboutus extends State<aboutUss> {
           children: [
             Column(
               children: [
+                const SizedBox(height: 20),
                 Container(
                   height: 180,
                   child: Image.asset('images/logo4.png'),
@@ -105,7 +107,7 @@ class _aboutus extends State<aboutUss> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 202, 187, 226),
+                  color: Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),

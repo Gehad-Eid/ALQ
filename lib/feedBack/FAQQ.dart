@@ -22,7 +22,8 @@ class _faqq extends State<FAQQ> {
           ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -43,7 +44,7 @@ class _faqq extends State<FAQQ> {
                 //     color:Color(0xFF8EA3E2),
                 //   ),
                 // ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 55),
                 buildAbout(),
                 buildAbout2(),
               ],
@@ -61,13 +62,15 @@ class _faqq extends State<FAQQ> {
           children: [
             Text(
               'Frequently asked questions',
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color:Colors.pink.shade200),
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color:Color.fromARGB(255, 165, 101, 234),),
             ),
-            const SizedBox(height: 35,),
-            // Text(
-            //   "",
-            //   style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color(0xFF8EA3E2).withOpacity(0.75),),
-            // ),
+            const SizedBox(height: 15,),
+            Text(
+              "Here you will find the most frequently asked questions that may help you",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color(0xFF8EA3E2).withOpacity(0.75),),
+            ),
+            const SizedBox(height: 40,),
           ], 
         ),
       );
@@ -81,7 +84,7 @@ class _faqq extends State<FAQQ> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color:Color.fromARGB(94, 244, 143, 177),
+                  color:Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
@@ -108,7 +111,7 @@ class _faqq extends State<FAQQ> {
               const SizedBox(height: 25,),
               Container(
                 decoration: BoxDecoration(
-                  color:Color.fromARGB(94, 244, 143, 177),
+                  color:Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
@@ -135,7 +138,7 @@ class _faqq extends State<FAQQ> {
               const SizedBox(height: 25,),
               Container(
                 decoration: BoxDecoration(
-                  color:Color.fromARGB(94, 244, 143, 177),
+                  color:Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
@@ -162,7 +165,7 @@ class _faqq extends State<FAQQ> {
               const SizedBox(height: 25,),
               Container(
                 decoration: BoxDecoration(
-                  color:Color.fromARGB(94, 244, 143, 177),
+                  color:Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
@@ -189,7 +192,7 @@ class _faqq extends State<FAQQ> {
               const SizedBox(height: 25,),
               Container(
                 decoration: BoxDecoration(
-                  color:Color.fromARGB(94, 244, 143, 177),
+                  color:Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),

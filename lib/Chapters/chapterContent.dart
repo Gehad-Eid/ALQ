@@ -384,12 +384,12 @@ class ImageAndIcons extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.02,
                     ),
-                    const IconCard(
-                        icon: "images/icons8-ar-100 (1).png", page: AR()),
+                     IconCard(
+                        icon: "images/icons8-ar-100 (1).png", page: AR(chaptNum: chapterNum,)),
                     IconCard(
                         icon: "images/icons8-elearning-64.png",
                         page: lessons(
-                          chapterNum,
+                          chapterNum!,
                           chpName: chpName,
                         )),
                     IconCard(
