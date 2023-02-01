@@ -129,19 +129,19 @@ style: ElevatedButton.styleFrom(
     String urlLink = '';
     switch(name){
       case 1: 
-        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/heart.glb";
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/circulatory_system.glb";
         break;
       case 2:      
-        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/heart.glb";
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/diaphragm_non-commercial.glb";
         break;
       case 3:      
-        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/heart.glb";
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/disgestive_system.glb";
         break;
       case 4:      
-        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/heart.glb";
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/urinary_system_final.glb";
         break;
       case 5:      
-        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/heart.glb";
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/male_full_body_ecorche.glb";
         break;
 
     }
