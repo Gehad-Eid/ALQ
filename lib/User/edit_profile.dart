@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:image_picker/image_picker.dart';
+import 'package:alqgp/widgets/show_dialog.dart';
 
 class EditProfile extends StatefulWidget {
   final UserModel? currentUser;
@@ -23,6 +24,7 @@ class _EditProfileState extends State<EditProfile> {
   bool isLoading = false;
   bool _displayNameValid = true;
   bool _bioValid = true;
+  String? userImage;
 
   @override
   void initState() {
@@ -30,6 +32,7 @@ class _EditProfileState extends State<EditProfile> {
     firstNameController.text = widget.currentUser!.firstName.toString();
     secondNameController.text = widget.currentUser!.secondName.toString();
     emailController.text = widget.currentUser!.email.toString();
+    userImage = widget.currentUser!.image.toString();
   }
 
   final _auth = FirebaseAuth.instance;
@@ -107,10 +110,14 @@ class _EditProfileState extends State<EditProfile> {
       if (imageFile != null) {
         updateUserImage();
       }
+      if (userImage == null) {
+        deleteUserImage();
+      }
       widget.onLoad!();
       setState(() {
         _isloading = false;
       });
+      showAlertDialog(context, 'Your profile updated successfully', true);
     } catch (e) {
       print(e);
       setState(() {
@@ -141,6 +148,27 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
+  Future deleteUserImage() async {
+    try {
+      siginUser = _auth.currentUser!;
+      final uId = siginUser.uid;
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('usersImages')
+          .child("${uId}jpg");
+      await ref.delete().then((p0) async {
+        await FirebaseFirestore.instance.collection("student").doc(uId).update({
+          "image": '',
+        }).then((value) => (value) {
+              getUserProfile();
+              return value;
+            });
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
+
   //--------------uploade image from gallery------------------------------------
   void pickImageGallery() async {
     try {
@@ -156,7 +184,7 @@ class _EditProfileState extends State<EditProfile> {
   uploadImage(context) {
     showDialog(
         context: context,
-        builder: (contex) {
+        builder: (con) {
           return AlertDialog(
             title: Text(
               "Upload image",
@@ -164,7 +192,10 @@ class _EditProfileState extends State<EditProfile> {
             ),
             content: Column(mainAxisSize: MainAxisSize.min, children: [
               InkWell(
-                onTap: pickImageGallery,
+                onTap: () {
+                  pickImageGallery();
+                  Navigator.pop(con);
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Row(
@@ -183,7 +214,34 @@ class _EditProfileState extends State<EditProfile> {
                     ],
                   ),
                 ),
-              )
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    userImage = null;
+                    Navigator.pop(con);
+                    print(userImage);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.delete,
+                        color: Colors.redAccent,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "Delete current Image",
+                        style: TextStyle(color: Colors.redAccent),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ]),
           );
         });
@@ -210,6 +268,14 @@ class _EditProfileState extends State<EditProfile> {
             color: Colors.black,
           ),
         ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 30.0,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: _isloading
           ? Container(
@@ -233,6 +299,9 @@ class _EditProfileState extends State<EditProfile> {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
+                          const SizedBox(
+                            height: 40,
+                          ),
                           Container(
                             margin: const EdgeInsets.only(
                                 bottom: 5, left: 26, right: 26),
@@ -246,35 +315,43 @@ class _EditProfileState extends State<EditProfile> {
                                     top: 16.0,
                                     bottom: 8.0,
                                   ),
-                                  child: (snapshot.data!
-                                          .data()
-                                          .toString()
-                                          .contains('image'))
-                                      ? snapshot.data!['image'] != '' &&
-                                              snapshot.data!['image']
-                                                  .toString()
-                                                  .contains('usersImages')
-                                          ? CircleAvatar(
-                                              radius: 50,
-                                              backgroundImage: NetworkImage(
-                                                '${snapshot.data!['image']}',
-                                              ),
-                                              backgroundColor: Colors.white,
-                                            )
-                                          : CircleAvatar(
+                                  child: (userImage != null && userImage != '')
+                                      ? CircleAvatar(
+                                          radius: 50,
+                                          backgroundImage: NetworkImage(
+                                            userImage!,
+                                          ),
+                                          backgroundColor: Colors.white,
+                                        )
+                                      : (snapshot.data!
+                                              .data()
+                                              .toString()
+                                              .contains('image'))
+                                          ? (snapshot.data!['image'] != '' &&
+                                                  snapshot.data!['image']
+                                                      .toString()
+                                                      .contains('usersImages'))
+                                              ? CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: NetworkImage(
+                                                    '${snapshot.data!['image']}',
+                                                  ),
+                                                  backgroundColor: Colors.white,
+                                                )
+                                              : const CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: AssetImage(
+                                                    'images/5b8f3d9f30460aeedbe6a235e2d001d3.jpg',
+                                                  ),
+                                                  backgroundColor: Colors.white,
+                                                )
+                                          : const CircleAvatar(
                                               radius: 50,
                                               backgroundImage: AssetImage(
                                                 'images/5b8f3d9f30460aeedbe6a235e2d001d3.jpg',
                                               ),
                                               backgroundColor: Colors.white,
-                                            )
-                                      : CircleAvatar(
-                                          radius: 50,
-                                          backgroundImage: AssetImage(
-                                            'images/5b8f3d9f30460aeedbe6a235e2d001d3.jpg',
-                                          ),
-                                          backgroundColor: Colors.white,
-                                        ),
+                                            ),
                                 ),
                                 Positioned(
                                   top: 0,
@@ -285,7 +362,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.redAccent,
                                       ),
@@ -316,12 +393,13 @@ class _EditProfileState extends State<EditProfile> {
                           InkWell(
                             onTap: updateProfileData,
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               margin: EdgeInsets.symmetric(
                                   horizontal: size.width * .2),
                               height: 45,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 244, 92, 92),
+                                color: Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               child: const Center(
