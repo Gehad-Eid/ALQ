@@ -8,6 +8,7 @@ import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:alqgp/Settings/delete_account.dart';
 import '../feedBack/FAQQ.dart';
 import '../feedBack/ReportABugg.dart';
+import 'change_password.dart';
 
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';
@@ -43,9 +44,9 @@ class setting extends StatelessWidget {
               const SizedBox(height: 8),
               darkMood(),
               const SizedBox(height: 2),
-              changePass(),
+              changePass(context),
               const SizedBox(height: 2),
-              deleteAccount(),
+              deleteAccount(context),
             ],
           ),
           const SizedBox(height: 32),
@@ -86,11 +87,18 @@ class setting extends StatelessWidget {
             const CustomIcon(icon: Icons.logout_rounded, color: Colors.grey),
         onTap: () => logingout(path),
       );
-  Widget deleteAccount() => SimpleSettingsTile(
+  Widget deleteAccount(context) => SimpleSettingsTile(
         title: 'Delete Account',
         subtitle: '',
         leading: const CustomIcon(
             icon: Icons.delete_forever_rounded, color: Colors.red),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return DeleteAcc();
+            },
+          ));
+        },
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget reportBug(BuildContext context) => SimpleSettingsTile(
@@ -110,12 +118,19 @@ class setting extends StatelessWidget {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => sendffeedback())),
           });
-  Widget changePass() => SimpleSettingsTile(
+  Widget changePass(context) => SimpleSettingsTile(
         //TextInputSettingsTile
         title: 'Change Password',
         subtitle: '',
         leading: const CustomIcon(
             icon: Icons.password_rounded, color: Colors.blueAccent),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return DeleteAcc();
+            },
+          ));
+        },
         //onTap: () => Utils.showSnackBar(context),
       );
   Widget aboutUs(BuildContext context) => SimpleSettingsTile(
