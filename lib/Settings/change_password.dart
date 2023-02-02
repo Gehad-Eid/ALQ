@@ -218,7 +218,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         Navigator.pop(context);
                         showAlertDialog(
                             context,
-                            'Make sure the new password matches the confirm',
+                            'Make sure that the new password matches the confirmed one',
                             false);
                       }
                     } on FirebaseAuthException catch (e) {

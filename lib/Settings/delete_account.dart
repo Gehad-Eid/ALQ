@@ -192,7 +192,7 @@ class _DeleteAccState extends State<DeleteAcc> {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(' If you delete it all your data will be ' +
+                Text(' When you delete account your data will be ' +
                     'deleted and you must sign up again'),
                 SizedBox(
                   height: 50,
