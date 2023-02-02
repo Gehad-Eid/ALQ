@@ -37,7 +37,7 @@ class quiz_page extends StatelessWidget {
         actions: [
           Countdown(
             controller: _count,
-            seconds: 10,
+            seconds: 60,
             build: (BuildContext context, double time) => Text(
               time.toString(),
               style: TextStyle(fontSize: 23),
@@ -132,6 +132,7 @@ class quiz_page extends StatelessWidget {
                       snapshot.data!.data() as Map<String, dynamic>;
   //****************************
                   List _data = <int>[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+                  _count.start();
       final random= new Random();
   var item = _data.toList()..shuffle();
         ///print(item);
@@ -167,13 +168,11 @@ class quiz_page extends StatelessWidget {
                           wrongAnswers: (showTwoAnswersOnly) ? ["${data['Q${item[index]}']['answers'][1]}",]: ["${data['Q${item[index]}']['answers'][1]}","${data['Q${item[index]}']['answers'][2]}","${data['Q${item[index]}']['answers'][3]}",],
                           onRightAnswer: () {
                             score += 1;
-                            total += 1;
                             print(score);
                             showTwoAnswersOnly = false;
                           },
                           onWrongAnswer: () {
                             random_number = Random().nextInt(10);
-                            total += 1;
                             showTwoAnswersOnly = false;
                           },
                         );})
@@ -198,7 +197,7 @@ class quiz_page extends StatelessWidget {
           onPressed: () {
             _page.nextPage(
                 duration: Duration(microseconds: 1), curve: Curves.bounceIn);
-
+             print(total);
             if (total > 9) {
               _count.onPause;
               Navigator.push(context,

@@ -38,7 +38,7 @@ class _aboutus extends State<aboutUss> {
                 const SizedBox(height: 20),
                 Container(
                   height: 180,
-                  child: Image.asset('images/logo4.png'),
+                  child: Image.asset('images/logo6.png'),
                 ),
                 // const Text(
                 //   'عَــلَــــق ',
