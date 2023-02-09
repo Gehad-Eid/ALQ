@@ -153,8 +153,8 @@ class _lessonContState extends State<lessonCont> {
     await flutterTts.setPitch(pitch);
 
     if (currentP != null) {
-      if (currentP!.isNotEmpty) {
-        await flutterTts.speak(currentP!);
+      if (currentP.isNotEmpty) {
+        await flutterTts.speak(currentP);
       }
     }
   }
