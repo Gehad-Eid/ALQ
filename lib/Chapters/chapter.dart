@@ -152,27 +152,22 @@
 //   }
 // }
 
+import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/material.dart';
 import '../models/achive_modle.dart';
 import '../models/chapter_model.dart';
+import '../widgets/App_Bar.dart';
 import 'chapterContent.dart';
 
 class chapters extends StatelessWidget {
-  const chapters({super.key});
+  final UserModel loggedInUser;
+  const chapters({super.key, required this.loggedInUser});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 243, 247, 248),
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Learning',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: buildAppBar(context, 'Learning'),
       body: Column(
         children: <Widget>[
           // Padding(
@@ -221,6 +216,7 @@ class chapterCard extends StatelessWidget {
       onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
+              settings: RouteSettings(name: "/ChapCon"),
               builder: (context) => chapCont(
                     chapter: chapterList[indx],
                   ))),

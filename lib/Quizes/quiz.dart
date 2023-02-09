@@ -1,3 +1,4 @@
+// import 'dart:html';
 import 'dart:math';
 
 import 'result.dart';
@@ -70,6 +71,7 @@ class quiz_page extends StatelessWidget {
                 _notifier.value = true;
               }
             },
+            child: Text('Hint'),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<HintItem>>[
               const PopupMenuItem<HintItem>(
                 value: HintItem.increaseTime,
@@ -195,15 +197,15 @@ class quiz_page extends StatelessWidget {
                                           "${data['Q$index']['answers'][3]}",
                                         ],
                                   onRightAnswer: () {
+                                    showTwoAnswersOnly = false;
                                     score += 1;
                                     total += 1;
                                     print(score);
-                                    showTwoAnswersOnly = false;
                                   },
                                   onWrongAnswer: () {
+                                    showTwoAnswersOnly = false;
                                     random_number = Random().nextInt(10);
                                     total += 1;
-                                    showTwoAnswersOnly = false;
                                   },
                                 );
                               }));

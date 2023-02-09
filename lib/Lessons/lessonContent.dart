@@ -1,4 +1,8 @@
+import 'package:alqgp/Chapters/chapterContent.dart';
 import 'package:alqgp/consts.dart';
+import 'package:alqgp/models/chapter_model.dart';
+import 'package:alqgp/widgets/my_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/models/lesson_model.dart';
@@ -8,16 +12,25 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class lessonCont extends StatefulWidget {
   final LessonModle lesson;
-  const lessonCont(this.lesson, {super.key});
+  // final LessonModle next_lesson;
+  final List<Object> lessonsList;
+  final int index;
+  const lessonCont(this.lesson, this.index, this.lessonsList, {super.key});
 
   @override
-  State<lessonCont> createState() => _lessonContState();
+  State<lessonCont> createState() => _lessonContState(index);
 }
 
 class _lessonContState extends State<lessonCont> {
   int currentIndex = 0;
   bool isPlaying = false;
   String _currentParagraph = '';
+  int? index;
+
+  _lessonContState(index) {
+    this.index = index;
+  }
+
   String get currentP => _currentParagraph;
   FlutterTts flutterTts = FlutterTts();
 
@@ -59,8 +72,8 @@ class _lessonContState extends State<lessonCont> {
 
   @override
   void dispose() {
-    super.dispose();
     flutterTts.stop();
+    super.dispose();
   }
 
   @override
@@ -143,22 +156,6 @@ class _lessonContState extends State<lessonCont> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          // InkWell(
-                                          //   onTap: _readP,
-                                          //   child: Container(
-                                          //     padding:
-                                          //         const EdgeInsets.all(8.0),
-                                          //     decoration: const BoxDecoration(
-                                          //       color: kTextColor,
-                                          //       shape: BoxShape.circle,
-                                          //     ),
-                                          //     child: const Icon(
-                                          //       Icons.volume_up_sharp,
-                                          //       color: Colors.white,
-                                          //       size: 30,
-                                          //     ),
-                                          //   ),
-                                          // ),
                                           GestureDetector(
                                             child: const Icon(Icons.bookmark),
                                             onTap: () {},
@@ -240,17 +237,64 @@ class _lessonContState extends State<lessonCont> {
                           ),
                         )
                       : const SizedBox(),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: widget.lesson.parts!.length,
-                    itemBuilder: (context, index) {
-                      return Column(children: []);
-                    },
-                  ),
-                  // const SizedBox(
-                  //   height: 50,
+                  // ListView.builder(
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemCount: widget.lesson.parts!.length,
+                  //   itemBuilder: (context, index) {
+                  //     return Column(children: []);
+                  //   },
                   // ),
+                  // currentIndex == widget.lesson.parts!.length
+                  //     ? MyButton(
+                  //         color: Color.fromARGB(255, 223, 115, 115),
+                  //         title: 'Log in',
+                  //         onPressed: () {},
+                  //       )
+                  //     : SizedBox(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Visibility(
+                    maintainSize: true,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: (currentIndex.toDouble() ==
+                        widget.lesson.parts!.length - 1),
+                    child: ElevatedButton(
+                      child: Text(
+                          index == -1 || index! >= widget.lessonsList.length - 1
+                              ? 'Finish!'
+                              : 'Next'),
+                      onPressed: () {
+                        if (index == -1 ||
+                            index! >= widget.lessonsList.length - 1) {
+                          Navigator.of(context)
+                              .popUntil(ModalRoute.withName("/ChapCon"));
+                          // Navigator.pushReplacement(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             chapCont(chapter: chap!)));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => lessonCont(
+                                      widget.lessonsList[index! + 1]
+                                          as LessonModle,
+                                      index! + 1,
+                                      widget.lessonsList)));
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 10)
                 ],
               ),
             ),

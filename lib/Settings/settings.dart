@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
+import '../widgets/App_Bar.dart';
+
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';
   const setting({super.key});
@@ -13,15 +15,7 @@ class setting extends StatelessWidget {
     final BuildContext path = context;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 243, 247, 248),
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Settings',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 243, 247, 248),
-      ),
+      appBar: buildAppBar(context, 'Settings'),
       body: SafeArea(
         child: ListView(padding: const EdgeInsets.all(25.0), children: [
           // SettingsGroup(
