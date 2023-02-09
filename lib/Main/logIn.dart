@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // form key
   final _formKey = GlobalKey<FormState>();
 
+  bool isPassword = true;
+
   // editing controller
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -63,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordController,
-        obscureText: true,
+        //obscureText: true,
+        obscureText: isPassword,
         validator: (value) {
           RegExp regex = RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
@@ -78,6 +81,17 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isPassword = !isPassword;
+                      });
+                    },
+                    icon: Icon(
+                      isPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.black,
+                    ),
+                  ),
           prefixIcon: const Icon(Icons.vpn_key),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
@@ -89,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: const Color.fromARGB(255, 156, 203, 247),
+      color: Color(0xFF8EA3E2),
       child: MaterialButton(
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -121,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                         height: 200,
                         child: Image.asset(
-                          "images/logo2.png",
+                          "images/logo6.png",
                           fit: BoxFit.contain,
                         )),
                     const SizedBox(height: 45),
@@ -145,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: const Text(
                               "Reset it",
                               style: TextStyle(
-                                  color: Colors.redAccent,
+                                  color: Color.fromARGB(155, 165, 71, 197),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),

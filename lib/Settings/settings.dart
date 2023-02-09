@@ -29,7 +29,7 @@ class setting extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 243, 247, 248),
       ),
       body: SafeArea(
-        child: ListView(padding: const EdgeInsets.all(25.0), children: [
+        child: ListView(padding: const EdgeInsets.all(20.0), children: [
           // SettingsGroup(
           //   title: '',
           //   children: <Widget>[
@@ -41,7 +41,7 @@ class setting extends StatelessWidget {
           SettingsGroup(
             title: 'GENERAL',
             children: <Widget>[
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               darkMood(),
               const SizedBox(height: 2),
               changePass(context),
@@ -49,7 +49,7 @@ class setting extends StatelessWidget {
               deleteAccount(context),
             ],
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 20),
           SettingsGroup(
             title: 'Feedback',
             children: <Widget>[
@@ -63,7 +63,7 @@ class setting extends StatelessWidget {
               faq(path),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           SettingsGroup(
             title: '',
             children: <Widget>[
@@ -127,7 +127,7 @@ class setting extends StatelessWidget {
         onTap: () {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
-              return DeleteAcc();
+              return ChangePassword();
             },
           ));
         },

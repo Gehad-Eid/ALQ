@@ -1,4 +1,5 @@
 //import 'dart:html';
+
 import 'dart:math';
 
 import 'result.dart';
@@ -30,11 +31,23 @@ class quiz_page extends StatelessWidget {
     int score = 0;
     int total = 0;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 156, 203, 247),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Color.fromARGB(255, 156, 203, 247),
+        title: const Text(
+          "Quiz",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Color(0xFF8EA3E2),
+        
         actions: [
+          // SizedBox(
+          //   width: 30,
+          //   height: 30,
+          // ),
+          Padding(padding: EdgeInsets.all(15.0),
+          child :
           Countdown(
             controller: _count,
             seconds: 60,
@@ -58,6 +71,7 @@ class quiz_page extends StatelessWidget {
                 _count.restart();
               }
             },
+          ),
           ),
           PopupMenuButton<HintItem>(
             //
@@ -83,8 +97,10 @@ class quiz_page extends StatelessWidget {
             ],
           ),
         ],
+        //iconTheme: IconThemeData(color: Colors.black),
+        //backgroundColor: Color.fromARGB(255, 156, 203, 247),
         //Color.fromARGB(255, 223, 115, 115)
-        elevation: 0,
+        //elevation: 0,
         /*
       logo
       leading: IconButton(
@@ -98,21 +114,24 @@ class quiz_page extends StatelessWidget {
         },
       ),
       */
-        title: const Text(
-          "ALQ",
-          style: TextStyle(
-            fontSize: 23,
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: true,
+        // title: const Text(
+        //   "ALQ",
+        //   style: TextStyle(
+        //     fontSize: 23,
+        //     color: Colors.black,
+        //   ),
+        // ),
+        // centerTitle: true,
       ),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         children: [
           SizedBox(
-            height: 20,
+            height: 10,
+            width: 30,
           ),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.79,
             child: FutureBuilder<DocumentSnapshot>(
@@ -130,14 +149,14 @@ class quiz_page extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   Map<String, dynamic> data =
                       snapshot.data!.data() as Map<String, dynamic>;
-  //****************************
-                  List _data = <int>[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-                  _count.start();
-      final random= new Random();
-  var item = _data.toList()..shuffle();
-        ///print(item);
-          var random_number = Random().nextInt(10);
-//***************************** */
+                    //****************************
+                      List _data = <int>[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+                      _count.start();
+                      final random= new Random();
+                      var item = _data.toList()..shuffle();
+                    //print(item);
+                      var random_number = Random().nextInt(10);
+                    //***************************** */
                   return PageView.builder(
                     reverse: false,
                     pageSnapping: true,
@@ -154,15 +173,14 @@ class quiz_page extends StatelessWidget {
                             builder: (BuildContext context, bool val, Widget? child) {
                               return QuizView(
                           showCorrect: true,
-                          tagBackgroundColor: Colors.deepOrange,
+                          tagBackgroundColor: Color.fromARGB(155, 165, 71, 197),
                           questionTag: "Question:$index",
                           tagColor: Colors.black,
                           answerColor: Colors.white,
-                          answerBackgroundColor:
-                              Color.fromARGB(255, 255, 0, 111),
+                          answerBackgroundColor:Color(0xFF8EA3E2).withOpacity(0.75),
                           questionColor: Colors.black,
-                          width: 300,
-                          height: 500,
+                          width: 400,
+                          height: 300,
                           question: "${data['Q${item[index]}']['question']}",
                           rightAnswer: "${data['Q${item[index]}']['answers'][0]}",
                           wrongAnswers: (showTwoAnswersOnly) ? ["${data['Q${item[index]}']['answers'][1]}",]: ["${data['Q${item[index]}']['answers'][1]}","${data['Q${item[index]}']['answers'][2]}","${data['Q${item[index]}']['answers'][3]}",],
@@ -174,44 +192,49 @@ class quiz_page extends StatelessWidget {
                           onWrongAnswer: () {
                             random_number = Random().nextInt(10);
                             showTwoAnswersOnly = false;
+                            Colors.red;
                           },
                         );})
                       );
                     },
                   );
                 }
-
                 return Text("loading");
               },
             ),
-          )
+          ),
         ],
       ),
+      ),
       bottomNavigationBar: BottomAppBar(
-          child: Container(
-        height: 60,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 156, 203, 247),
-              side: BorderSide(color: Colors.black)),
-          onPressed: () {
-            _page.nextPage(
-                duration: Duration(microseconds: 1), curve: Curves.bounceIn);
-             print(total);
-            if (total > 9) {
-              _count.onPause;
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                return result(score);
-              }));
-            } else {
-              total += 1;
-              _count.restart();
-            }
-          },
-          child: Text("NEXT"),
-        ),
-      )),
+        child: Container(
+          height: 50,
+          width: 10,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                //primary: Color.fromARGB(255, 156, 203, 247),
+                primary: Color.fromARGB(155, 165, 71, 197),
+                //side: BorderSide(color: Color(0xFF8EA3E2).withOpacity(0.75),)
+                ),
+            onPressed: () {
+              _page.nextPage(
+                  duration: Duration(microseconds: 1), curve: Curves.bounceIn);
+              print(total);
+              if (total > 9) {
+                _count.onPause;
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                  return result(score);
+                }));
+              } else {
+                total += 1;
+                _count.restart();
+              }
+            },
+            child: Text("NEXT"),
+          ),
+        )
+      ),
     );
   }
 }

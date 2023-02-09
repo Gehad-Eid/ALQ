@@ -44,6 +44,7 @@ class UserModel {
       'score': score,
       'level': level,
       'image': image,
+      'bookmark' : [],
     };
   }
 }

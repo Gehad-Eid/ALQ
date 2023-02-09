@@ -13,7 +13,7 @@ class lessonCont extends StatefulWidget {
   const lessonCont(this.lesson, {super.key});
 
   @override
-  State<lessonCont> createState() => _lessonContState();
+  State<lessonCont> createState() => _lessonContState(lesson);
 }
 
 enum TtsState { playing, stopped, paused, continued }
@@ -33,6 +33,14 @@ class _lessonContState extends State<lessonCont> {
   int currentIndex = 0;
   //bool isPlaying = false;
   String _currentParagraph = '';
+
+  // LessonModle lessonn = LessonModle();
+  dynamic flag;
+  _lessonContState(LessonModle lesson){
+    // lessonn = lesson;
+    flag = lesson.BookmarkValus;
+  }
+
   String get currentP => _currentParagraph;
   TtsState ttsState = TtsState.stopped;
 
@@ -172,6 +180,8 @@ class _lessonContState extends State<lessonCont> {
     super.dispose();
     _stop();
   }
+  // bool? flag = lessonn.BookmarkValus;
+  Color bookcolor= Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -240,6 +250,7 @@ class _lessonContState extends State<lessonCont> {
                         items: widget.lesson.parts!.map((part) {
                           return Builder(
                             builder: (BuildContext context) {
+                              var _favIconColor= Colors.grey;
                               return Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
@@ -269,9 +280,26 @@ class _lessonContState extends State<lessonCont> {
                                           //     ),
                                           //   ),
                                           // ),
+                                      //     IconButton(
+                                      //             icon: Icon(Icons.favorite),
+                                      //             color: _favIconColor,
+                                      //             tooltip: 'Add to favorite',
+                                      //             onPressed: () {
+                                      //               setState(() {
+                                      //                 if(_favIconColor == Colors.grey){
+                                      //                   _favIconColor = Colors.red;
+                                      //                 }else{
+                                      //               _favIconColor = Colors.blue;
+                                      //           }
+                                      //     });
+                                      //   },
+                                      // ),
                                           GestureDetector(
-                                            child: const Icon(Icons.bookmark),
+                                            child: Icon(Icons.bookmark ,color: bookcolor,),
+
                                             onTap: (() {
+                                              flag = !flag;
+                                              onbookmark();
                                             }),
                                           ),
                                           GestureDetector(
@@ -369,6 +397,18 @@ class _lessonContState extends State<lessonCont> {
         ),
       ),
     );
+  }
+  
+  void onbookmark() {
+    if (flag == true){
+      bookcolor = Color.fromARGB(155, 165, 71, 197);
+
+    }
+    else {
+      bookcolor = Colors.black;
+    }
+
+
   }
 }
 //   @override

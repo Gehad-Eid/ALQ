@@ -26,24 +26,31 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   Widget buildEmailField() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      //margin: EdgeInsets.only(top: 30, right: 20,left: 20),
+      padding: EdgeInsets.symmetric(horizontal: 30),
       child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Change your password',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 21,
-                  fontWeight: FontWeight.bold),
+            Text(
+              '     Change your password',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 165, 101, 234),),
             ),
+            const SizedBox(height: 40,),
+            // const Text(
+            //   'Change your password',
+            //   style: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 21,
+            //       fontWeight: FontWeight.bold),
+            // ),
             const SizedBox(
               height: 20,
             ),
             Text(
-              'Current password',
+              'Enter the current password',
               style: TextStyle(
                 color: Colors.grey.shade500,
                 fontSize: 18,
@@ -82,8 +89,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       color: Colors.black,
                     ),
                   ),
+                  prefixIcon: const Icon(Icons.vpn_key),
                   contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                  hintText: "",
+                  hintText: "Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -92,7 +100,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               height: 20,
             ),
             Text(
-              'New password',
+              'Enter the new password',
               style: TextStyle(
                 color: Colors.grey.shade500,
                 fontSize: 18,
@@ -132,17 +140,18 @@ class _ChangePasswordState extends State<ChangePassword> {
                       color: Colors.black,
                     ),
                   ),
+                  prefixIcon: const Icon(Icons.vpn_key),
                   contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                  hintText: "",
+                  hintText: "Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                  ),
+                    ),
                 )),
             const SizedBox(
               height: 20,
             ),
             Text(
-              'Confirm new password',
+              'Confirm the new password',
               style: TextStyle(
                 color: Colors.grey.shade500,
                 fontSize: 18,
@@ -181,11 +190,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                       color: Colors.black,
                     ),
                   ),
+                  prefixIcon: const Icon(Icons.vpn_key),
                   contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                  hintText: "",
+                  hintText: "Confirm",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                  ),
+                    ),
                 )),
             const SizedBox(
               height: 20,
@@ -228,21 +238,24 @@ class _ChangePasswordState extends State<ChangePassword> {
                     }
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(7),
+                    margin: EdgeInsets.only(top: 15, right: 50,left: 70),
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(
-                        color: Colors.blue,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Text(
-                      'Update password',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 18,
-                      ),
+                          color: Color.fromARGB(255, 165, 101, 234),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                    // borderRadius: BorderRadius.circular(5.0),
+                    //),
+                    child: Row(
+                      children: [
+                         Icon(Icons.update,color: Colors.white,),
+                        Text(
+                          '   Update Password',
+                          style: TextStyle(
+                            color: Colors.white,fontSize: 14, height: 1.4,fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 )
@@ -269,22 +282,14 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         title: const Text(
-          "Change password",
-          style: TextStyle(
-            color: Colors.black,
+          "Chang password",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
-        ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back,
-            size: 30.0,
-            color: Colors.black87,
-          ),
-        ),
+        elevation: 0,
+        centerTitle: true,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SingleChildScrollView(
         child: Column(

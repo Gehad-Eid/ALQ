@@ -82,7 +82,7 @@ class _aboutus extends State<aboutUss> {
           children: [
             Text(
               'Hello and welcome to ALQ!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 165, 101, 234),),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Color(0xFF8EA3E2),),
             ),
             const SizedBox(height: 15,),
             // Text(
@@ -107,7 +107,7 @@ class _aboutus extends State<aboutUss> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(73, 165, 101, 234),
+                  //color: Color.fromARGB(73, 165, 101, 234),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
@@ -117,12 +117,12 @@ class _aboutus extends State<aboutUss> {
                   children: [
                     Text(
                       "ALQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University.\n",
-                      style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Colors.white,),
+                      style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color.fromARGB(155, 165, 71, 197),),
                     ),
                     const SizedBox(height: 5,),
                     Text(
                       "To launch the application, the user must first sign up in order to have an account, then log in.\nWhen the user logs in, a welcome page appears, and the user can choose to start learning or go to their profile.\nIf the user starts learning, then human body systems chapters will appear, and the user can choose a chapter and take lessons and see a 3D model, view AR, or take a quiz.\nIf the user goes to their profile, they can see their information, score, and achievements.\nWhen the user has finished learning, they can log out.",
-                      style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Colors.white,),
+                      style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color.fromARGB(155, 165, 71, 197),),
                     ), 
                   ],
                 ),

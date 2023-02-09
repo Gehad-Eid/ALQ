@@ -78,10 +78,10 @@ chapnum = chapterNum;
                 ),
                 Expanded(
                   child: ElevatedButton(
-style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(155, 165, 71, 197)),
-                      onPressed: () => onWebObjectAtButtonPressed(chapnum),
-                      child:  Text("Add / Remove the object")),
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(155, 165, 71, 197)),
+                    onPressed: () => onWebObjectAtButtonPressed(chapnum),
+                    child:  Text("Add / Remove the object")),
                 )
               ],
             ),

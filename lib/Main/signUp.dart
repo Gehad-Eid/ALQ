@@ -18,6 +18,9 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
 
+  bool isPassword = true;
+  bool confirmPassword = true;
+
   // string for displaying the error Message
   String? errorMessage;
 
@@ -117,7 +120,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
-        obscureText: true,
+        //obscureText: true,
+        obscureText: isPassword,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
@@ -132,6 +136,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isPassword = !isPassword;
+                      });
+                    },
+                    icon: Icon(
+                      isPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.black,
+                    ),
+                  ),
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
@@ -144,7 +159,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final confirmPasswordField = TextFormField(
         autofocus: false,
         controller: confirmPasswordEditingController,
-        obscureText: true,
+        //obscureText: true,
+        obscureText: confirmPassword,
         validator: (value) {
           if (confirmPasswordEditingController.text !=
               passwordEditingController.text) {
@@ -157,6 +173,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        confirmPassword = !confirmPassword;
+                      });
+                    },
+                    icon: Icon(
+                      confirmPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.black,
+                    ),
+                  ),
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
@@ -169,7 +196,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Color.fromARGB(255, 156, 203, 247),
+      color: Color(0xFF8EA3E2),
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -212,7 +239,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     SizedBox(
                         height: 180,
                         child: Image.asset(
-                          "images/logo2.png",
+                          "images/logo6.png",
                           fit: BoxFit.contain,
                         )),
                     SizedBox(height: 45),

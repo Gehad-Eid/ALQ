@@ -20,7 +20,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: TextFormField(
               autofocus: false,
               controller: emailController,
@@ -56,8 +56,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           onPressed: () {
             resetPassword();
           },
+          style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8EA3E2)),
           icon: Icon(Icons.lock_reset),
           label: Text('Reset password'),
+          
         ),
       ],
     );
@@ -76,24 +78,48 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          "Reset Password",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+              title: const Text(
+                "Reset Password",
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              elevation: 0,
+              centerTitle: true,
+              backgroundColor: Color(0xFF8EA3E2),
+            ),
+      body: SingleChildScrollView(
+      child: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('Enter your email to receive a message and reset your password'),
-          SizedBox(
-            height: 50,
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 150,),
+                Text(
+                  "Don't worry if you forgot your password, we will help you so that you can recover it !",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, height: 1.4,fontWeight: FontWeight.bold,color:Color.fromARGB(155, 165, 71, 197),),
+                ),
+                const SizedBox(height: 10,),
+                Text(
+                    "Enter your email to receive a message and reset your password",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color(0xFF8EA3E2)),
+                  ),
+                  //const SizedBox(height: 10,),
+              ],
+              ),
           ),
           buildEmailField(),
+          // Text('Enter your email to receive a message and reset your password'),
+          // SizedBox(
+          //   height: 50,
+          // ),
+          // const SizedBox(height: 15,),
         ],
       ),
+    ),
     );
   }
 
