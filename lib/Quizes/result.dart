@@ -1,3 +1,11 @@
+//import 'dart:js';
+
+
+
+import 'package:alqgp/Chapters/chapter.dart';
+import 'package:alqgp/Chapters/chapterContent.dart';
+import 'package:alqgp/Main/home.dart';
+import 'package:alqgp/models/chapter_model.dart';
 import 'package:flutter/material.dart';
 
 class result extends StatelessWidget {
@@ -27,10 +35,12 @@ class result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BuildContext path = context;
+    buildAppBar(context);
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 156, 203, 247),
+        //backgroundColor: Color.fromARGB(255, 156, 203, 247),
         //drawer: NavigationDrawer(),
-        appBar: buildAppBar(),
+        appBar: buildAppBar(context),
         body: //Body(),
             SingleChildScrollView(
           child: Padding(
@@ -43,12 +53,14 @@ class result extends StatelessWidget {
                 ),
                 const Text.rich(
                   (TextSpan(
-                      text: 'Score out of 10',
+                      text: 'Your result out of 10',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 30.0),
+                          fontWeight: FontWeight.bold, fontSize: 28,
+                          color: Color.fromARGB(155, 165, 71, 197),),
                       children: [
                         TextSpan(
-                          text: ' ✨',
+                          text: ' 👏',
+                          //text: '  🤨📙✨',
                           style: TextStyle(
                               fontWeight: FontWeight.normal, fontSize: 30.0),
                         )
@@ -65,11 +77,12 @@ class result extends StatelessWidget {
                     (TextSpan(
                         text: '$score/10',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 80.0),
+                            fontWeight: FontWeight.bold, fontSize: 80.0, color: Color(0xFF8EA3E2).withOpacity(0.75),),
                         children: [])),
                     //style: TextStyle(fontSize: 30.0),
                   ),
                 ),
+                buildAbout3(),
               ],
             ),
           ),
@@ -92,12 +105,53 @@ class result extends StatelessWidget {
         );
   }
 
-  AppBar buildAppBar() {
+  Widget buildAbout3() => Container(
+        padding: EdgeInsets.all(30.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                const SizedBox(height: 100,),
+                Container(
+                  height: 180,
+                  child: Image.asset('images/result.png'),
+                ),
+          ],
+            ),
+          ],
+        ),
+      );
+
+  AppBar buildAppBar(context) {
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
-      backgroundColor: Color.fromARGB(255, 156, 203, 247),
-      //Color.fromARGB(255, 223, 115, 115)
-      elevation: 0,
+        title: const Text(
+          "The Result",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Color(0xFF8EA3E2),
+        leading: IconButton(
+                onPressed: () => Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return homePage();
+            },
+          )),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 25.0,
+                  color: Colors.white,
+                ),
+              ),
+        // leading: new IconButton(
+        //   icon: new Icon(Icons.ac_unit),
+        //   onPressed: () => Navigator.of().push(MaterialPageRoute(builder: (context) => page));,
+
+      // iconTheme: IconThemeData(color: Colors.black),
+      // backgroundColor: Color.fromARGB(255, 156, 203, 247),
+      // //Color.fromARGB(255, 223, 115, 115)
+      // elevation: 0,
       /*
       logo
       leading: IconButton(
@@ -111,14 +165,14 @@ class result extends StatelessWidget {
         },
       ),
       */
-      title: const Text(
-        "ALQ",
-        style: TextStyle(
-          fontSize: 23,
-          color: Colors.black,
-        ),
-      ),
-      centerTitle: true,
+      // title: const Text(
+      //   "ALQ",
+      //   style: TextStyle(
+      //     fontSize: 23,
+      //     color: Colors.black,
+      //   ),
+      // ),
+      // centerTitle: true,
     );
     // actions: [
     //   IconButton(

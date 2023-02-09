@@ -114,7 +114,7 @@ class homey extends StatelessWidget {
           ),
           Spacer(),
           Image.asset(
-            'images/logo2.png',
+            'images/logo6.png',
             width: size.width * 0.3,
           ),
         ],

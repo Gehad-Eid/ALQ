@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class UserModel {
   String? uid;
   String? email;
@@ -5,6 +7,7 @@ class UserModel {
   String? secondName, image;
   int? score;
   int? level;
+  List? bookmarks;
 
   UserModel({
     this.uid,
@@ -14,6 +17,7 @@ class UserModel {
     this.score,
     this.level,
     this.image,
+    this.bookmarks,
   });
 
   // receiving data from server
@@ -26,6 +30,7 @@ class UserModel {
       score: map['score'],
       level: map['level'],
       image: map['image'],
+      bookmarks: map['bookmark'],
     );
   }
 
@@ -39,6 +44,7 @@ class UserModel {
       'score': score,
       'level': level,
       'image': image,
+      'bookmark' : [],
     };
   }
 }

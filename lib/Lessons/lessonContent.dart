@@ -10,6 +10,8 @@ import 'package:easy_web_view2/easy_web_view2.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'boookmarks.dart';
+
 class lessonCont extends StatefulWidget {
   final LessonModle lesson;
   // final LessonModle next_lesson;
@@ -21,9 +23,22 @@ class lessonCont extends StatefulWidget {
   State<lessonCont> createState() => _lessonContState(index);
 }
 
+enum TtsState { playing, stopped, paused, continued }
+
 class _lessonContState extends State<lessonCont> {
+  late FlutterTts flutterTts;
+  String? language;
+  String? engine;
+  double volume = 0.5;
+  double pitch = 1.0;
+  double rate = 0.5;
+  bool isCurrentLanguageInstalled = false;
+
+  String? _newVoiceText;
+  int? _inputLength;
+
   int currentIndex = 0;
-  bool isPlaying = false;
+  //bool isPlaying = false;
   String _currentParagraph = '';
   int? index;
 
@@ -32,7 +47,12 @@ class _lessonContState extends State<lessonCont> {
   }
 
   String get currentP => _currentParagraph;
-  FlutterTts flutterTts = FlutterTts();
+  TtsState ttsState = TtsState.stopped;
+
+  get isPlaying => ttsState == TtsState.playing;
+  get isStopped => ttsState == TtsState.stopped;
+  get isPaused => ttsState == TtsState.paused;
+  get isContinued => ttsState == TtsState.continued;
 
   @override
   void initState() {
@@ -43,19 +63,109 @@ class _lessonContState extends State<lessonCont> {
 
     flutterTts.setStartHandler(() {
       setState(() {
-        isPlaying = true;
+        ttsState = TtsState.playing;
       });
     });
 
     flutterTts.setCompletionHandler(() {
       setState(() {
-        isPlaying = false;
+        ttsState = TtsState.stopped;
       });
     });
   }
 
+  Future _setAwaitOptions() async {
+    await flutterTts.awaitSpeakCompletion(true);
+  }
+
+  Future _getDefaultEngine() async {
+    var engine = await flutterTts.getDefaultEngine;
+    if (engine != null) {
+      print(engine);
+    }
+  }
+
+  Future _getDefaultVoice() async {
+    var voice = await flutterTts.getDefaultVoice;
+    if (voice != null) {
+      print(voice);
+    }
+  }
+
   initTts() async {
     flutterTts = FlutterTts();
+    _setAwaitOptions();
+    _getDefaultEngine();
+    _getDefaultVoice();
+
+    flutterTts.setStartHandler(() {
+      setState(() {
+        print("Playing");
+        ttsState = TtsState.playing;
+      });
+    });
+    flutterTts.setInitHandler(() {
+      setState(() {
+        print("TTS Initialized");
+      });
+    });
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        print("Complete");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        print("Cancel");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setPauseHandler(() {
+      setState(() {
+        print("Paused");
+        ttsState = TtsState.paused;
+      });
+    });
+
+    flutterTts.setContinueHandler(() {
+      setState(() {
+        print("Continued");
+        ttsState = TtsState.continued;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        print("error: $msg");
+        ttsState = TtsState.stopped;
+      });
+    });
+  }
+
+  Future _speak() async {
+    await flutterTts.setVolume(volume);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setPitch(pitch);
+
+    if (currentP != null) {
+      if (currentP!.isNotEmpty) {
+        await flutterTts.speak(currentP!);
+      }
+    }
+  }
+
+  Future _stop() async {
+    var result = await flutterTts.stop();
+    if (result == 1) setState(() => ttsState = TtsState.stopped);
+  }
+
+  Future _pause() async {
+    var result = await flutterTts.pause();
+    if (result == 1) setState(() => ttsState = TtsState.paused);
   }
 
   Future _readP() async {
@@ -65,7 +175,7 @@ class _lessonContState extends State<lessonCont> {
     var result = await flutterTts.speak(currentP);
     if (result == 1) {
       setState(() {
-        isPlaying = true;
+        ttsState = TtsState.playing;
       });
     }
   }
@@ -75,6 +185,9 @@ class _lessonContState extends State<lessonCont> {
     flutterTts.stop();
     super.dispose();
   }
+
+  // bool? flag = lessonn.BookmarkValus;
+  Color bookcolor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -143,6 +256,7 @@ class _lessonContState extends State<lessonCont> {
                         items: widget.lesson.parts!.map((part) {
                           return Builder(
                             builder: (BuildContext context) {
+                              var _favIconColor = Colors.grey;
                               return Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
@@ -157,8 +271,14 @@ class _lessonContState extends State<lessonCont> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           GestureDetector(
-                                            child: const Icon(Icons.bookmark),
-                                            onTap: () {},
+                                            child: Icon(
+                                              Icons.bookmark,
+                                              color: bookcolor,
+                                            ),
+                                            onTap: (() {
+                                              flag = !flag;
+                                              onbookmark();
+                                            }),
                                           ),
                                           GestureDetector(
                                             child: Icon(Icons.volume_up),
@@ -302,6 +422,14 @@ class _lessonContState extends State<lessonCont> {
         ),
       ),
     );
+  }
+
+  void onbookmark() {
+    if (flag == true) {
+      bookcolor = Color.fromARGB(155, 165, 71, 197);
+    } else {
+      bookcolor = Colors.black;
+    }
   }
 }
 //   @override

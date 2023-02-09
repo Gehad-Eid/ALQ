@@ -93,10 +93,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 Container(
                   height: 180,
-                  child: Image.asset('images/logo2.png'),
+                  child: Image.asset('images/logo6.png'),
                 ),
                 const Text(
-                  'ALQ',
+                  'عَـــلَــــــق ',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
@@ -107,14 +107,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             SizedBox(height: 30),
             MyButton(
-              color: Color.fromARGB(255, 223, 115, 115),
+              color: Colors.purple.shade200,
               title: 'Log in',
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.screenRout);
               },
             ),
             MyButton(
-              color: Color.fromARGB(255, 156, 203, 247),
+              color: Color(0xFF8EA3E2),
               title: 'Sign up',
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.screenRout);

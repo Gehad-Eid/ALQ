@@ -13,10 +13,11 @@ import 'package:vector_math/vector_math_64.dart';
 import 'package:flutter/src/material/colors.dart';
 
 class AR extends StatefulWidget {
-  const AR({super.key});
+  final int chaptNum;
+  const AR({super.key, required this.chaptNum});
 
   @override
-  State<AR> createState() => _ARState();
+  State<AR> createState() => _ARState(chaptNum!);
 }
 
 class _ARState extends State<AR> {
@@ -28,6 +29,10 @@ class _ARState extends State<AR> {
 
   //String webObjectReference;
   ARNode? webObjectNode;
+  int chapnum = 0;
+  _ARState(int chapterNum){
+chapnum = chapterNum;
+  }
 
   @override
   void dispose() {
@@ -45,6 +50,7 @@ class _ARState extends State<AR> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -60,23 +66,25 @@ class _ARState extends State<AR> {
                 ),
               ),
             ),
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: ElevatedButton(
-            //           onPressed: onLocalObjectButtonPressed,
-            //           child: const Text("Add / Remove Local Object")),
-            //     ),
-            //     const SizedBox(
-            //       width: 10,
-            //     ),
-            //     Expanded(
-            //       child: ElevatedButton(
-            //           onPressed: onWebObjectAtButtonPressed,
-            //           child: const Text("Add / Remove Web Object")),
-            //     )
-            //   ],
-            // ),
+            Row(
+              children: [
+                // Expanded(
+                //   child: ElevatedButton(
+                //       onPressed: () => onLocalObjectButtonPressed(),
+                //       child:  Text("Add / Remove Local Object")),
+                // ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(155, 165, 71, 197)),
+                    onPressed: () => onWebObjectAtButtonPressed(chapnum),
+                    child:  Text("Add / Remove the object")),
+                )
+              ],
+            ),
           ],
         ),
       ),
@@ -94,30 +102,49 @@ class _ARState extends State<AR> {
     this.arSessionManager.onInitialize(
           showFeaturePoints: false,
           showPlanes: true,
-          customPlaneTexturePath: "images/Beating heart.glb",
+          customPlaneTexturePath:"images/Beatingheart.glb",
           showWorldOrigin: true,
           handleTaps: false,
         );
     this.arObjectManager.onInitialize();
   }
 
-  Future<void> onLocalObjectButtonPressed() async {
-    if (localObjectNode != null) {
-      arObjectManager.removeNode(localObjectNode!);
-      localObjectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "images/Beating heart.glb",
-          scale: Vector3(0.2, 0.2, 0.2),
-          position: Vector3(0.0, 0.0, 0.0),
-          rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-      bool? didAddLocalNode = await arObjectManager.addNode(newNode);
-      localObjectNode = (didAddLocalNode!) ? newNode : null;
-    }
-  }
+  // Future<void> onLocalObjectButtonPressed() async {
+  //   if (localObjectNode != null) {
+  //     arObjectManager.removeNode(localObjectNode!);
+  //     localObjectNode = null;
+  //   } else {
+  //     var newNode = ARNode(
+  //         type: NodeType.localGLTF2,
+  //         uri: "images/heart.glb",
+  //         scale: Vector3(0.2, 0.2, 0.2),
+  //         position: Vector3(0.0, 0.0, 0.0),
+  //         rotation: Vector4(1.0, 0.0, 0.0, 0.0));
+  //     bool? didAddLocalNode = await arObjectManager.addNode(newNode);
+  //     localObjectNode = (didAddLocalNode!) ? newNode : null;
+  //   }
+  // }
 
-  Future<void> onWebObjectAtButtonPressed() async {
+  Future<void> onWebObjectAtButtonPressed(int name) async {
+    String urlLink = '';
+    switch(name){
+      case 1: 
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/circulatory_system.glb";
+        break;
+      case 2:      
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/diaphragm_non-commercial.glb";
+        break;
+      case 3:      
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/disgestive_system.glb";
+        break;
+      case 4:      
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/urinary_system_final.glb";
+        break;
+      case 5:      
+        urlLink = "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/male_full_body_ecorche.glb";
+        break;
+
+    }
     if (webObjectNode != null) {
       arObjectManager.removeNode(webObjectNode!);
       webObjectNode = null;
@@ -125,8 +152,8 @@ class _ARState extends State<AR> {
       var newNode = ARNode(
           type: NodeType.webGLB,
           uri:
-              "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Fox/glTF-Binary/Fox.glb",
-          scale: Vector3(0.2, 0.2, 0.2));
+              urlLink,
+          scale: Vector3(1, 1, 1));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;
     }

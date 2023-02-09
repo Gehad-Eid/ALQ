@@ -170,7 +170,8 @@ class _lessonsState extends State<lessons> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF8EA3E2),
       ),
       body: SafeArea(
           child: ListView.builder(
@@ -223,7 +224,7 @@ class Lcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(10.0),
       child: Card(
         color: kTextColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
