@@ -129,8 +129,11 @@ class ImageAndIcons extends StatelessWidget {
                     IconCard(
                         icon: "images/icons8-elearning-64.png",
                         page: lessons(chap: chap)),
-                    const IconCard(
-                        icon: "images/icons8-ar-100 (1).png", page: AR()),
+                    IconCard(
+                        icon: "images/icons8-ar-100 (1).png",
+                        page: AR(
+                          chaptNum: chap.chapNum,
+                        )),
                     IconCard(
                       icon: "images/icons8-marker-100 (2).png",
                       page: quiz_page(chap: chap.chapNum),

@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:alqgp/models/bookmark_model.dart';
 import 'package:alqgp/models/user_model.dart';
+import 'package:alqgp/widgets/App_Bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,8 @@ class bookMark extends StatefulWidget {
 
 class _bookMarkState extends State<bookMark> {
   List<Object> _PartsList = [];
-   UserModel user = UserModel();
-  _bookMarkState(UserModel loggedInUser){
+  UserModel user = UserModel();
+  _bookMarkState(UserModel loggedInUser) {
     user = loggedInUser;
   }
 
@@ -30,21 +31,13 @@ class _bookMarkState extends State<bookMark> {
   Widget build(BuildContext context) {
     List<dynamic>? list = user.bookmarks;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Bookmarks',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: buildAppBar(context, 'Bookmarks'),
       body: SafeArea(
           child: ListView.builder(
               itemCount: list!.length,
               padding: EdgeInsets.only(top: 80.0),
               itemBuilder: (context, index) {
-                return ListbookMark(index,list);
+                return ListbookMark(index, list);
               })),
     );
   }
@@ -60,12 +53,10 @@ class _bookMarkState extends State<bookMark> {
   }
 }
 
-
-
 class ListbookMark extends StatelessWidget {
   int index = 0;
   List listt = [];
-  ListbookMark(int index, List list){
+  ListbookMark(int index, List list) {
     this.index = index;
     listt = list;
   }

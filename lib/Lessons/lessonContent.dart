@@ -41,6 +41,7 @@ class _lessonContState extends State<lessonCont> {
   //bool isPlaying = false;
   String _currentParagraph = '';
   int? index;
+  bool flag = false;
 
   _lessonContState(index) {
     this.index = index;
@@ -200,8 +201,8 @@ class _lessonContState extends State<lessonCont> {
           elevation: 0,
           title: Text(
             '${widget.lesson.name?.split(",")[0]}',
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold),
+            // style: const TextStyle(
+            //     color: Colors.black, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF8EA3E2),

@@ -167,15 +167,16 @@ class _lessonsState extends State<lessons> {
         elevation: 0,
         title: Text(
           chpName,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          // style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         //backgroundColor: Colors.transparent,
-        backgroundColor: Color(0xFF8EA3E2),
+        backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
           child: ListView.builder(
               itemCount: lessonsList.length,
+              padding: EdgeInsets.only(top: 20.0),
               itemBuilder: (context, index) {
                 return index < lessonsList.length - 1
                     ? Lcard(
@@ -224,7 +225,7 @@ class Lcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0),
       child: Card(
         color: kTextColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
