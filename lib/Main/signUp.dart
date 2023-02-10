@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'logIn.dart';
+
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 
@@ -137,16 +139,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPassword = !isPassword;
-                      });
-                    },
-                    icon: Icon(
-                      isPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.black,
-                    ),
-                  ),
+            onPressed: () {
+              setState(() {
+                isPassword = !isPassword;
+              });
+            },
+            icon: Icon(
+              isPassword ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black,
+            ),
+          ),
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
@@ -174,16 +176,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        confirmPassword = !confirmPassword;
-                      });
-                    },
-                    icon: Icon(
-                      confirmPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.black,
-                    ),
-                  ),
+            onPressed: () {
+              setState(() {
+                confirmPassword = !confirmPassword;
+              });
+            },
+            icon: Icon(
+              confirmPassword ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black,
+            ),
+          ),
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
@@ -327,10 +329,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => WelcomeScreen()),
-        (route) => false);
+    Navigator.pushReplacement(
+        (context), MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }
 

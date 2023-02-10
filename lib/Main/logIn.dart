@@ -3,7 +3,7 @@ import '../Main/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../Main/forget_password.dart';
+import '../Settings/forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -82,16 +82,16 @@ class _LoginScreenState extends State<LoginScreen> {
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPassword = !isPassword;
-                      });
-                    },
-                    icon: Icon(
-                      isPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.black,
-                    ),
-                  ),
+            onPressed: () {
+              setState(() {
+                isPassword = !isPassword;
+              });
+            },
+            icon: Icon(
+              isPassword ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black,
+            ),
+          ),
           prefixIcon: const Icon(Icons.vpn_key),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
