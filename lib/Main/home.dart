@@ -2,7 +2,7 @@ import 'package:alqgp/Chapters/chapter.dart';
 import 'package:alqgp/Lessons/boookmarks.dart';
 import 'package:alqgp/Main/homePage.dart';
 import 'package:alqgp/Settings/settings.dart';
-import 'package:alqgp/User/profile.dart';
+import 'package:alqgp/Ptofile/profile.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -38,10 +38,14 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      bookMark(loggedInUser: loggedInUser,),
-      chapters(),
+      bookMark(
+        loggedInUser: loggedInUser,
+      ),
+      chapters(
+        loggedInUser: loggedInUser as UserModel,
+      ),
       homey(loggedInUser.firstName),
-      ProfileScreen(),
+      profile(user: loggedInUser),
       const setting(),
     ];
 
@@ -52,15 +56,12 @@ class _homePageState extends State<homePage> {
       const Icon(Icons.person_rounded, size: 30),
       const Icon(Icons.settings_rounded, size: 30),
     ];
+
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFFF3F7F8),
-      // appBar: AppBar(
-      //   elevation: 0,
-      // ),
       body: pages[index],
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 243, 247, 248),
+        backgroundColor: Colors.transparent,
         color: Colors.indigo.shade200,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 350),
@@ -71,25 +72,4 @@ class _homePageState extends State<homePage> {
       ),
     );
   }
-  // Widget getSelectedWidget({required int index}) {
-  //   Widget widget;
-  //   switch (index) {
-  //     case 0:
-  //       widget = const bookMark();
-  //       break;
-  //     case 1:
-  //       widget = const chapters();
-  //       break;
-  //     case 3:
-  //       widget = const profile();
-  //       break;
-  //     case 4:
-  //       widget = const setting();
-  //       break;
-  //     default:
-  //       widget = const setting();
-  //       break;
-  //   }
-  //   return widget;
-  // }
 }

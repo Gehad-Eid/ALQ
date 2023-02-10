@@ -1,4 +1,8 @@
+import 'package:alqgp/Chapters/chapterContent.dart';
 import 'package:alqgp/consts.dart';
+import 'package:alqgp/models/chapter_model.dart';
+import 'package:alqgp/widgets/my_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:alqgp/models/lesson_model.dart';
@@ -10,10 +14,13 @@ import 'boookmarks.dart';
 
 class lessonCont extends StatefulWidget {
   final LessonModle lesson;
-  const lessonCont(this.lesson, {super.key});
+  // final LessonModle next_lesson;
+  final List<Object> lessonsList;
+  final int index;
+  const lessonCont(this.lesson, this.index, this.lessonsList, {super.key});
 
   @override
-  State<lessonCont> createState() => _lessonContState(lesson);
+  State<lessonCont> createState() => _lessonContState(index);
 }
 
 enum TtsState { playing, stopped, paused, continued }
@@ -33,12 +40,11 @@ class _lessonContState extends State<lessonCont> {
   int currentIndex = 0;
   //bool isPlaying = false;
   String _currentParagraph = '';
+  int? index;
+  bool flag = false;
 
-  // LessonModle lessonn = LessonModle();
-  dynamic flag;
-  _lessonContState(LessonModle lesson){
-    // lessonn = lesson;
-    flag = lesson.BookmarkValus;
+  _lessonContState(index) {
+    this.index = index;
   }
 
   String get currentP => _currentParagraph;
@@ -147,8 +153,8 @@ class _lessonContState extends State<lessonCont> {
     await flutterTts.setPitch(pitch);
 
     if (currentP != null) {
-      if (currentP!.isNotEmpty) {
-        await flutterTts.speak(currentP!);
+      if (currentP.isNotEmpty) {
+        await flutterTts.speak(currentP);
       }
     }
   }
@@ -177,11 +183,12 @@ class _lessonContState extends State<lessonCont> {
 
   @override
   void dispose() {
+    flutterTts.stop();
     super.dispose();
-    _stop();
   }
+
   // bool? flag = lessonn.BookmarkValus;
-  Color bookcolor= Colors.black;
+  Color bookcolor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +201,8 @@ class _lessonContState extends State<lessonCont> {
           elevation: 0,
           title: Text(
             '${widget.lesson.name?.split(",")[0]}',
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold),
+            // style: const TextStyle(
+            //     color: Colors.black, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF8EA3E2),
@@ -250,7 +257,7 @@ class _lessonContState extends State<lessonCont> {
                         items: widget.lesson.parts!.map((part) {
                           return Builder(
                             builder: (BuildContext context) {
-                              var _favIconColor= Colors.grey;
+                              var _favIconColor = Colors.grey;
                               return Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
@@ -264,39 +271,11 @@ class _lessonContState extends State<lessonCont> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          // InkWell(
-                                          //   onTap: _readP,
-                                          //   child: Container(
-                                          //     padding:
-                                          //         const EdgeInsets.all(8.0),
-                                          //     decoration: const BoxDecoration(
-                                          //       color: kTextColor,
-                                          //       shape: BoxShape.circle,
-                                          //     ),
-                                          //     child: const Icon(
-                                          //       Icons.volume_up_sharp,
-                                          //       color: Colors.white,
-                                          //       size: 30,
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                      //     IconButton(
-                                      //             icon: Icon(Icons.favorite),
-                                      //             color: _favIconColor,
-                                      //             tooltip: 'Add to favorite',
-                                      //             onPressed: () {
-                                      //               setState(() {
-                                      //                 if(_favIconColor == Colors.grey){
-                                      //                   _favIconColor = Colors.red;
-                                      //                 }else{
-                                      //               _favIconColor = Colors.blue;
-                                      //           }
-                                      //     });
-                                      //   },
-                                      // ),
                                           GestureDetector(
-                                            child: Icon(Icons.bookmark ,color: bookcolor,),
-
+                                            child: Icon(
+                                              Icons.bookmark,
+                                              color: bookcolor,
+                                            ),
                                             onTap: (() {
                                               flag = !flag;
                                               onbookmark();
@@ -379,17 +358,64 @@ class _lessonContState extends State<lessonCont> {
                           ),
                         )
                       : const SizedBox(),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: widget.lesson.parts!.length,
-                    itemBuilder: (context, index) {
-                      return Column(children: []);
-                    },
-                  ),
-                  // const SizedBox(
-                  //   height: 50,
+                  // ListView.builder(
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemCount: widget.lesson.parts!.length,
+                  //   itemBuilder: (context, index) {
+                  //     return Column(children: []);
+                  //   },
                   // ),
+                  // currentIndex == widget.lesson.parts!.length
+                  //     ? MyButton(
+                  //         color: Color.fromARGB(255, 223, 115, 115),
+                  //         title: 'Log in',
+                  //         onPressed: () {},
+                  //       )
+                  //     : SizedBox(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Visibility(
+                    maintainSize: true,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: (currentIndex.toDouble() ==
+                        widget.lesson.parts!.length - 1),
+                    child: ElevatedButton(
+                      child: Text(
+                          index == -1 || index! >= widget.lessonsList.length - 1
+                              ? 'Finish!'
+                              : 'Next'),
+                      onPressed: () {
+                        if (index == -1 ||
+                            index! >= widget.lessonsList.length - 1) {
+                          Navigator.of(context)
+                              .popUntil(ModalRoute.withName("/ChapCon"));
+                          // Navigator.pushReplacement(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             chapCont(chapter: chap!)));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => lessonCont(
+                                      widget.lessonsList[index! + 1]
+                                          as LessonModle,
+                                      index! + 1,
+                                      widget.lessonsList)));
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 10)
                 ],
               ),
             ),
@@ -398,17 +424,13 @@ class _lessonContState extends State<lessonCont> {
       ),
     );
   }
-  
-  void onbookmark() {
-    if (flag == true){
-      bookcolor = Color.fromARGB(155, 165, 71, 197);
 
-    }
-    else {
+  void onbookmark() {
+    if (flag == true) {
+      bookcolor = Color.fromARGB(155, 165, 71, 197);
+    } else {
       bookcolor = Colors.black;
     }
-
-
   }
 }
 //   @override

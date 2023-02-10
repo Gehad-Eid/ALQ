@@ -3,21 +3,17 @@
 // import 'package:alqgp/screens/lessons/lesson_content.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
-
 // class ChapterLessonsScreen extends StatefulWidget {
 //   Chapter? chapter;
 //   ChapterLessonsScreen({this.chapter});
-
 //   @override
 //   State<ChapterLessonsScreen> createState() => _ChapterLessonsScreenState();
 // }
-
 // class _ChapterLessonsScreenState extends State<ChapterLessonsScreen> {
 //   final CollectionReference _collectionRef =
 //       FirebaseFirestore.instance.collection('chapters');
 //   List<LessonModle> myLessons = [];
 //   Future<List<LessonModle>>? fLessons;
-
 //   Future<List<LessonModle>?> getChapterLessons() async {
 //     var data = await FirebaseFirestore.instance
 //         .collection('chapters')
@@ -32,7 +28,6 @@
 //     }
 //     return myLessons;
 //   }
-
 //   @override
 //   void initState() {
 //     fLessons = getChapterLessons() as Future<List<LessonModle>>?;
@@ -41,7 +36,6 @@
 //     });
 //     super.initState();
 //   }
-
 //   @override
 //   Widget build(BuildContext context) {
 //     Size size = MediaQuery.of(context).size;
@@ -136,27 +130,31 @@
 
 import 'package:alqgp/Lessons/lessonContent.dart';
 import 'package:alqgp/consts.dart';
+import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/lesson_model.dart';
+import 'package:alqgp/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class lessons extends StatefulWidget {
-  final int chpNum;
-  final String chpName;
-  const lessons(this.chpNum, {super.key, required this.chpName});
+  final Chapter chap;
+  final UserModel loggedInUser;
+  const lessons({super.key, required this.chap, required this.loggedInUser});
 //prop
   //static const String screenRout = 'lessonsList';
   @override
-  State<lessons> createState() => _lessonsState(chpNum, chpName);
+  State<lessons> createState() => _lessonsState(chap);
 }
 
 class _lessonsState extends State<lessons> {
-  List<Object> _lessonsList = [];
+  List<Object> lessonsList = [];
   int chapNum = 0;
   String chpName = '';
-  _lessonsState(int chpNum, String chpName) {
-    chapNum = chpNum;
-    chpName = chpName;
+  Chapter? chap;
+  _lessonsState(Chapter chap) {
+    this.chap = chap;
+    chapNum = chap.chapNum;
+    chpName = chap.chapterName;
   }
   @override
   void didChangeDependencies() {
@@ -171,18 +169,32 @@ class _lessonsState extends State<lessons> {
         elevation: 0,
         title: Text(
           chpName,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          // style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         //backgroundColor: Colors.transparent,
-        backgroundColor: Color(0xFF8EA3E2),
+        backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
           child: ListView.builder(
-              itemCount: _lessonsList.length,
-              padding: EdgeInsets.only(top: 80.0),
+              itemCount: lessonsList.length,
+              padding: EdgeInsets.only(top: 20.0),
               itemBuilder: (context, index) {
-                return Lcard(_lessonsList[index] as LessonModle);
+                return index < lessonsList.length - 1
+                    ? Lcard(
+                        lessonsList[index] as LessonModle,
+                        lessonsList[index + 1] as LessonModle,
+                        index,
+                        chap!,
+                        lessonsList,
+                        widget.loggedInUser)
+                    : Lcard(
+                        lessonsList[index] as LessonModle,
+                        lessonsList[index] as LessonModle,
+                        index,
+                        chap!,
+                        lessonsList,
+                        widget.loggedInUser);
               })),
     );
   }
@@ -198,9 +210,9 @@ class _lessonsState extends State<lessons> {
       // _lessonsList = List.from(data.docs.map((e) => LessonModle.fromMap(e)));
       List<Map<String, dynamic>> allData =
           data.docs.map((doc) => doc.data()).toList();
-      _lessonsList.clear();
+      lessonsList.clear();
       for (int i = 0; i < allData.length; i++) {
-        _lessonsList.add(LessonModle.fromMap(allData[i]));
+        lessonsList.add(LessonModle.fromMap(allData[i]));
       }
     });
   }
@@ -208,11 +220,17 @@ class _lessonsState extends State<lessons> {
 
 class Lcard extends StatelessWidget {
   final LessonModle _lesson;
-  Lcard(this._lesson);
+  final LessonModle _next_lesson;
+  final UserModel loggedInUser;
+  final List<Object> lessonsList;
+  final int index;
+  final Chapter chap;
+  Lcard(this._lesson, this._next_lesson, this.index, this.chap,
+      this.lessonsList, this.loggedInUser);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0),
       child: Card(
         color: kTextColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -222,7 +240,9 @@ class Lcard extends StatelessWidget {
             ListTile(
               title: Center(
                 child: Text(
+                  // _lesson != _Next_lesson?
                   "${_lesson.name?.split(",")[0]}",
+                  // : 'fouck',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -231,8 +251,13 @@ class Lcard extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => lessonCont(_lesson)));
+                _lesson != _next_lesson
+                    ? Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            lessonCont(_lesson, index, lessonsList)))
+                    : Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            lessonCont(_lesson, -1, lessonsList)));
               },
             ),
           ]),

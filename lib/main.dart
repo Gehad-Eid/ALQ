@@ -26,16 +26,18 @@ class MyApp extends StatelessWidget {
         title: 'ALQ',
         theme: isDarkMood
             ? ThemeData.dark().copyWith(
-                primaryColor: Colors.amber,
-                //accentColor: Colors.red,
+                primaryColor: Colors.black,
+                colorScheme: ColorScheme.dark(),
                 scaffoldBackgroundColor: Color.fromARGB(255, 38, 4, 57),
+                primaryColorDark: Color.fromARGB(255, 53, 22, 70),
                 canvasColor: Color.fromARGB(255, 53, 22, 70),
               )
             : ThemeData.light().copyWith(
-                accentColor: Colors.indigo.shade800,
-                primaryColor: kTextColor,
+                // primaryColor: Colors.blue.shade300,
                 scaffoldBackgroundColor: kBackgroundColor,
-                canvasColor: kBackgroundColor,
+                // primaryColorLight: kBackgroundColor,
+                colorScheme: ColorScheme.light(),
+                // canvasColor: kBackgroundColor,
               ),
 
         //for testing sign in & up : WelcomeScreen

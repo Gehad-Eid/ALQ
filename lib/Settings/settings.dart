@@ -1,14 +1,16 @@
 import 'package:alqgp/Main/welcome.dart';
 import 'package:alqgp/Settings/tts_settings.dart';
-import 'package:alqgp/feedBack/AboutUss.dart';
-import 'package:alqgp/feedBack/sendffeedback.dart';
+import 'package:alqgp/Settings/AboutUss.dart';
+import 'package:alqgp/Settings/sendffeedback.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:alqgp/Settings/delete_account.dart';
-import '../feedBack/FAQQ.dart';
-import '../feedBack/ReportABugg.dart';
+import 'FAQQ.dart';
+import 'ReportABugg.dart';
 import 'change_password.dart';
+
+import '../widgets/App_Bar.dart';
 
 class setting extends StatelessWidget {
   static const darkMoodKey = 'key-dark-mood';
@@ -19,15 +21,7 @@ class setting extends StatelessWidget {
     final BuildContext path = context;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 243, 247, 248),
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Settings',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 243, 247, 248),
-      ),
+      appBar: buildAppBar(context, 'Settings'),
       body: SafeArea(
         child: ListView(padding: const EdgeInsets.all(20.0), children: [
           // SettingsGroup(

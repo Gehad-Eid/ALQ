@@ -56,6 +56,8 @@ dependencies:
   dots_indicator: ^2.1.0
   firebase_storage: ^11.0.10
   image_picker: ^0.8.6+1
+  fl_chart: ^0.60.0
+  smooth_page_indicator: ^1.0.0+2
 
 
 dev_dependencies:
