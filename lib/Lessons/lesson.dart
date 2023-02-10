@@ -132,12 +132,14 @@ import 'package:alqgp/Lessons/lessonContent.dart';
 import 'package:alqgp/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/lesson_model.dart';
+import 'package:alqgp/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class lessons extends StatefulWidget {
   final Chapter chap;
-  const lessons({super.key, required this.chap});
+  final UserModel loggedInUser;
+  const lessons({super.key, required this.chap, required this.loggedInUser});
 //prop
   //static const String screenRout = 'lessonsList';
   @override

@@ -1,4 +1,5 @@
 import 'package:alqgp/Ptofile/chart.dart';
+import 'package:alqgp/User/edit.dart';
 import 'package:alqgp/consts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,10 +39,16 @@ class _profileState extends State<profile> {
             imagePath:
                 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80', //user.imagePath
             onClicked: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => EditProfilePage(loggedInUser)),
-              );
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return EditProfile(
+                    currentUser: loggedInUser,
+                    onLoad: () {
+                      setState(() {});
+                    },
+                  );
+                },
+              ));
             },
           ),
           const SizedBox(height: 24),

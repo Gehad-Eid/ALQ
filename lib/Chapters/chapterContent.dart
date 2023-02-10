@@ -1,6 +1,7 @@
 import 'package:alqgp/Lessons/lesson.dart';
 import 'package:alqgp/Quizes/quiz.dart';
 import 'package:alqgp/consts.dart';
+import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../AR/AR.dart';
@@ -8,7 +9,9 @@ import '../models/chapter_model.dart';
 
 class chapCont extends StatelessWidget {
   final Chapter chapter;
-  const chapCont({super.key, required this.chapter});
+  final UserModel loggedInUser;
+  const chapCont(
+      {super.key, required this.chapter, required this.loggedInUser});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class chapCont extends StatelessWidget {
       ),
       body: Body(
         chap: chapter,
+        loggedInUser: loggedInUser,
       ),
     );
   }
@@ -31,9 +35,11 @@ class chapCont extends StatelessWidget {
 
 class Body extends StatelessWidget {
   final Chapter chap;
+  final UserModel loggedInUser;
   const Body({
     Key? key,
     required this.chap,
+    required this.loggedInUser,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -44,6 +50,7 @@ class Body extends StatelessWidget {
           ImageAndIcons(
             size: size,
             chap: chap,
+            loggedInUser: loggedInUser,
           ),
           Title(
             title: chap.chapterName,
@@ -92,11 +99,16 @@ class Body extends StatelessWidget {
 }
 
 class ImageAndIcons extends StatelessWidget {
-  const ImageAndIcons({Key? key, required this.size, required this.chap})
+  const ImageAndIcons(
+      {Key? key,
+      required this.size,
+      required this.chap,
+      required this.loggedInUser})
       : super(key: key);
 
   final Size size;
   final Chapter chap;
+  final UserModel loggedInUser;
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +140,10 @@ class ImageAndIcons extends StatelessWidget {
 
                     IconCard(
                         icon: "images/icons8-elearning-64.png",
-                        page: lessons(chap: chap)),
+                        page: lessons(
+                          chap: chap,
+                          loggedInUser: loggedInUser,
+                        )),
                     IconCard(
                         icon: "images/icons8-ar-100 (1).png",
                         page: AR(

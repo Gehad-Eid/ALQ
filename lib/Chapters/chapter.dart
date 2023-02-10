@@ -192,8 +192,11 @@ class chapters extends StatelessWidget {
                     crossAxisSpacing: 20.0,
                     childAspectRatio: 0.75,
                   ),
-                  itemBuilder: ((context, index) =>
-                      chapterCard(chapter: chapterList[index], indx: index))),
+                  itemBuilder: ((context, index) => chapterCard(
+                        chapter: chapterList[index],
+                        indx: index,
+                        loggedInUser: loggedInUser,
+                      ))),
             ),
           ),
         ],
@@ -205,10 +208,12 @@ class chapters extends StatelessWidget {
 class chapterCard extends StatelessWidget {
   final Chapter chapter;
   final int indx;
+  final UserModel loggedInUser;
   const chapterCard({
     Key? key,
     required this.chapter,
     required this.indx,
+    required this.loggedInUser,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -219,6 +224,7 @@ class chapterCard extends StatelessWidget {
               settings: RouteSettings(name: "/ChapCon"),
               builder: (context) => chapCont(
                     chapter: chapterList[indx],
+                    loggedInUser: loggedInUser,
                   ))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
