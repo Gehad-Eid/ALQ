@@ -220,13 +220,13 @@ class _lessonsState extends State<lessons> {
 
 class Lcard extends StatelessWidget {
   final LessonModle _lesson;
-  final LessonModle _next_lesson;
+  final LessonModle _nextLesson;
   final UserModel loggedInUser;
   final List<Object> lessonsList;
   final int index;
   final Chapter chap;
-  Lcard(this._lesson, this._next_lesson, this.index, this.chap,
-      this.lessonsList, this.loggedInUser);
+  Lcard(this._lesson, this._nextLesson, this.index, this.chap, this.lessonsList,
+      this.loggedInUser);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -251,7 +251,7 @@ class Lcard extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                _lesson != _next_lesson
+                _lesson != _nextLesson
                     ? Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
                             lessonCont(_lesson, index, lessonsList)))
