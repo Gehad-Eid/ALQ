@@ -6,7 +6,7 @@
   </intent>  
  </queries>
    <application
-        android:label="alqgp"
+        android:label="ALAQ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

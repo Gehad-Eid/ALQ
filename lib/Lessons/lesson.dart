@@ -169,7 +169,10 @@ class _lessonsState extends State<lessons> {
         elevation: 0,
         title: Text(
           chpName,
-          // style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF8EA3E2),
+          ),
         ),
         centerTitle: true,
         //backgroundColor: Colors.transparent,
@@ -253,11 +256,11 @@ class Lcard extends StatelessWidget {
               onTap: () {
                 _lesson != _next_lesson
                     ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            lessonCont(_lesson, index, lessonsList)))
+                        builder: (context) => lessonCont(
+                            _lesson, index, lessonsList, loggedInUser)))
                     : Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            lessonCont(_lesson, -1, lessonsList)));
+                        builder: (context) => lessonCont(
+                            _lesson, -1, lessonsList, loggedInUser)));
               },
             ),
           ]),

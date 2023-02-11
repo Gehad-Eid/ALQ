@@ -1,17 +1,13 @@
-import 'dart:ui';
-
+import 'package:alqgp/Services/database.dart';
 import 'package:alqgp/consts.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../models/achive_modle.dart';
-
 class homey extends StatelessWidget {
-  final String? name;
-  const homey(this.name, {super.key});
+  UserModel loggedInUser;
+  homey(this.loggedInUser, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +18,6 @@ class homey extends StatelessWidget {
         children: <Widget>[
           HeaderWithWelcom(size, context),
           const SizedBox(height: 50),
-
-          // PageView(
-          //   children: [
-          //     Container(
-          //       height: 300,
-          //       child: Column(
-          //         children: [
-          //           bar(size, context, 0.6, Colors.amber,
-          //               Colors.amber.shade200),
-          //           bar(size, context, 0.4, Colors.red, Colors.red.shade200),
-          //           bar(size, context, 0.3, Colors.blue, Colors.blue.shade200),
-          //           bar(size, context, 0.9, Colors.green,
-          //               Colors.green.shade200),
-          //           bar(size, context, 0.2, Colors.pink, Colors.pink.shade200),
-          //         ],
-          //       ),
-          //     ),
-          //   ],
-          // ),
-
           Container(
             height: 300,
             child: PageView.builder(
@@ -82,44 +58,55 @@ class homey extends StatelessWidget {
     );
   }
 
-  Container HeaderWithWelcom(Size size, BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        bottom: 20.0 * 2.5,
-      ),
-      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-      height: size.height * 0.33,
-      decoration: BoxDecoration(
-        color: Color(0xFF8EA3E2),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(39),
-          bottomRight: Radius.circular(39),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 10),
-            blurRadius: 50,
-            color: Color(0xFF8EA3E2).withOpacity(0.75),
-          )
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Text(
-            'Hi $name',
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          Spacer(),
-          Image.asset(
-            'images/logo6.png',
-            width: size.width * 0.3,
-          ),
-        ],
-      ),
-    );
+  StreamBuilder HeaderWithWelcom(Size size, BuildContext context) {
+    return StreamBuilder<UserModel?>(
+        stream: getUserData(loggedInUser.uid),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Somthing went wrong ☹');
+          } else if (snapshot.hasData) {
+            loggedInUser = snapshot.data!;
+            return Container(
+              margin: EdgeInsets.only(
+                bottom: 20.0 * 2.5,
+              ),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              height: size.height * 0.33,
+              decoration: BoxDecoration(
+                color: Color(0xFF8EA3E2),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(39),
+                  bottomRight: Radius.circular(39),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 50,
+                    color: Color(0xFF8EA3E2).withOpacity(0.75),
+                  )
+                ],
+              ),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    'Hi ${loggedInUser.firstName}',
+                    style: Theme.of(context).textTheme.headline4?.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  Image.asset(
+                    'images/logo6.png',
+                    width: size.width * 0.3,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 
   Column progressCard(int index, Size size, BuildContext context) {

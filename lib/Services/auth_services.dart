@@ -1,24 +1,27 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:alqgp/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// import '../models/user_model.dart';
+import 'database.dart';
 
-// class AuthServices {
-//   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+// instance of Auth
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-//   User? get currentUser => _firebaseAuth.currentUser;
+// get the logged in user
+User? get currentUser => _firebaseAuth.currentUser;
+User? user = FirebaseAuth.instance.currentUser;
 
-//   User? user = FirebaseAuth.instance.currentUser;
-//   UserModel loggedInUser = UserModel();
+// UserModel? _loggedInUser = UserModel();
 
-//   UserModel loggedin() {
-//     FirebaseFirestore.instance
-//         .collection("student")
-//         .doc(user!.uid)
-//         .get()
-//         .then((value) {
-//       this.loggedInUser = UserModel.fromMap(value.data());
-//     });
-//     return loggedInUser;
-//   }
+// UserModel loggedin() {
+//   studentCollection.doc(user!.uid).get().then((value) {
+//     loggedInUser = UserModel.fromMap(value.data());
+//   });
 // }
+
+Future<UserModel?> getUser() async {
+  final snapshot = await studentCollection.doc(user!.uid).get();
+  if (snapshot.exists) {
+    return UserModel.fromMap(snapshot.data()!);
+  }
+}

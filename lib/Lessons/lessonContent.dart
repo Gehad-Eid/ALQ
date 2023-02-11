@@ -1,6 +1,7 @@
 import 'package:alqgp/Chapters/chapterContent.dart';
 import 'package:alqgp/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
+import 'package:alqgp/models/user_model.dart';
 import 'package:alqgp/widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -14,10 +15,11 @@ import 'boookmarks.dart';
 
 class lessonCont extends StatefulWidget {
   final LessonModle lesson;
-  // final LessonModle next_lesson;
+  final UserModel loggedInUser;
   final List<Object> lessonsList;
   final int index;
-  const lessonCont(this.lesson, this.index, this.lessonsList, {super.key});
+  const lessonCont(this.lesson, this.index, this.lessonsList, this.loggedInUser,
+      {super.key});
 
   @override
   State<lessonCont> createState() => _lessonContState(index);
@@ -393,15 +395,14 @@ class _lessonContState extends State<lessonCont> {
                               ? 'Finish!'
                               : 'Next'),
                       onPressed: () {
+                        FirebaseFirestore.instance
+                            .collection('student')
+                            .doc('${widget.loggedInUser.uid}')
+                            .update({'ch2': widget.loggedInUser.ch1! + 1});
                         if (index == -1 ||
                             index! >= widget.lessonsList.length - 1) {
                           Navigator.of(context)
                               .popUntil(ModalRoute.withName("/ChapCon"));
-                          // Navigator.pushReplacement(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             chapCont(chapter: chap!)));
                         } else {
                           Navigator.pushReplacement(
                               context,
@@ -410,7 +411,8 @@ class _lessonContState extends State<lessonCont> {
                                       widget.lessonsList[index! + 1]
                                           as LessonModle,
                                       index! + 1,
-                                      widget.lessonsList)));
+                                      widget.lessonsList,
+                                      widget.loggedInUser)));
                         }
                       },
                     ),

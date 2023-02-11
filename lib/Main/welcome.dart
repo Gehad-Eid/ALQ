@@ -95,8 +95,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 180,
                   child: Image.asset('images/logo6.png'),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 const Text(
-                  'عَـــلَــــــق ',
+                  'ALAQ',
+                  //'عَـــلَــــــق ',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
