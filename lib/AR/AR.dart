@@ -154,7 +154,7 @@ class _ARState extends State<AR> {
       webObjectNode = null;
     } else {
       var newNode =
-          ARNode(type: NodeType.webGLB, uri: urlLink, scale: Vector3(1, 1, 1));
+          ARNode(type: NodeType.webGLB, uri: urlLink, scale: Vector3(0.5, 0.5, 0.5));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;
     }
