@@ -130,23 +130,23 @@ class _ARState extends State<AR> {
     switch (name) {
       case 1:
         urlLink =
-            "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/circulatory_system.glb";
+            "https://github.com/Gehad1995/2022-GP1-Group23/raw/c6b32081628af16fe0c3fe42fee19432f09b71f8/images/AR%20model/circulatory_system%20(1).glb";
         break;
       case 2:
         urlLink =
-            "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/diaphragm_non-commercial.glb";
+            "https://github.com/Gehad1995/2022-GP1-Group23/raw/c6b32081628af16fe0c3fe42fee19432f09b71f8/images/AR%20model/respiratory_system.glb";
         break;
       case 3:
         urlLink =
-            "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/disgestive_system.glb";
+            "https://github.com/Gehad1995/2022-GP1-Group23/raw/c6b32081628af16fe0c3fe42fee19432f09b71f8/images/AR%20model/digestive_system.glb";
         break;
       case 4:
         urlLink =
-            "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/urinary_system_final.glb";
+            "https://github.com/Gehad1995/2022-GP1-Group23/raw/c6b32081628af16fe0c3fe42fee19432f09b71f8/images/AR%20model/urinary_system.glb";
         break;
       case 5:
         urlLink =
-            "https://github.com/Gehad1995/2022-GP1-Group23/raw/main/images/male_full_body_ecorche.glb";
+            "https://github.com/Gehad1995/2022-GP1-Group23/raw/c6b32081628af16fe0c3fe42fee19432f09b71f8/images/AR%20model/muscle_system.glb";
         break;
     }
     if (webObjectNode != null) {
@@ -154,7 +154,7 @@ class _ARState extends State<AR> {
       webObjectNode = null;
     } else {
       var newNode =
-          ARNode(type: NodeType.webGLB, uri: urlLink, scale: Vector3(1, 1, 1));
+          ARNode(type: NodeType.webGLB, uri: urlLink, scale: Vector3(0.5, 0.5, 0.5));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;
     }
