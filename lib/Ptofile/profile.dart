@@ -1,101 +1,111 @@
 import 'package:alqgp/Ptofile/chart.dart';
+import 'package:alqgp/Services/database.dart';
 import 'package:alqgp/User/edit.dart';
-import 'package:alqgp/consts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../Main/homePage.dart';
 import '../models/user_model.dart';
 import '../widgets/App_Bar.dart';
 import '../widgets/profile_widget.dart';
 import 'edit_profile.dart';
 
 class profile extends StatefulWidget {
-  const profile({super.key, required this.user});
+  profile({super.key, required this.user});
 
-  final UserModel user;
+  UserModel user;
 
   @override
-  State<profile> createState() => _profileState(user);
+  State<profile> createState() => _profileState();
 }
 
 class _profileState extends State<profile> {
   // User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  // UserModel loggedInUser = UserModel();
 
-  _profileState(UserModel user) {
-    loggedInUser = user;
-  }
+  // _profileState(UserModel user) {
+  //   loggedInUser = user;
+  // }
+  late Stream<UserModel?> userData = getUserData(widget.user.uid);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, 'Profile'),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath:
-                'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80', //user.imagePath
-            onClicked: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return EditProfile(
-                    currentUser: loggedInUser,
-                    onLoad: () {
-                      setState(() {});
+    return StreamBuilder<UserModel?>(
+        stream: userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Somthing went wrong ☹');
+          } else if (snapshot.hasData) {
+            widget.user = snapshot.data!;
+            return Scaffold(
+              appBar: buildAppBar(context, 'Profile'),
+              body: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath:
+                        'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80', //user.imagePath
+                    onClicked: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return EditProfile(
+                            currentUser: widget.user,
+                            onLoad: () {
+                              setState(() {});
+                            },
+                          );
+                        },
+                      ));
                     },
-                  );
-                },
-              ));
-            },
-          ),
-          const SizedBox(height: 24),
-          buildName(loggedInUser),
-          const SizedBox(height: 50),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
-              child: CircularPercentIndicator(
-                animation: true,
-                animationDuration: 1000,
-                radius: 131,
-                lineWidth: 40,
-                percent: loggedInUser.score! / 100 * 50,
-                progressColor: Color.fromARGB(255, 165, 101, 234),
-                backgroundColor: Color.fromARGB(255, 202, 187, 226),
-                circularStrokeCap: CircularStrokeCap.round,
-                center: Text(
-                  '${loggedInUser.score! / 100 * 50}%',
-                  style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
-                ),
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(widget.user),
+                  const SizedBox(height: 50),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
+                      child: CircularPercentIndicator(
+                        animation: true,
+                        animationDuration: 1000,
+                        radius: 131,
+                        lineWidth: 40,
+                        percent: widget.user.score! / 100 * 50,
+                        progressColor: Color.fromARGB(255, 165, 101, 234),
+                        backgroundColor: Color.fromARGB(255, 202, 187, 226),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        center: Text(
+                          '${widget.user.score! / 100 * 50}%',
+                          style: TextStyle(
+                              fontSize: 55, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  Container(
+                    transform: Matrix4.translationValues(0.0, -60, 0.0),
+                    child: MyLineChart(),
+                  )
+                ],
               ),
-            ),
-          ),
-          const SizedBox(height: 50),
-          Container(
-            transform: Matrix4.translationValues(0.0, -60, 0.0),
-            child: MyLineChart(),
-          )
-        ],
-      ),
-    );
-    //   ),
-    // );
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        }
+        //   ),
+        );
   }
 
   Widget buildName(UserModel user) => Column(
         children: [
           Text(
             //user.name,
-            '${loggedInUser.firstName} ${loggedInUser.secondName}',
+            '${widget.user.firstName} ${widget.user.secondName}',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
           Text(
             //user.email,
-            '${loggedInUser.email}',
+            '${widget.user.email}',
             style: TextStyle(color: Colors.grey),
           )
         ],

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                 canvasColor: Color.fromARGB(255, 53, 22, 70),
               )
             : ThemeData.light().copyWith(
-                // primaryColor: Colors.blue.shade300,
+                primaryColor: Colors.blue.shade300,
                 scaffoldBackgroundColor: kBackgroundColor,
                 // primaryColorLight: kBackgroundColor,
                 colorScheme: ColorScheme.light(),

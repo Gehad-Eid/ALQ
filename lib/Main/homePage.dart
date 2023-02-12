@@ -9,6 +9,8 @@ class homey extends StatelessWidget {
   UserModel loggedInUser;
   homey(this.loggedInUser, {super.key});
 
+  late Stream<UserModel?> userData = getUserData(loggedInUser.uid);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,79 +36,55 @@ class homey extends StatelessWidget {
             count: 2,
             effect: const WormEffect(activeDotColor: kTextColor),
           )
-
-          // TitleWithLine(text: 'You ach'),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 20.0, bottom: 90.0),
-          //   child: Expanded(
-          //     child: Padding(
-          //       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          //       child: GridView.builder(
-          //           itemCount: achieveList.length,
-          //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //             crossAxisCount: 2,
-          //             mainAxisSpacing: 20.0,
-          //             childAspectRatio: 0.75,
-          //           ),
-          //           itemBuilder: ((context, index) =>
-          //               achiCard(achi: achieveList[index]))),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
   }
 
-  StreamBuilder HeaderWithWelcom(Size size, BuildContext context) {
-    return StreamBuilder<UserModel?>(
-        stream: getUserData(loggedInUser.uid),
+  HeaderWithWelcom(Size size, BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20.0 * 2.5),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+      height: size.height * 0.33,
+      decoration: BoxDecoration(
+        color: Color(0xFF8EA3E2),
+        borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(39), bottomRight: Radius.circular(39)),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 10),
+            blurRadius: 50,
+            color: Color(0xFF8EA3E2).withOpacity(0.75),
+          )
+        ],
+      ),
+      child: StreamBuilder<UserModel?>(
+        stream: userData,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text('Somthing went wrong ☹');
+            return const Text('Somthing went wrong ☹');
           } else if (snapshot.hasData) {
             loggedInUser = snapshot.data!;
-            return Container(
-              margin: EdgeInsets.only(
-                bottom: 20.0 * 2.5,
-              ),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              height: size.height * 0.33,
-              decoration: BoxDecoration(
-                color: Color(0xFF8EA3E2),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(39),
-                  bottomRight: Radius.circular(39),
+            return Row(
+              children: <Widget>[
+                Text(
+                  'Hi ${loggedInUser.firstName}',
+                  style: Theme.of(context).textTheme.headline4?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 50,
-                    color: Color(0xFF8EA3E2).withOpacity(0.75),
-                  )
-                ],
-              ),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'Hi ${loggedInUser.firstName}',
-                    style: Theme.of(context).textTheme.headline4?.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  Spacer(),
-                  Image.asset(
-                    'images/logo6.png',
-                    width: size.width * 0.3,
-                  ),
-                ],
-              ),
+                const Spacer(),
+                Image.asset(
+                  'images/logo6.png',
+                  width: size.width * 0.3,
+                ),
+              ],
             );
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: Text(''));
           }
-        });
+        },
+      ),
+    );
   }
 
   Column progressCard(int index, Size size, BuildContext context) {
@@ -115,11 +93,11 @@ class homey extends StatelessWidget {
         children: [
           const TitleWithLine(text: 'Your Progress'),
           const SizedBox(height: 30),
-          bar(size, context, 0.6, Colors.amber),
-          bar(size, context, 0.4, Colors.red),
-          bar(size, context, 0.3, Colors.blue),
-          bar(size, context, 0.9, Colors.green),
-          bar(size, context, 0.2, Colors.pink),
+          bar(size, context, loggedInUser.ch1! / 5, Colors.amber),
+          bar(size, context, loggedInUser.ch2! / 7, Colors.red),
+          bar(size, context, loggedInUser.ch3! / 6, Colors.blue),
+          bar(size, context, loggedInUser.ch4! / 4, Colors.green),
+          bar(size, context, loggedInUser.ch5! / 4, Colors.pink),
         ],
       );
     } else {

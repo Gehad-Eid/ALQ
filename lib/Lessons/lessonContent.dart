@@ -398,7 +398,8 @@ class _lessonContState extends State<lessonCont> {
                         FirebaseFirestore.instance
                             .collection('student')
                             .doc('${widget.loggedInUser.uid}')
-                            .update({'ch2': widget.loggedInUser.ch1! + 1});
+                            .update({'ch1': widget.loggedInUser.ch1! + 1});
+                        widget.loggedInUser.ch1 = widget.loggedInUser.ch1! + 1;
                         if (index == -1 ||
                             index! >= widget.lessonsList.length - 1) {
                           Navigator.of(context)
