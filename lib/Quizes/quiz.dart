@@ -72,7 +72,9 @@ class quiz_page extends StatelessWidget {
               },
             ),
           ),
-          PopupMenuButton<HintItem>(
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: PopupMenuButton<HintItem>(
             //
             onSelected: (HintItem item) {
               if (item == HintItem.increaseTime && !hint1Used) {
@@ -84,18 +86,33 @@ class quiz_page extends StatelessWidget {
                 _notifier.value = true;
               }
             },
-            child: Text('Hint'),
+            child: Icon(Icons.help,color: Colors.white,),
+            //Text('Hint'),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<HintItem>>[
-              const PopupMenuItem<HintItem>(
+               PopupMenuItem<HintItem>(
                 value: HintItem.increaseTime,
-                child: Text('Increase time'),
-              ),
-              const PopupMenuItem<HintItem>(
+                child: Row(
+                      children: [
+                        Icon(Icons.timelapse,color: Colors.black,),
+                        Text(' Increase time'),
+                      ],
+                    ),
+                ),
+               PopupMenuItem<HintItem>(
                 value: HintItem.deleteAnswers,
-                child: Text('Delete answers'),
+                child: Row(
+                      children: [
+                        Icon(Icons.delete,color: Colors.black,),
+                        Text('Delete answers'),
+                      ],
+                    ),
+                    
               ),
             ],
           ),
+
+            ),
+          
         ],
         //iconTheme: IconThemeData(color: Colors.black),
         //backgroundColor: Color.fromARGB(255, 156, 203, 247),
@@ -193,15 +210,16 @@ class quiz_page extends StatelessWidget {
                                 valueListenable: _notifier,
                                 builder: (BuildContext context, bool val,
                                     Widget? child) {
+                                      var colorAn;
                                   return QuizView(
                                     showCorrect: true,
                                     tagBackgroundColor:
                                         Color.fromARGB(155, 165, 71, 197),
+                                    answerBackgroundColor: //coloan(),
+                                        Color(0xFF8EA3E2).withOpacity(0.75),
                                     questionTag: "Question:$index",
                                     tagColor: Colors.black,
                                     answerColor: Colors.white,
-                                    answerBackgroundColor:
-                                        Color(0xFF8EA3E2).withOpacity(0.75),
                                     questionColor: Colors.black,
                                     width: 400,
                                     height: 300,
@@ -226,8 +244,9 @@ class quiz_page extends StatelessWidget {
                                     onWrongAnswer: () {
                                       random_number = Random().nextInt(10);
                                       showTwoAnswersOnly = false;
-                                      Colors.red;
+                                     answerBackgroundColor:Colors.red;
                                     },
+                                    
                                   );
                                 }));
                       },
@@ -270,4 +289,9 @@ class quiz_page extends StatelessWidget {
       )),
     );
   }
+  
+  // coloan() {
+  //   if
+
+  // }
 }
