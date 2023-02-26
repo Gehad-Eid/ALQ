@@ -93,11 +93,35 @@ class homey extends StatelessWidget {
         children: [
           const TitleWithLine(text: 'Your Progress'),
           const SizedBox(height: 30),
-          bar(size, context, loggedInUser.ch1! / 5, Colors.amber),
-          bar(size, context, loggedInUser.ch2! / 7, Colors.red),
-          bar(size, context, loggedInUser.ch3! / 6, Colors.blue),
-          bar(size, context, loggedInUser.ch4! / 4, Colors.green),
-          bar(size, context, loggedInUser.ch5! / 4, Colors.pink),
+          bar(
+              size,
+              context,
+              loggedInUser.ch1! / 5 >= 5 ? 1.0 : loggedInUser.ch1! / 5,
+              Colors.amber),
+          bar(
+              size,
+              context,
+              0.5,
+              // loggedInUser.ch2! / 7 >= 7 ? 1.0 : loggedInUser.ch2! / 7,
+              Colors.red),
+          bar(
+              size,
+              context,
+              // loggedInUser.ch3! / 6 >= 6 ? 1.0 : loggedInUser.ch3! / 6,
+              0.7,
+              Colors.blue),
+          bar(
+              size,
+              context,
+              // loggedInUser.ch4! / 4 >= 4 ? 1.0 : loggedInUser.ch4! / 4,
+              0.3,
+              Colors.green),
+          bar(
+              size,
+              context,
+              // loggedInUser.ch5! / 4 >= 4 ? 1.0 : loggedInUser.ch5! / 4,
+              0.26,
+              Colors.pink),
         ],
       );
     } else {

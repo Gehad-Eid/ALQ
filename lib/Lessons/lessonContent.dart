@@ -17,8 +17,9 @@ class lessonCont extends StatefulWidget {
   final LessonModle lesson;
   final UserModel loggedInUser;
   final List<Object> lessonsList;
-  final int index;
+  final int index, chapNum;
   const lessonCont(this.lesson, this.index, this.lessonsList, this.loggedInUser,
+      this.chapNum,
       {super.key});
 
   @override
@@ -44,6 +45,7 @@ class _lessonContState extends State<lessonCont> {
   String _currentParagraph = '';
   int? index;
   bool flag = false;
+  bool tts = true;
 
   _lessonContState(index) {
     this.index = index;
@@ -177,9 +179,7 @@ class _lessonContState extends State<lessonCont> {
     await flutterTts.setPitch(1);
     var result = await flutterTts.speak(currentP);
     if (result == 1) {
-      setState(() {
-        ttsState = TtsState.playing;
-      });
+      setState(() => ttsState = TtsState.playing);
     }
   }
 
@@ -259,13 +259,12 @@ class _lessonContState extends State<lessonCont> {
                         items: widget.lesson.parts!.map((part) {
                           return Builder(
                             builder: (BuildContext context) {
-                              var _favIconColor = Colors.grey;
+                              // var _favIconColor = Colors.grey;
                               return Container(
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  color: kLightTextColor,
-                                ),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    color: kLightTextColor),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
@@ -284,9 +283,19 @@ class _lessonContState extends State<lessonCont> {
                                             }),
                                           ),
                                           GestureDetector(
-                                            child: Icon(Icons.volume_up),
-                                            onTap: _readP,
-                                          ),
+                                              child: Icon(
+                                                  tts
+                                                      ? Icons.volume_up
+                                                      : Icons.pause_circle,
+                                                  color: tts
+                                                      ? Colors.amber
+                                                      : Colors.red),
+                                              onTap: () {
+                                                tts ? _readP() : _pause();
+                                                setState(() {
+                                                  tts = !tts;
+                                                });
+                                              }),
                                         ],
                                       ),
                                       const SizedBox(
@@ -327,6 +336,8 @@ class _lessonContState extends State<lessonCont> {
                         options: CarouselOptions(
                           onPageChanged: (index, reason) {
                             setState(() {
+                              _stop();
+                              tts = true;
                               currentIndex = index;
                               _currentParagraph =
                                   '${widget.lesson.parts![index].topic} ${widget.lesson.parts![index].textList![0]}';
@@ -395,11 +406,49 @@ class _lessonContState extends State<lessonCont> {
                               ? 'Finish!'
                               : 'Next'),
                       onPressed: () {
+                        late int ch;
+                        switch (widget.chapNum) {
+                          case 1:
+                            ch = widget.loggedInUser.ch1!;
+                            break;
+                          case 2:
+                            ch = widget.loggedInUser.ch2!;
+                            break;
+                          case 3:
+                            ch = widget.loggedInUser.ch3!;
+                            break;
+                          case 4:
+                            ch = widget.loggedInUser.ch4!;
+                            break;
+                          case 5:
+                            ch = widget.loggedInUser.ch5!;
+                            break;
+                        }
+                        //updating the chapter points counter in db
                         FirebaseFirestore.instance
                             .collection('student')
                             .doc('${widget.loggedInUser.uid}')
-                            .update({'ch1': widget.loggedInUser.ch1! + 1});
-                        widget.loggedInUser.ch1 = widget.loggedInUser.ch1! + 1;
+                            .update({'ch${widget.chapNum}': ch + 1});
+
+                        switch (widget.chapNum) {
+                          case 1:
+                            widget.loggedInUser.ch1 = ch + 1;
+                            break;
+                          case 2:
+                            widget.loggedInUser.ch2 = ch + 1;
+                            break;
+                          case 3:
+                            widget.loggedInUser.ch3 = ch + 1;
+                            break;
+                          case 4:
+                            widget.loggedInUser.ch4 = ch + 1;
+                            break;
+                          case 5:
+                            widget.loggedInUser.ch5 = ch + 1;
+                            break;
+                        }
+
+                        //check if it's the last lesson then redirect the user to the chapter content page else contenue to next lesson
                         if (index == -1 ||
                             index! >= widget.lessonsList.length - 1) {
                           Navigator.of(context)
@@ -413,7 +462,8 @@ class _lessonContState extends State<lessonCont> {
                                           as LessonModle,
                                       index! + 1,
                                       widget.lessonsList,
-                                      widget.loggedInUser)));
+                                      widget.loggedInUser,
+                                      widget.chapNum)));
                         }
                       },
                     ),

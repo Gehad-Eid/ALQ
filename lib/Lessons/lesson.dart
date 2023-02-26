@@ -243,9 +243,7 @@ class Lcard extends StatelessWidget {
             ListTile(
               title: Center(
                 child: Text(
-                  // _lesson != _Next_lesson?
                   "${_lesson.name?.split(",")[0]}",
-                  // : 'fouck',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -256,11 +254,11 @@ class Lcard extends StatelessWidget {
               onTap: () {
                 _lesson != _next_lesson
                     ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => lessonCont(
-                            _lesson, index, lessonsList, loggedInUser)))
+                        builder: (context) => lessonCont(_lesson, index,
+                            lessonsList, loggedInUser, chap.chapNum)))
                     : Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => lessonCont(
-                            _lesson, -1, lessonsList, loggedInUser)));
+                        builder: (context) => lessonCont(_lesson, -1,
+                            lessonsList, loggedInUser, chap.chapNum)));
               },
             ),
           ]),
