@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:alqgp/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";

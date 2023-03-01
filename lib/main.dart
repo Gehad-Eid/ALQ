@@ -64,9 +64,9 @@
 //   }
 // }
 
-import 'package:alqgp/Screens/splash.dart';
-import 'package:alqgp/Services/auth.dart';
-import 'package:alqgp/Utils/theme.dart';
+import 'package:alqgp/Src/Screens/splash.dart';
+import 'package:alqgp/Src/Services/auth.dart';
+import 'package:alqgp/Src/Utils/theme.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

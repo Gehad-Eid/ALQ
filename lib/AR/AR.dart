@@ -1,4 +1,4 @@
-import 'package:alqgp/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
