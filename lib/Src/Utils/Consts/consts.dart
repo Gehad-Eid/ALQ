@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// -- LIST OF COLORS --
+// -- List of colors --
 
 const tPrimaryColor = Color(0xFFFFE400);
 const tSecondaryColor = Color(0xFF272727);
@@ -14,4 +14,4 @@ const tDarkColor = Color(0xFF000000);
 const tDefaultSize = 30.0;
 const tSplashContainerSize = 30.0;
 const tDefaultPadding = 20.0;
-const tButtonHeight = 30.0;
+const tButtonHeight = 20.0;

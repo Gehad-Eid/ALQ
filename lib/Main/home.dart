@@ -30,7 +30,7 @@ class _homePageState extends State<homePage> {
             chapters(loggedInUser: loggedInUser),
             homey(loggedInUser),
             profile(user: loggedInUser),
-            const setting(),
+            // const setting(),
           ];
 
           final itList = <Widget>[

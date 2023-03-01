@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Screens/Authenticate/signin.dart';
+import 'package:alqgp/Src/Screens/welcome.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -10,7 +10,7 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SignIn(),
+      child: WelcomeScreen(),
     );
   }
 }
