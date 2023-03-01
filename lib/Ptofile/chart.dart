@@ -1,4 +1,4 @@
-import 'package:alqgp/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:alqgp/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
@@ -36,9 +36,15 @@ class _ChangePasswordState extends State<ChangePassword> {
             Text(
               '     Change your password',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 165, 101, 234),),
+              style: TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 165, 101, 234),
+              ),
             ),
-            const SizedBox(height: 40,),
+            const SizedBox(
+              height: 40,
+            ),
             // const Text(
             //   'Change your password',
             //   style: TextStyle(
@@ -145,7 +151,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   hintText: "Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    ),
+                  ),
                 )),
             const SizedBox(
               height: 20,
@@ -195,7 +201,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   hintText: "Confirm",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    ),
+                  ),
                 )),
             const SizedBox(
               height: 20,
@@ -239,20 +245,26 @@ class _ChangePasswordState extends State<ChangePassword> {
                   },
                   child: Container(
                     padding: const EdgeInsets.all(7),
-                    margin: EdgeInsets.only(top: 15, right: 50,left: 70),
+                    margin: EdgeInsets.only(top: 15, right: 50, left: 70),
                     decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 165, 101, 234),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+                      color: Color.fromARGB(255, 165, 101, 234),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                     // borderRadius: BorderRadius.circular(5.0),
                     //),
                     child: Row(
                       children: [
-                         Icon(Icons.update,color: Colors.white,),
+                        Icon(
+                          Icons.update,
+                          color: Colors.white,
+                        ),
                         Text(
                           '   Update Password',
                           style: TextStyle(
-                            color: Colors.white,fontSize: 14, height: 1.4,fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 14,
+                            height: 1.4,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -285,7 +297,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         title: const Text(
           "Chang password",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
+        ),
         elevation: 0,
         centerTitle: true,
         //backgroundColor: Colors.transparent,

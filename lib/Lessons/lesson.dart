@@ -129,7 +129,7 @@
 // }
 
 import 'package:alqgp/Lessons/lessonContent.dart';
-import 'package:alqgp/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/lesson_model.dart';
 import 'package:alqgp/models/user_model.dart';

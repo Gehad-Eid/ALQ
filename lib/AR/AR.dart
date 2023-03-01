@@ -1,4 +1,4 @@
-import 'package:alqgp/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
@@ -153,8 +153,8 @@ class _ARState extends State<AR> {
       arObjectManager.removeNode(webObjectNode!);
       webObjectNode = null;
     } else {
-      var newNode =
-          ARNode(type: NodeType.webGLB, uri: urlLink, scale: Vector3(0.5, 0.5, 0.5));
+      var newNode = ARNode(
+          type: NodeType.webGLB, uri: urlLink, scale: Vector3(0.5, 0.5, 0.5));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;
     }

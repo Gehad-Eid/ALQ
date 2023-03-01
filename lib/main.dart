@@ -65,7 +65,6 @@
 // }
 
 import 'package:alqgp/Screens/splash.dart';
-import 'package:alqgp/Screens/wrapper.dart';
 import 'package:alqgp/Services/auth.dart';
 import 'package:alqgp/Utils/theme.dart';
 import 'package:alqgp/models/user_model.dart';
@@ -80,7 +79,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of the application.
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     //Stream Provider keeps listening to the changes
@@ -95,7 +95,7 @@ class MyApp extends StatelessWidget {
         darkTheme: TAppTheme.darkTheme,
         themeMode: ThemeMode.system,
         // kick off with the splash screen.
-        home: SplashPage(),
+        home: SplashScreen(),
       ),
     );
   }
