@@ -67,6 +67,7 @@
 import 'package:alqgp/Screens/splash.dart';
 import 'package:alqgp/Screens/wrapper.dart';
 import 'package:alqgp/Services/auth.dart';
+import 'package:alqgp/Utils/theme.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +90,9 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.light),
-        darkTheme: ThemeData(brightness: Brightness.dark),
+        //by default the theme will ba as the system's theme
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
         themeMode: ThemeMode.system,
         // kick off with the splash screen.
         home: SplashPage(),

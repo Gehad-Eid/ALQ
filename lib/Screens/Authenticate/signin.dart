@@ -22,6 +22,7 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         title: Text(
           'Sign in to Brew Crew',
+          // ignore: deprecated_member_use
           style: Theme.of(context).textTheme.headline2,
         ),
       ),
@@ -44,6 +45,10 @@ class _SignInState extends State<SignIn> {
                 },
               ),
               SizedBox(height: 20.0),
+              Text(
+                'Sign in to Brew Crew',
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
               ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor:

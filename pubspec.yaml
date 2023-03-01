@@ -60,7 +60,6 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
 
   provider: ^5.0.0
-  google_fonts: ^3.0.1
 
 
 dev_dependencies:
