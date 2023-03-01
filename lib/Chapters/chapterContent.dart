@@ -1,6 +1,5 @@
 import 'package:alqgp/Lessons/lesson.dart';
 import 'package:alqgp/Quizes/quiz.dart';
-import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/material.dart';
 import '../AR/AR.dart';
@@ -169,7 +168,7 @@ class ImageAndIcons extends StatelessWidget {
                   BoxShadow(
                     offset: const Offset(0, 10),
                     blurRadius: 60,
-                    color: kTextColor.withOpacity(0.29),
+                    color: Colors.amber.withOpacity(0.29),
                   ),
                 ],
                 image: DecorationImage(

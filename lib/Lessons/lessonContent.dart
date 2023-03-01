@@ -1,6 +1,5 @@
 import 'package:alqgp/Chapters/chapterContent.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
-import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:alqgp/widgets/my_button.dart';
@@ -199,7 +198,7 @@ class _lessonContState extends State<lessonCont> {
     return SizedBox(
       height: size.height,
       child: Scaffold(
-        backgroundColor: kBackgroundColor,
+        backgroundColor: tPrimaryColor,
         appBar: AppBar(
           elevation: 0,
           title: Text(
@@ -214,7 +213,7 @@ class _lessonContState extends State<lessonCont> {
           child: Column(children: [
             Container(
               margin: const EdgeInsets.only(
-                bottom: kPadding * 1.2,
+                bottom: tDefaultPadding * 1.2,
               ),
               decoration: const BoxDecoration(
                 color: Color(0xFF8EA3E2),
@@ -234,7 +233,7 @@ class _lessonContState extends State<lessonCont> {
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   margin: const EdgeInsets.only(
-                    bottom: kPadding - 5,
+                    bottom: tDefaultPadding - 5,
                   ),
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.33,
@@ -265,7 +264,7 @@ class _lessonContState extends State<lessonCont> {
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    color: kLightTextColor),
+                                    color: tSecondaryColor),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
@@ -308,7 +307,7 @@ class _lessonContState extends State<lessonCont> {
                                         style: const TextStyle(
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.bold,
-                                          color: kTextColor,
+                                          color: tPrimaryColor,
                                         ),
                                       ),
                                       const SizedBox(
@@ -368,7 +367,7 @@ class _lessonContState extends State<lessonCont> {
                             activeSize: const Size(18.0, 9.0),
                             activeShape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
-                            activeColor: kTextColor,
+                            activeColor: tSecondaryColor,
                           ),
                         )
                       : const SizedBox(),

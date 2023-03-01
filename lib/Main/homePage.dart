@@ -1,6 +1,6 @@
 import 'package:alqgp/Services/database.dart';
-import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/user_model.dart';
+import 'package:alqgp/src/Utils/Consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -34,7 +34,7 @@ class homey extends StatelessWidget {
           SmoothPageIndicator(
             controller: _currentIndex,
             count: 2,
-            effect: const WormEffect(activeDotColor: kTextColor),
+            effect: const WormEffect(activeDotColor: tPrimaryColor),
           )
         ],
       ),

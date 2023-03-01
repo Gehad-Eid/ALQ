@@ -130,7 +130,6 @@
 
 import 'package:alqgp/Lessons/lessonContent.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
-import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/lesson_model.dart';
 import 'package:alqgp/models/user_model.dart';
@@ -236,7 +235,7 @@ class Lcard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0),
       child: Card(
-        color: kTextColor,
+        color: Colors.amber,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: const EdgeInsets.all(0.0),
