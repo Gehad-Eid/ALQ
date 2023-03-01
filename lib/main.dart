@@ -66,10 +66,11 @@
 
 import 'package:alqgp/Src/Screens/splash.dart';
 import 'package:alqgp/Src/Services/auth.dart';
-import 'package:alqgp/Src/Utils/theme.dart';
+import 'package:alqgp/Src/Utils/Theme/theme.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
@@ -80,7 +81,8 @@ void main() async {
 }
 
 // File structure :
-// controllers - the logic of the named screen
+// controllers - the logic of the named screens
+//
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -92,13 +94,19 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       value: AuthService().user,
       initialData: null,
-      //we're using GetX
+      //we're using GetX in this App
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
+
         //by default the theme will ba as the system's theme
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
         themeMode: ThemeMode.system,
+
+        //transiition
+        defaultTransition: Transition.cupertino, //********** change
+        transitionDuration: const Duration(milliseconds: 500),
+
         // kick off with the splash screen.
         home: SplashScreen(),
       ),
