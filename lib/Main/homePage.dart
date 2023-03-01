@@ -1,5 +1,5 @@
 import 'package:alqgp/Services/database.dart';
-import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';

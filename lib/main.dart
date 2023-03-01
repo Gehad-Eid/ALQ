@@ -70,6 +70,7 @@ import 'package:alqgp/Src/Utils/theme.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -77,6 +78,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
+// File structure :
+// controllers - the logic of the named screen
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -88,7 +92,8 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       value: AuthService().user,
       initialData: null,
-      child: MaterialApp(
+      //we're using GetX
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         //by default the theme will ba as the system's theme
         theme: TAppTheme.lightTheme,

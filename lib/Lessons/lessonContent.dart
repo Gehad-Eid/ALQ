@@ -1,5 +1,6 @@
 import 'package:alqgp/Chapters/chapterContent.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Utils/Consts/consts.dart';
 import 'package:alqgp/models/chapter_model.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:alqgp/widgets/my_button.dart';
