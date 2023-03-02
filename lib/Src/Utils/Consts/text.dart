@@ -52,6 +52,11 @@ const String tForgetPasswordSubTitle =
 const String tResetViaEMail = "Reset via Mail Verification";
 const String tResetViaPhone = "Reset via Phone Verification";
 
+// OTP Screen - Text
+const String tOtpTitle = "CO\nDE";
+const String tOtpSubTitle = "Verification";
+const String tOtpMessage = "Enter the verification code sent at ";
+
 // -- Forget Password Via Phone - Text
 const String tForgetPhoneSubTitle =
     "Enter your registered Phone No to receive OTP";
@@ -59,3 +64,13 @@ const String tForgetPhoneSubTitle =
 // -- Forget Password Via E-Mail - Text
 const String tForgetMailSubTitle =
     "Enter your registered E-Mail to receive OTP";
+
+//-- Dashboard Screen - Text
+const String tDashboardTitle = "Hey, Coding with T";
+const String tDashboardHeading = "Explore Courses";
+const String tDashboardSearch = "Search...";
+const String tDashboardBannerTitle1 = "Android for Beginners";
+const String tDashboardBannerTitle2 = "JAVA";
+const String tDashboardBannerSubTitle = "10 Lessons";
+const String tDashboardButton = "View All";
+const String tDashboardTopCourses = "Top Courses";

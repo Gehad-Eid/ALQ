@@ -1,5 +1,6 @@
 import 'package:alqgp/Src/Models/animatedWidget_model.dart';
 import 'package:alqgp/Src/Screens/Authenticate/LogIn/login.dart';
+import 'package:alqgp/Src/Screens/Authenticate/SignUp/signup.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
@@ -67,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                       const SizedBox(width: 10.0),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => SignUpScreen()),
                           child: Text(tSignup.toUpperCase()),
                         ),
                       ),

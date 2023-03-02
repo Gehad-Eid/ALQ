@@ -66,17 +66,18 @@
 
 import 'package:alqgp/Src/Screens/splash.dart';
 import 'package:alqgp/Src/Services/auth.dart';
+import 'package:alqgp/Src/Services/auth_repo.dart';
 import 'package:alqgp/Src/Utils/Theme/theme.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp()
+      .then((value) => Get.put(AuthenticationRepository()));
   runApp(MyApp());
 }
 
@@ -94,7 +95,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       value: AuthService().user,
       initialData: null,
-      //we're using GetX in this App
+      //To keep code clean, manageable, and readable,
+      //  we are using GETX State management
+      //  to follow the seperation of concern principle.
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
 

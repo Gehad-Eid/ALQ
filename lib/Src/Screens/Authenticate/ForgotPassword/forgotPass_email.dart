@@ -4,6 +4,7 @@ import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/Widgets/Form/form_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'forgotPass_OTP.dart';
 
 class ForgetPasswordMailScreen extends StatelessWidget {
   const ForgetPasswordMailScreen({Key? key}) : super(key: key);
@@ -38,12 +39,14 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20.0),
                       SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                // Get.to(() => const OTPScreen());
-                              },
-                              child: const Text(tNext))),
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => const OTPScreen());
+                          },
+                          child: const Text(tNext),
+                        ),
+                      ),
                     ],
                   ),
                 ),

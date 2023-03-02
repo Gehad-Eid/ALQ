@@ -1,7 +1,9 @@
 import 'package:alqgp/Src/Screens/Authenticate/ForgotPassword/forgotPass_button_seet.dart';
+import 'package:alqgp/Src/Screens/Home/home.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -49,7 +51,9 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => Home());
+                },
                 child: Text(tLogin.toUpperCase()),
               ),
             ),

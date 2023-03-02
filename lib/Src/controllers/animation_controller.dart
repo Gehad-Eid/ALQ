@@ -11,7 +11,7 @@ class FadeInAnimationController extends GetxController {
     animate.value = true;
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 3000));
     Get.offAll(
       // Get.off Instead of Get.offAll()
       () => const OnBoardingScreen(),
