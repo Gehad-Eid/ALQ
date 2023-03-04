@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Screens/Authenticate/ForgotPassword/forgotPass_OTP.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/controllers/signup_controller.dart';
@@ -12,12 +13,12 @@ class SignUpFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10),
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,10 +51,11 @@ class SignUpFormWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    SignUpController.instance.registerUser(
-                        controller.email.text.trim(),
-                        controller.password.text.trim());
+                  if (formKey.currentState!.validate()) {
+                    // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                    SignUpController.instance
+                        .phoneAuthentication(controller.phoneNo.text.trim());
+                    Get.to(() => const OTPScreen());
                   }
                 },
                 child: Text(tSignup.toUpperCase()),
