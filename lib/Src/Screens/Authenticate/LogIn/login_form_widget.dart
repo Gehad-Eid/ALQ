@@ -52,7 +52,7 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => Home());
+                  Get.offAll(() => Home()); // add Log in auth
                 },
                 child: Text(tLogin.toUpperCase()),
               ),
