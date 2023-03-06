@@ -1,5 +1,5 @@
-import 'package:alqgp/Src/Services/auth.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -16,6 +16,7 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
+        bottomNavigationBar: bottomNavBar(),
       ),
     );
   }

@@ -55,13 +55,21 @@ dependencies:
   fl_chart: ^0.60.0
 
   provider: ^6.0.5
+  # -- state mangement --
   get: ^4.6.5
+
+  # -- onboarding --
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.1
+
+  # -- database functionalities --
   flutter_otp_text_field: ^1.1.1
   firebase_auth: ^4.2.9
   cloud_firestore: ^4.0.3
   firebase_core: ^2.7.0
+
+  # -- main UI --
+  google_nav_bar: ^5.0.6
 
 
 dev_dependencies:
