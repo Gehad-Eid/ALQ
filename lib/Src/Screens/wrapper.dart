@@ -1,5 +1,5 @@
 import 'package:alqgp/Src/Screens/Authenticate/authenticate.dart';
-import 'package:alqgp/Src/Screens/Home/home.dart';
+import 'package:alqgp/Src/Screens/Authorized/homeWrapper.dart';
 import 'package:alqgp/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return HomeWrapper();
     }
   }
 }

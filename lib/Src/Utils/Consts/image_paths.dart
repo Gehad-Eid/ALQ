@@ -1,7 +1,7 @@
 // All the pathes for all the images that'll be used in this App
 
 // -- logo --
-const String pLogo = 'images/logo6.png';
+const String tLogo = 'images/logo6.png';
 
 // -- OnBoarding Screen Images --
 const String tOnBoardingImage1 = "images/exam.png";

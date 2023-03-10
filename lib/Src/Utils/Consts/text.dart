@@ -66,11 +66,35 @@ const String tForgetMailSubTitle =
     "Enter your registered E-Mail to receive OTP";
 
 //-- Dashboard Screen - Text
-const String tDashboardTitle = "Hey, Coding with T";
-const String tDashboardHeading = "Explore Courses";
 const String tDashboardSearch = "Search...";
 const String tDashboardBannerTitle1 = "Android for Beginners";
 const String tDashboardBannerTitle2 = "JAVA";
 const String tDashboardBannerSubTitle = "10 Lessons";
 const String tDashboardButton = "View All";
 const String tDashboardTopCourses = "Top Courses";
+
+// -- Home Screen - text
+const String tHomeTitle = "Welcome Back ";
+const String tHomeHeading = "Keep It Up !";
+const String tHomeHeading2 = "Peers Rank";
+const String tHomeHeading3 = "Your Progress";
+const String tSeeAll = "See All";
+
+// -- Profile Screen - Text
+const String tProfile = "Profile";
+const String tEditProfile = "Edit Profile";
+const String tLogoutDialogHeading = "Logout";
+const String tProfileHeading = "Coding with T";
+const String tProfileSubHeading = "super Admin@codingwitht.com";
+
+// -- Menu - Text
+const String tMenu1 = "Settings";
+const String tMenu2 = "Billing Details";
+const String tMenu3 = "User Management";
+const String tMenu4 = "Information";
+const String tMenu5 = "tLogout";
+
+// -- Update Profile Screen - Text
+const String tDelete = "Delete";
+const String tJoined = "Joined";
+const String tJoinedAt = "31 October 2022";

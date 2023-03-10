@@ -1,5 +1,5 @@
 import 'package:alqgp/Src/Screens/Authenticate/ForgotPassword/forgotPass_button_seet.dart';
-import 'package:alqgp/Src/Screens/Home/home.dart';
+import 'package:alqgp/Src/Screens/Authorized/homeWrapper.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => Home()); // add Log in auth
+                  Get.offAll(() => HomeWrapper()); // add Log in auth
                 },
                 child: Text(tLogin.toUpperCase()),
               ),

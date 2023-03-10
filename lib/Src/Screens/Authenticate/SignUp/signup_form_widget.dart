@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:alqgp/Src/Screens/Authenticate/ForgotPassword/forgotPass_OTP.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
@@ -38,7 +39,7 @@ class SignUpFormWidget extends StatelessWidget {
             TextFormField(
               controller: controller.phoneNo,
               decoration: const InputDecoration(
-                  label: Text(tPhoneNo), prefixIcon: Icon(Icons.numbers)),
+                  label: Text(tPhoneNo), prefixIcon: Icon(Icons.phone)),
             ),
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
@@ -52,10 +53,19 @@ class SignUpFormWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                    //email & pass auth:
                     // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
-                    SignUpController.instance
-                        .phoneAuthentication(controller.phoneNo.text.trim());
-                    Get.to(() => const OTPScreen());
+
+                    // phone No. auth:
+                    // SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
+
+                    final user = UserModel(
+                      email: controller.email.text.trim(),
+                      password: controller.password.text.trim(),
+                      fullName: controller.fullName.text.trim(),
+                      phoneNo: controller.phoneNo.text.trim(),
+                    );
+                    SignUpController.instance.createUser(user);
                   }
                 },
                 child: Text(tSignup.toUpperCase()),

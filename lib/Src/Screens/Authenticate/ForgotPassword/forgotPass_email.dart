@@ -20,7 +20,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: tDefaultSize * 4),
                 FormHeaderWidget(
-                  image: pLogo, //*********change
+                  image: tLogo, //*********change
                   title: tForgetPassword.toUpperCase(),
                   subTitle: tForgetPasswordSubTitle,
                   crossAxisAlignment: CrossAxisAlignment.center,

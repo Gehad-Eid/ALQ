@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Screens/Home/home.dart';
+import 'package:alqgp/Src/Screens/Authorized/homeWrapper.dart';
 import 'package:alqgp/Src/Screens/welcome.dart';
 import 'package:alqgp/Src/Services/exeptions/signin_e.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,23 +12,23 @@ class AuthenticationRepository extends GetxController {
   late final Rx<User?> firebaseUser;
   var verificationId = ''.obs;
 
-  //Will be load when app launches this func will be called and set the firebaseUser state
+  //Will be called when app launches and set the firebaseUser state
   @override
-  void onReady() {
+  void onReady() async {
+    await Future.delayed(const Duration(seconds: 7)); // waiting for splash
     firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    firebaseUser.bindStream(_auth.userChanges()); //keep the values in sync
+    ever(firebaseUser, _setInitialScreen); // do action when the status changes
   }
 
-  /// If we are setting initial screen from here
-  /// then in the main.dart => App() add CircularProgressIndicator()
+  //first screen
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => Home());
+        : Get.offAll(() => HomeWrapper());
   }
 
-  //FUNC
+  //FUNCs
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -64,7 +64,7 @@ class AuthenticationRepository extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() => Home())
+          ? Get.offAll(() => HomeWrapper())
           : Get.to(() => const WelcomeScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);

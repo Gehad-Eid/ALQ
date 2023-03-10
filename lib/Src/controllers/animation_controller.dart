@@ -12,12 +12,13 @@ class FadeInAnimationController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 3000));
-    Get.offAll(
-      // Get.off Instead of Get.offAll()
-      () => const OnBoardingScreen(),
-      duration: const Duration(milliseconds: 1000), //Transition Time
-      transition: Transition.fadeIn, //Screen Switch Transition
-    );
+    //*********************** the on time onboarding condition */
+    // Get.offAll(
+    //   // Get.off Instead of Get.offAll()
+    //   () => const OnBoardingScreen(),
+    //   duration: const Duration(milliseconds: 1000), //Transition Time
+    //   transition: Transition.fadeIn, //Screen Switch Transition
+    // );
   }
 
   //Call where you need to animate In any widget.
