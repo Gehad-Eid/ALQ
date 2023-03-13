@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC_7EC7SFem-24yo4gUFjJLOSMM5eYZhHc',
-    appId: '1:497430701190:web:dd8ece2623132b0d7c9d07',
-    messagingSenderId: '497430701190',
-    projectId: 'alq-gp',
-    authDomain: 'alq-gp.firebaseapp.com',
-    databaseURL: 'https://alq-gp-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'alq-gp.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDQ_WrY1TSRrtQ4XvRumITLxosM1YjgPXg',
     appId: '1:497430701190:android:30f099513a9bbcd67c9d07',
@@ -64,25 +60,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBYx9goelJ0uelztbyj5HUCaizM1uld20c',
-    appId: '1:497430701190:ios:bf94b0fc6983916f7c9d07',
+    appId: '1:497430701190:ios:5f526b292e62718c7c9d07',
     messagingSenderId: '497430701190',
     projectId: 'alq-gp',
     databaseURL: 'https://alq-gp-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'alq-gp.appspot.com',
-    androidClientId: '497430701190-5q7c88s3andvl1nbnaggva8eu81vknaf.apps.googleusercontent.com',
-    iosClientId: '497430701190-bok3d739semba9i75pnigooa1odq08ck.apps.googleusercontent.com',
-    iosBundleId: 'com.example.alqgp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBYx9goelJ0uelztbyj5HUCaizM1uld20c',
-    appId: '1:497430701190:ios:bf94b0fc6983916f7c9d07',
-    messagingSenderId: '497430701190',
-    projectId: 'alq-gp',
-    databaseURL: 'https://alq-gp-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'alq-gp.appspot.com',
-    androidClientId: '497430701190-5q7c88s3andvl1nbnaggva8eu81vknaf.apps.googleusercontent.com',
-    iosClientId: '497430701190-bok3d739semba9i75pnigooa1odq08ck.apps.googleusercontent.com',
-    iosBundleId: 'com.example.alqgp',
+    androidClientId: '497430701190-dpjnb8rmra30cd1unas5ag55c6socvoh.apps.googleusercontent.com',
+    iosClientId: '497430701190-mk9olmrg49o61nl32jdvfcm2i1oeplc1.apps.googleusercontent.com',
+    iosBundleId: 'com.alqgpit.alqgp',
   );
 }

@@ -147,10 +147,10 @@ class ImageAndIcons extends StatelessWidget {
                         page: AR(
                           chaptNum: chap.chapNum,
                         )),
-                    IconCard(
-                      icon: "images/icons8-marker-100 (2).png",
-                      page: quiz_page(chap: chap.chapNum),
-                    ),
+                    // IconCard(
+                    //   icon: "images/icons8-marker-100 (2).png",
+                    //   page: quiz_page(chap: chap.chapNum),
+                    // ),
                     //IconCard(icon: "images/rating.png"),
                   ],
                 ),

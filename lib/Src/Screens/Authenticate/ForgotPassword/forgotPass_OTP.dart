@@ -28,11 +28,12 @@ class OTPScreen extends StatelessWidget {
                 textAlign: TextAlign.center),
             const SizedBox(height: 20.0),
             OtpTextField(
-                mainAxisAlignment: MainAxisAlignment.center,
-                numberOfFields: 6,
-                fillColor: Colors.black.withOpacity(0.1),
-                filled: true,
-                onSubmit: (code) => OTPController.instance.verifyOTP(code)),
+              mainAxisAlignment: MainAxisAlignment.center,
+              numberOfFields: 6,
+              fillColor: Colors.black.withOpacity(0.1),
+              filled: true,
+              onSubmit: (code) => OTPController.instance.verifyOTP(code),
+            ),
             const SizedBox(height: 20.0),
             SizedBox(
               width: double.infinity,

@@ -1,7 +1,9 @@
 import 'package:alqgp/Src/Models/bookmark.dart';
+import 'package:alqgp/Src/Screens/Authorized/Bookmarks/bookmarks.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class bookmarksFolders extends StatelessWidget {
   bookmarksFolders({super.key});
@@ -56,7 +58,7 @@ class bookmarksFolders extends StatelessWidget {
   Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
     return GestureDetector(
       onTap: () {
-        //go to bookmarks list
+        Get.to(() => bookmarks());
       },
       child: Container(
         padding: EdgeInsets.all(15),
@@ -72,12 +74,12 @@ class bookmarksFolders extends StatelessWidget {
               color: bookmarkFolder.iconColor,
               size: 35,
             ), // Icon
-            SizedBox(height: 30),
+            SizedBox(height: tDefaultPadding),
             Text(
               bookmarkFolder.title!,
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ), // Text
-            SizedBox(height: 20),
+            SizedBox(height: tDefaultPadding),
             Row(
               children: [
                 bookmarkCount(bookmarkFolder.iconColor, bookmarkFolder.btnColor,

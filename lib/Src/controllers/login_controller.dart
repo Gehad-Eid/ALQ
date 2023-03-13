@@ -5,20 +5,20 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
 
-  /// TextField Controllers to get data from TextFields
+  // TextField Controllers to get data from TextFields
   final email = TextEditingController();
   final password = TextEditingController();
 
-  /// TextField Validation
+  //*******  TextField Validation
 
-  // //Call this Function from Design & it will do the rest
-  // Future<void> loginUser(String email, String password) async {
-  //   String? error = await AuthenticationRepository.instance
-  //       .loginWithEmailAndPassword(email, password);
-  //   if (error != null) {
-  //     Get.showSnackbar(GetSnackBar(
-  //       message: error.toString(),
-  //     ));
-  //   }
-  // }
+  //this Function will be called from Design & it will do the logec behind it
+  Future<void> loginUser(String email, String password) async {
+    String? error = await AuthenticationRepository.instance
+        .loginWithEmailAndPassword(email, password);
+    if (error != null) {
+      Get.showSnackbar(GetSnackBar(
+        message: error.toString(),
+      ));
+    }
+  }
 }

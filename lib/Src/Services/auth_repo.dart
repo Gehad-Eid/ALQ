@@ -1,7 +1,10 @@
+import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:alqgp/Src/Screens/Authorized/homeWrapper.dart';
 import 'package:alqgp/Src/Screens/welcome.dart';
 import 'package:alqgp/Src/Services/exeptions/signin_e.dart';
+import 'package:alqgp/Src/Services/user_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthenticationRepository extends GetxController {
@@ -11,6 +14,8 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
   var verificationId = ''.obs;
+
+  final userRepo = Get.put(UserRepository());
 
   //Will be called when app launches and set the firebaseUser state
   @override
@@ -29,12 +34,13 @@ class AuthenticationRepository extends GetxController {
   }
 
   //FUNCs
-  Future<void> phoneAuthentication(String phoneNo) async {
+
+  //authantictes the user phone No. by sending OTP code
+  Future<bool> phoneAuthentication(String phoneNo) async {
+    bool state = true;
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
-      verificationCompleted: (credential) async {
-        await _auth.signInWithCredential(credential);
-      },
+      verificationCompleted: (credential) async {}, //if error in otp del async
       codeSent: (verificationId, resendToken) {
         this.verificationId.value = verificationId;
       },
@@ -47,48 +53,62 @@ class AuthenticationRepository extends GetxController {
         } else {
           Get.snackbar('Error', 'Something went wrong. Try again.');
         }
+        state = false;
       },
     );
+    return state;
   }
 
+  //makes sure that the OTP code dose work and correct by checking the credential
   Future verifyOTP(String otp) async {
-    var credentials = await _auth.signInWithCredential(
-        PhoneAuthProvider.credential(
-            verificationId: verificationId.value, smsCode: otp));
-    return credentials.user != null ? true : false;
+    var credentials = PhoneAuthProvider.credential(
+        verificationId: verificationId.value, smsCode: otp);
+    return credentials != null ? true : false;
   }
 
-  Future<String?> createUserWithEmailAndPassword(
-      String email, String password) async {
+  //creates a new user to log in with email and passwordin firebase auth
+  Future<bool> createUserWithEmailAndPassword(
+      String email, String password, UserModel user) async {
+    bool state = true;
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          //creates a doc in firebase firestore
+          .then((value) => {userRepo.createUser(user, value.user!.uid)});
       firebaseUser.value != null
-          ? Get.offAll(() => HomeWrapper())
+          ? Get.offAll(() => HomeWrapper()) //log in
           : Get.to(() => const WelcomeScreen());
     } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      final ex = SignWithEmailAndPasswordFailure.code(e.code);
+      state = false;
+      Get.snackbar("Error", ex.message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    } catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.toString());
+      state = false;
+      Get.snackbar("Error", ex.message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+    return state;
+  }
+
+  Future<String?> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.code);
       return ex.message;
-    } catch (_) {
-      const ex = SignUpWithEmailAndPasswordFailure();
+    } catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.toString());
       return ex.message;
     }
     return null;
   }
-
-  // Future<String?> loginWithEmailAndPassword(
-  //     String email, String password) async {
-  //   try {
-  //     await _auth.signInWithEmailAndPassword(email: email, password: password);
-  //   } on FirebaseAuthException catch (e) {
-  //     final ex = LogInWithEmailAndPasswordFailure.fromCode(e.code);
-  //     return ex.message;
-  //   } catch (_) {
-  //     const ex = LogInWithEmailAndPasswordFailure();
-  //     return ex.message;
-  //   }
-  //   return null;
-  // }
 
   Future<void> logout() async => await _auth.signOut();
 }

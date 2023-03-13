@@ -1,43 +1,54 @@
-import 'package:alqgp/models/lesson_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Chapter {
-  String chapterName;
-  String chapterImage, photo;
-  int chapNum;
-  Chapter.items({
-    required this.chapterImage,
-    required this.chapterName,
-    required this.photo,
-    required this.chapNum,
+  String? chapterName, chapterImage, photo;
+  Map<String, dynamic>? parts;
+  int? chapNum;
+  Chapter({
+    this.chapterImage,
+    this.chapterName,
+    this.photo,
+    this.chapNum,
   });
+
+  // // Map user fetched from Firebase to UserModel
+  // factory Chapter.fromSnapshot(
+  //     DocumentSnapshot<Map<String, dynamic>> document) {
+  //   final data = document.data()!;
+
+  //   return Chapter(
+  //     id: document.id,
+
+  //   );
+  // }
 }
 
-List<Chapter> chapterList = [
-  Chapter.items(
+List<Chapter> ChaptersList = [
+  Chapter(
     chapterName: "Circulatory system",
     chapterImage: 'images/heart.png',
     photo: 'images/Picture4.png',
     chapNum: 1,
   ),
-  Chapter.items(
+  Chapter(
     chapterName: "Respiratory system",
     chapterImage: 'images/lung.png',
     photo: 'images/Picture1.png',
     chapNum: 2,
   ),
-  Chapter.items(
+  Chapter(
     chapterName: "Digestive system",
     chapterImage: 'images/digestive-system(1).png',
     photo: 'images/Picture2.png',
     chapNum: 3,
   ),
-  Chapter.items(
+  Chapter(
     chapterName: "Urinary system",
     chapterImage: 'images/urinary.png',
     photo: 'images/Picture5.png',
     chapNum: 4,
   ),
-  Chapter.items(
+  Chapter(
     chapterName: "Muscular system",
     chapterImage: 'images/muscular.png',
     photo: 'images/Picture3.png',

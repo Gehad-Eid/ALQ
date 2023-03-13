@@ -19,11 +19,11 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HomePageHeader(),
-                const SizedBox(height: tDefaultPadding),
+                SizedBox(height: tDefaultPadding),
                 ChapterProgressList(),
-                const SizedBox(height: tDefaultSpacing),
+                SizedBox(height: tDefaultSpacing),
                 PeerRankWithAvatarAndName(),
-                const SizedBox(height: tDefaultSpacing),
+                SizedBox(height: tDefaultSpacing),
                 ProgressChart()
               ],
             ),

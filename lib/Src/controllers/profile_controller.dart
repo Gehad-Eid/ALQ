@@ -1,6 +1,7 @@
 import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:alqgp/Src/Services/auth_repo.dart';
 import 'package:alqgp/Src/Services/user_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -11,12 +12,20 @@ class ProfileController extends GetxController {
 
 // Get User Email and pass to UserRepository to fetch user record.
   getUserData() {
-    final Phone = _authRepo.firebaseUser.value?.phoneNumber;
-    if (Phone != null) {
-      return _userRepo.getUserDetails(Phone);
+    final uid = _authRepo.firebaseUser.value?.uid;
+    if (uid != null) {
+      return _userRepo.getUserDetails(uid);
     } else {
       Get.snackbar("Error", "Please login to continue.");
       throw '';
     }
+  }
+
+  /// Fetch List of user records.
+  Future<List<UserModel>> getAllUsers() async => await _userRepo.allUsers();
+
+  //calling the
+  updateRecord(UserModel user) async {
+    await _userRepo.updateUserRecord(user);
   }
 }

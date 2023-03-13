@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  final String? id;
-  final String fullName;
-  final String email;
-  final String phoneNo;
-  final String password;
+  String? uid, fullName, email, phoneNo;
+  int score, ch1prog, ch2prog, ch3prog, ch4prog, ch5prog;
 
-  const UserModel({
-    this.id,
-    required this.email,
-    required this.password,
-    required this.fullName,
-    required this.phoneNo,
+  UserModel({
+    this.uid,
+    this.email,
+    this.fullName,
+    this.phoneNo,
+    this.score = 0,
+    this.ch1prog = 0,
+    this.ch2prog = 0,
+    this.ch3prog = 0,
+    this.ch4prog = 0,
+    this.ch5prog = 0,
   });
 
   // Map user fetched from Firebase to UserModel
@@ -21,11 +23,16 @@ class UserModel {
     final data = document.data()!;
 
     return UserModel(
-      id: document.id,
-      email: data["Email"],
-      password: data["Password"],
+      uid: document.id,
       fullName: data["FullName"],
+      email: data["Email"],
       phoneNo: data["Phone"],
+      score: data["score"],
+      ch1prog: data["ch1prog"],
+      ch2prog: data["ch2prog"],
+      ch3prog: data["ch3prog"],
+      ch4prog: data["ch4prog"],
+      ch5prog: data["ch5prog"],
     );
   }
 
@@ -35,7 +42,12 @@ class UserModel {
       "FullName": fullName,
       "Email": email,
       "Phone": phoneNo,
-      "Password": password,
+      "score": score,
+      "ch1prog": ch1prog,
+      "ch2prog": ch2prog,
+      "ch3prog": ch3prog,
+      "ch4prog": ch4prog,
+      "ch5prog": ch5prog,
     };
   }
 }

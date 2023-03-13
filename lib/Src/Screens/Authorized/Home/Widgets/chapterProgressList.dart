@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/Widgets/chapterCard_widget.dart';
@@ -18,33 +19,22 @@ class ChapterProgressList extends StatelessWidget {
           style: Theme.of(context).textTheme.headline5,
         ),
         const SizedBox(height: tDefaultPadding),
-        Container(
+        SizedBox(
           height: tHomeCardHeight,
-          child: ListView(
+          child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            children: [
-              ChapterCard(),
-              const SizedBox(width: tDefaultPadding),
-              ChapterCard(),
-            ],
+            itemCount: ChaptersList.length,
+            itemBuilder: ((context, index) => Padding(
+                  padding: const EdgeInsets.only(right: tDefaultPadding),
+                  child: ChapterCard(
+                    chapter: ChaptersList[index],
+                    home: true,
+                    learning: false,
+                  ),
+                )),
           ),
         ),
-
-        // ListView.builder(
-        //   scrollDirection: Axis.horizontal,
-        //   itemCount: 5,
-        //   itemBuilder: (BuildContext ctx, int index) {
-        //     return ChapterCard();
-        //   },
-        // ),
-
-        // ListView.builder(
-        //   scrollDirection: Axis.horizontal,
-        //   itemBuilder: itemBuilder,
-        //   controller: ,
-        //   itemCount: ,
-        //   ),
       ],
     );
   }

@@ -1,20 +1,23 @@
 import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../Screens/Authorized/Chapters/chapter.dart';
+
 class ChapterCard extends StatelessWidget {
-  // Chapter? chapter;
+  Chapter chapter;
   bool home, learning;
 
-  Function? onCardClick;
+  // Function onCardClick + the status + lesson count + progress + image size to half
 
-  ChapterCard({
-    // this.chapter,
-    this.onCardClick,
-    this.learning = false,
-    this.home = true,
-  });
+  ChapterCard(
+      {required this.chapter,
+      // required this.onCardClick,
+      this.learning = false,
+      this.home = true,
+      super.key});
 
 //******************** theme frindly ?!!!!! */
   @override
@@ -22,7 +25,7 @@ class ChapterCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        this.onCardClick!();
+        Get.to(() => Chaptercontent(), arguments: chapter);
       },
       child: Container(
           // margin: EdgeInsets.symmetric(vertical: 20),
@@ -31,14 +34,14 @@ class ChapterCard extends StatelessWidget {
           child: Stack(
             children: [
               //chapter image
-              Positioned.fill(
+              Positioned(
                 right: 10,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(
+                      width: size.width / 2.3,
                       alignment: Alignment.topRight,
-                      // 'assets/imgs/' + this.chapter!.imgName! + '.png',
-                      'images/urinary.png',
+                      chapter.chapterImage!,
                       fit: BoxFit.contain),
                 ),
               ),
@@ -106,11 +109,8 @@ class ChapterCard extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         child: Row(
                           children: [
-                            // CategoryIcon(
-                            //     color: this.chapter!.color,
-                            //     iconName: this.chapter!.icon),
                             const SizedBox(width: 10),
-                            Text('this.chapter!.name!',
+                            Text(chapter.chapterName!,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25))
                           ],
@@ -124,12 +124,13 @@ class ChapterCard extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Row(
                     children: [
-                      // CategoryIcon(
-                      //     color: this.chapter!.color,
-                      //     iconName: this.chapter!.icon),
                       const SizedBox(width: 10),
-                      Text(learning ? 'this status' : 'this.chapter!.name!',
-                          style: TextStyle(color: Colors.white, fontSize: 25))
+                      Text(
+                        learning ? 'this status' : chapter.chapterName!,
+                        style: learning
+                            ? TextStyle(color: Colors.white, fontSize: 19)
+                            : TextStyle(color: Colors.white, fontSize: 25),
+                      )
                     ],
                   ),
                 ),

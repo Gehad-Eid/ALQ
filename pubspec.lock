@@ -616,14 +616,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
-  quiz_view:
-    dependency: "direct main"
-    description:
-      name: quiz_view
-      sha256: ad959ffa162421c716f0950e19c03bab5be24eef0424fa8816fe34679d1e6015
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   sky_engine:
     dependency: transitive
     description: flutter

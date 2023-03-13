@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Screens/Authorized/Home/Widgets/chapterProgressList.dart';
+import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Widgets/chapterCard_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,39 +13,33 @@ class chapterList extends StatelessWidget {
         appBar: AppBar(
           //************** change appBar themeData */
           title: Text(
-            'Learning',
+            'Learning', // in text & usable
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: tDefaultScreenPadding, vertical: tDefaultPadding),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: tDefaultPadding),
-                child: ChapterCard(learning: true, home: false),
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: tDefaultScreenPadding,
+                    vertical: tDefaultPadding),
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: ChaptersList.length,
+                  itemBuilder: ((context, index) => Padding(
+                        padding: const EdgeInsets.only(bottom: tDefaultPadding),
+                        child: ChapterCard(
+                          chapter: ChaptersList[index],
+                          home: false,
+                          learning: true,
+                        ),
+                      )),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: tDefaultPadding),
-                child: ChapterCard(learning: true, home: false),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: tDefaultPadding),
-                child: ChapterCard(learning: true, home: false),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: tDefaultSpacing),
-                child: ChapterCard(learning: true, home: false),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: tDefaultSpacing),
-                child: ChapterCard(learning: true, home: false),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Services/auth_repo.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
@@ -96,7 +97,9 @@ class profile extends StatelessWidget {
                 icon: Icons.logout_outlined,
                 textColor: Colors.red,
                 endIcon: false,
-                onPress: () {},
+                onPress: () {
+                  AuthenticationRepository.instance.logout();
+                },
               ),
             ],
           ),

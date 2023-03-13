@@ -14,28 +14,23 @@ class SignUpController extends GetxController {
   final fullName = TextEditingController();
   final phoneNo = TextEditingController();
 
-  final userRepo = Get.put(UserRepository());
-
-// these Functions will be called from Design to do the logic
-
-  // This func will be used to register user with [EMAIL] & [Password]
-  void registerUser(String email, String password) {
-    String? error = AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(email, password) as String?;
-    if (error != null) {
-      Get.showSnackbar(GetSnackBar(message: error.toString()));
-    }
-  }
+  final authRepo = Get.put(AuthenticationRepository());
 
   //Get phone No from user and pass it to Auth Repository for Firebase Authentication
-  Future<void> createUser(UserModel user) async {
-    await userRepo.createUser(user);
-    phoneAuthentication(user.phoneNo);
-    Get.to(() => const OTPScreen());
+  Future<void> createUser(UserModel user, String password) async {
+    bool state = await authRepo.createUserWithEmailAndPassword(
+        user.email!, password, user);
+    state
+        ? phoneAuthentication(user.phoneNo!)
+            ? Get.to(() => const OTPScreen())
+            : Get.back()
+        : Get.back();
   }
 
   //Get phoneNo from user (Screen) and pass it to Auth Repository for Firebase Authentication
-  void phoneAuthentication(String phoneNo) {
-    AuthenticationRepository.instance.phoneAuthentication(phoneNo);
+  bool phoneAuthentication(String phoneNo) {
+    bool state =
+        AuthenticationRepository.instance.phoneAuthentication(phoneNo) as bool;
+    return state;
   }
 }

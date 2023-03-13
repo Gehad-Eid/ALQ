@@ -28,6 +28,14 @@ class updateProfile extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
                   UserModel userData = snapshot.data as UserModel;
+
+                  //Controllers
+                  final email = TextEditingController(text: userData.email);
+                  final password = TextEditingController();
+                  final fullName =
+                      TextEditingController(text: userData.fullName);
+                  final phoneNo = TextEditingController(text: userData.phoneNo);
+
                   return Column(
                     children: [
                       GestureDetector(
@@ -69,7 +77,7 @@ class updateProfile extends StatelessWidget {
                         child: Column(
                           children: [
                             TextFormField(
-                              initialValue: userData.fullName,
+                              controller: fullName,
                               decoration: const InputDecoration(
                                   label: Text(tFullName),
                                   prefixIcon:
@@ -77,21 +85,21 @@ class updateProfile extends StatelessWidget {
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             TextFormField(
-                              initialValue: userData.email,
+                              controller: email,
                               decoration: const InputDecoration(
                                   label: Text(tEmail),
                                   prefixIcon: Icon(Icons.email_outlined)),
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             TextFormField(
-                              initialValue: userData.phoneNo,
+                              controller: phoneNo,
                               decoration: const InputDecoration(
                                   label: Text(tPhoneNo),
                                   prefixIcon: Icon(Icons.phone)),
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             TextFormField(
-                              initialValue: userData.password,
+                              controller: password,
                               decoration: const InputDecoration(
                                   label: Text(tPassword),
                                   prefixIcon: Icon(Icons.fingerprint)),
@@ -100,7 +108,15 @@ class updateProfile extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () => Get.to(() => updateProfile()),
+                                onPressed: () async {
+                                  final user = UserModel(
+                                    email: email.text.trim(),
+                                    // password: password.text.trim(),
+                                    fullName: fullName.text.trim(),
+                                    phoneNo: phoneNo.text.trim(),
+                                  );
+                                  await controller.updateRecord(user);
+                                },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: tPrimaryColor,
                                     side: BorderSide.none,

@@ -29,7 +29,7 @@ class _homePageState extends State<homePage> {
             bookMark(loggedInUser: loggedInUser!),
             chapters(loggedInUser: loggedInUser),
             homey(loggedInUser),
-            profile(user: loggedInUser),
+            // profile(user: loggedInUser),
             // const setting(),
           ];
 

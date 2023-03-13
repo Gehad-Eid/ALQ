@@ -1,4 +1,4 @@
-package com.example.alqgp
+package com.alqgpit.alqgp
 
 import io.flutter.embedding.android.FlutterActivity
 

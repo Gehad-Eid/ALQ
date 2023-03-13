@@ -53,19 +53,13 @@ class SignUpFormWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    //email & pass auth:
-                    // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
-
-                    // phone No. auth:
-                    // SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
-
                     final user = UserModel(
                       email: controller.email.text.trim(),
-                      password: controller.password.text.trim(),
                       fullName: controller.fullName.text.trim(),
                       phoneNo: controller.phoneNo.text.trim(),
                     );
-                    SignUpController.instance.createUser(user);
+                    SignUpController.instance
+                        .createUser(user, controller.password.text.trim());
                   }
                 },
                 child: Text(tSignup.toUpperCase()),

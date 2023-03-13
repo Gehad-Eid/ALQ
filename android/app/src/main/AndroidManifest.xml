@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.alqgp">
+    package="com.alqgpit.alqgp">
     <queries>  
   <intent>  
       <action android:name="android.intent.action.TTS_SERVICE" />  
