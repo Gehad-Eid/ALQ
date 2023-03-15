@@ -38,6 +38,16 @@ const tHomeCardHeight = 200.0;
 const tLearningCardHeight = 250.0;
 const tCardRadius = 20.0;
 
+// -- chapter esson card sizes --
+const tChapterLessonsBoxHeight = 190.0;
+const tChapterLessonsCardWidth = 90.0;
+const tChapterLessonsCardHeight = 120.0;
+
+// -- chapter esson card sizes --
+const tLessonsBoxHeight = 190.0;
+const tLessonsCardWidth = 90.0;
+const tLessonsCardHeight = 120.0;
+
 ////////////////
 const Color kYellowLight = Color(0xFFFFF7EC);
 const Color kYellow = Color(0xFFFAF0DA);

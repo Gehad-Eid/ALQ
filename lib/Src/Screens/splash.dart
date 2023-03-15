@@ -6,6 +6,8 @@ import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Utils/Consts/text.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -42,9 +44,8 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('tAppName', style: Theme.of(context).textTheme.headline3),
-                Text('tAppTagLine',
-                    style: Theme.of(context).textTheme.headline2),
+                Text(tAppName, style: Theme.of(context).textTheme.headline3),
+                Text(tAppTagLine, style: Theme.of(context).textTheme.headline2),
               ],
             ),
           ),

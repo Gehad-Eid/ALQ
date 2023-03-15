@@ -98,3 +98,7 @@ const String tMenu5 = "tLogout";
 const String tDelete = "Delete";
 const String tJoined = "Joined";
 const String tJoinedAt = "31 October 2022";
+
+// -- Chapter content Screen - Text
+const String tQuiz = "Take the Quiz";
+const String tChapterHeading1 = "Organs";

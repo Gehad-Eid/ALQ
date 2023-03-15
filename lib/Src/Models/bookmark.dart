@@ -1,52 +1,53 @@
-import 'package:alqgp/Src/Utils/Consts/consts.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class bookmarkFolder {
-  String? title;
-  Color? bgColor;
-  Color? iconColor;
-  Color? btnColor;
-  num? count;
-  num? done;
-  bool isLast;
+class Bookmark {
+  String? uid, fullName, email, phoneNo;
+  int score, ch1prog, ch2prog, ch3prog, ch4prog, ch5prog;
 
-  bookmarkFolder({
-    this.bgColor,
-    this.iconColor,
-    this.title,
-    this.btnColor,
-    this.done,
-    this.count,
-    this.isLast = false,
+  Bookmark({
+    this.uid,
+    this.email,
+    this.fullName,
+    this.phoneNo,
+    this.score = 0,
+    this.ch1prog = 0,
+    this.ch2prog = 0,
+    this.ch3prog = 0,
+    this.ch4prog = 0,
+    this.ch5prog = 0,
   });
 
-  static List<bookmarkFolder> generateBookmark() {
-    return [
-      bookmarkFolder(
-        title: 'Personal',
-        bgColor: tPrimaryColor,
-        iconColor: tAccentColor,
-        btnColor: tCardBgColor,
-        count: 3,
-        done: 1,
-      ),
-      bookmarkFolder(
-        title: 'Personal',
-        bgColor: tPrimaryColor,
-        iconColor: tAccentColor,
-        btnColor: tCardBgColor,
-        count: 3,
-        done: 1,
-      ),
-      bookmarkFolder(
-        title: 'Personal',
-        bgColor: tPrimaryColor,
-        iconColor: tAccentColor,
-        btnColor: tCardBgColor,
-        count: 3,
-        done: 1,
-      ),
-      bookmarkFolder(isLast: true),
-    ];
+  // Map bookmark fetched from Firebase to Bookmark model
+  factory Bookmark.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+
+    return Bookmark(
+      uid: document.id,
+      fullName: data["FullName"],
+      email: data["Email"],
+      phoneNo: data["Phone"],
+      score: data["score"],
+      ch1prog: data["ch1prog"],
+      ch2prog: data["ch2prog"],
+      ch3prog: data["ch3prog"],
+      ch4prog: data["ch4prog"],
+      ch5prog: data["ch5prog"],
+    );
+  }
+
+  // Map user data from UserModel to a map (json form)
+  toJson() {
+    return {
+      "FullName": fullName,
+      "Email": email,
+      "Phone": phoneNo,
+      "score": score,
+      "ch1prog": ch1prog,
+      "ch2prog": ch2prog,
+      "ch3prog": ch3prog,
+      "ch4prog": ch4prog,
+      "ch5prog": ch5prog,
+    };
   }
 }

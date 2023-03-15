@@ -1,9 +1,12 @@
 import 'package:alqgp/Src/Models/lesson_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/controllers/chapter_controller.dart';
 import 'package:alqgp/Src/Screens/Authorized/Chapters/widgets/chapterHeader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'widgets/chapterLessonCard.dart';
 
 class Chaptercontent extends StatelessWidget {
   const Chaptercontent({super.key});
@@ -27,16 +30,48 @@ class Chaptercontent extends StatelessWidget {
                   List<lesson> chapterData = snapshot.data as List<lesson>;
                   return Column(
                     children: [
-                      //fullscreen in 3D
+                      //******** fullscreen in 3D
                       lessonCardWithIndicatorAndModel(
                           size, chapterData, controller),
                       const SizedBox(height: tDefaultPadding),
                       const Divider(),
-                      const SizedBox(height: tDefaultPadding),
-                      //header and boxes of organes
-                      listofChap(chapterData),
+                      // const SizedBox(height: tDefaultPadding),
 
-                      //quiz btn
+                      //header and boxes of organes
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: tDefaultScreenPadding),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(tChapterHeading1,
+                                  style: Theme.of(context).textTheme.headline5),
+                            ),
+                            lessonCardList(chapterData),
+                          ],
+                        ),
+                      ),
+
+                      //quiz button
+                      Container(
+                        padding: const EdgeInsets.only(
+                            left: tDefaultScreenPadding,
+                            right: tDefaultScreenPadding,
+                            bottom: tDefaultScreenPadding),
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            //****** go to quiz
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                          child: Text(tQuiz.toUpperCase()),
+                        ),
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {
@@ -51,14 +86,16 @@ class Chaptercontent extends StatelessWidget {
           ),
         ),
       ),
-      // ),
     );
   }
 
+// ****** delete
   Container listofChap(List<lesson> chapterData) {
     return Container(
       child: ListView.builder(
           shrinkWrap: true,
+          // physics: const BouncingScrollPhysics(),
+          //     scrollDirection: Axis.horizontal,
           itemCount: 3,
           itemBuilder: (context, index) {
             return Column(

@@ -65,14 +65,11 @@
 // }
 
 import 'package:alqgp/Src/Screens/splash.dart';
-import 'package:alqgp/Src/Services/auth.dart';
 import 'package:alqgp/Src/Services/auth_repo.dart';
 import 'package:alqgp/Src/Utils/Theme/theme.dart';
-import 'package:alqgp/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,27 +89,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Stream Provider keeps listening to the changes
     //on the user in the database through the app.
-    return StreamProvider<UserModel?>.value(
-      value: AuthService().user,
-      initialData: null,
-      //To keep code clean, manageable, and readable,
-      //  we are using GETX State management
-      //  to follow the seperation of concern principle.
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+    return
+        // StreamProvider<UserModel?>.value(
+        //   value: AuthService().user,
+        //   initialData: null,
+        //   //To keep code clean, manageable, and readable,
+        //   //  we are using GETX State management
+        //   //  to follow the seperation of concern principle.
+        //   child:
+        GetMaterialApp(
+      debugShowCheckedModeBanner: false,
 
-        //by default the theme will ba as the system's theme
-        theme: TAppTheme.lightTheme,
-        darkTheme: TAppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+      //by default the theme will ba as the system's theme
+      theme: TAppTheme.lightTheme,
+      darkTheme: TAppTheme.darkTheme,
+      themeMode: ThemeMode.light,
 
-        //transiition
-        defaultTransition: Transition.cupertino, //********** change
-        transitionDuration: const Duration(milliseconds: 500),
+      //transiition
+      defaultTransition: Transition.cupertino, //********** change
+      transitionDuration: const Duration(milliseconds: 500),
 
-        // kick off with the splash screen.
-        home: SplashScreen(),
-      ),
+      // kick off with the splash screen.
+      home: SplashScreen(),
+      // ),
     );
   }
 }

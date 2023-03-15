@@ -19,13 +19,14 @@ class ChapterController extends GetxController {
 
   onPageChangedCallback(int activePageIndex) {
     currentPage.value = activePageIndex;
-    print(currentPage.value);
+    // print(currentPage.value);
   }
 
   Future<List<lesson>> getAllLessons() async {
     return await _userRepo.getLessons(chapterContent.chapNum!);
   }
 
+//****** just for me, delet it if not used */
   userid() {
     final uid = _authRepo.firebaseUser.value?.uid;
   }
