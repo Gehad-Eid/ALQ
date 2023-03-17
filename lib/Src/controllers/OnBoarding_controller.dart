@@ -1,11 +1,12 @@
 import 'package:alqgp/Src/Models/OnBoarding_model.dart';
 import 'package:alqgp/Src/Screens/onBoarding/onBoarding_widget.dart';
-import 'package:alqgp/Src/Screens/wrapper.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
+
+import '../Screens/welcome.dart';
 
 class OnBoardingController extends GetxController {
   final controller = LiquidController();
@@ -46,7 +47,7 @@ class OnBoardingController extends GetxController {
     int nextPage = controller.currentPage + 1;
     controller.animateToPage(page: nextPage);
     if (nextPage == 3) {
-      Get.offAll(() => Wrapper());
+      Get.offAll(() => const WelcomeScreen());
     }
   }
 

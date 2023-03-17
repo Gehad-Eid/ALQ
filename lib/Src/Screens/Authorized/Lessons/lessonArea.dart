@@ -49,7 +49,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                     child: Center(
                       child: Text(
                           controller.lessonContent.nameAndModle!.split(",")[0],
-                          style: Theme.of(context).textTheme.headline2),
+                          style: Theme.of(context).textTheme.headline3),
                     ),
                   ),
                   GestureDetector(
@@ -65,7 +65,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
 
               const SizedBox(height: tDefaultSpacing),
 
-              //Lesson card dand indecator
+              //Lesson card and indecator
               AspectRatio(
                 aspectRatio: 15 / 11,
                 child: PageView.builder(
@@ -74,6 +74,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                   onPageChanged: (value) {
                     controller.onPageChangedCallback(value);
                     controller.showNextButton();
+                    controller.stoptTTS();
                   },
                   itemCount: controller.lessonContent.parts!.length,
                   itemBuilder: (context, index) {
@@ -90,6 +91,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // lesson's part title and TTS icon
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -98,17 +100,30 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                                         .split("+")[0],
                                     style:
                                         Theme.of(context).textTheme.headline4),
-                                GestureDetector(
-                                  onTap: () {
-                                    // *********** add TTS
-                                  },
-                                  child: Icon(
-                                    Icons.volume_up,
+                                Obx(
+                                  () => GestureDetector(
+                                    onTap: () {
+                                      controller.tts.value
+                                          ? controller.startTTS(controller
+                                              .lessonContent.parts![index]
+                                              .replaceAll("+", "\n"))
+                                          : controller.pauseTTS();
+                                    },
+                                    child: Icon(
+                                      color: controller.tts.value
+                                          ? Colors.amber
+                                          : Colors.red,
+                                      controller.tts.value
+                                          ? Icons.volume_up
+                                          : Icons.pause_circle,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: tDefaultPadding),
+
+                            // lesson's part content
                             AspectRatio(
                               aspectRatio: 10 / 5,
                               child: Column(
@@ -116,7 +131,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                                 children: [
                                   Expanded(
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(tCardRadius),
                                         topRight: Radius.circular(tCardRadius),
                                       ),
@@ -125,7 +140,8 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                                         child: Text(
                                             controller
                                                 .lessonContent.parts![index]
-                                                .split("+")[1],
+                                                .split("+")[1]
+                                                .replaceAll("\\n", "\n"),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline4),
@@ -143,6 +159,8 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                 ),
               ),
               const SizedBox(height: tDefaultPadding),
+
+              // indicator
               Obx(
                 () => Align(
                   alignment: Alignment.bottomCenter,
@@ -157,6 +175,8 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                 ),
               ),
               const SizedBox(height: tDefaultSpacing),
+
+              // Next button
               Obx(
                 () => Visibility(
                   visible: controller.next.value,
@@ -166,7 +186,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                     },
                     child: Text(controller.currentPage >=
                             controller.lessonContent.parts!
-                                .length //controller.next.value
+                                .length //****** controller.next.value
                         ? 'Finish!'
                         : 'Next Organ'),
                   ),

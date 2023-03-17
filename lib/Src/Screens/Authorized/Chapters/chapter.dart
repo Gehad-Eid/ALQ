@@ -56,9 +56,10 @@ class Chaptercontent extends StatelessWidget {
                       //quiz button
                       Container(
                         padding: const EdgeInsets.only(
-                            left: tDefaultScreenPadding,
-                            right: tDefaultScreenPadding,
-                            bottom: tDefaultScreenPadding),
+                          left: tDefaultScreenPadding,
+                          right: tDefaultScreenPadding,
+                          // bottom: tDefaultScreenPadding
+                        ),
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
@@ -80,7 +81,10 @@ class Chaptercontent extends StatelessWidget {
                   return const Center(child: Text('Somthing went wrong.'));
                 }
               } else {
-                return const Center(child: CircularProgressIndicator());
+                //while loading data
+                return Container(
+                    margin: EdgeInsets.only(top: size.height / 2),
+                    child: const Center(child: CircularProgressIndicator()));
               }
             },
           ),

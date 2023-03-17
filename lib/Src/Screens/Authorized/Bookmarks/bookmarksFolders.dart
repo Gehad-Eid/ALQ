@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Models/bookmarkFolder.dart';
+import 'package:alqgp/Src/Models/bookmarkFolder_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:flutter/material.dart';
 

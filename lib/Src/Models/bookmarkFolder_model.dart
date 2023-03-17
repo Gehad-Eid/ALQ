@@ -1,4 +1,5 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class bookmarkFolder {
@@ -18,6 +19,30 @@ class bookmarkFolder {
     this.count,
     this.isLast = false,
   });
+
+  // Map user fetched from Firebase to UserModel
+  factory bookmarkFolder.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+
+    return bookmarkFolder(
+      id: document.id,
+      title: data["title"],
+      bgColor: data["bgColor"],
+      btnColor: data["btnColor"],
+      iconColor: data["iconColor"],
+    );
+  }
+
+  // Map user data from UserModel to a map (json form)
+  toJson() {
+    return {
+      "title": title,
+      "bgColor": bgColor,
+      "btnColor": btnColor,
+      "iconColor": iconColor,
+    };
+  }
 
   static List<bookmarkFolder> generateBookmark() {
     return [

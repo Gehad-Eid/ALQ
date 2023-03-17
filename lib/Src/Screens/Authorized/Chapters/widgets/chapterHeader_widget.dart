@@ -24,36 +24,20 @@ SizedBox lessonCardWithIndicatorAndModel(
           child: Column(
             children: [
               // chapter name
-              Container(
-                margin: const EdgeInsets.only(
-                  left: tDefaultSize,
-                  right: tDefaultSize,
-                  top: tDefaultSize,
-                ),
-                decoration: const BoxDecoration(
-                  color: tPrimaryColor,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(tCardRadius * 1.5),
-                      topLeft: Radius.circular(tCardRadius * 1.5)),
-                ),
-                child: Container(
-                  width: size.width,
-                  padding: const EdgeInsets.all(tDefaultPadding),
-                  child:
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      Center(
-                    child: Text(
-                      controller.chapterContent.chapterName!,
-                      // style:
-                      //     Theme.of(context).textTheme.headline5,
-                    ),
-                  ),
-                  //   ],
-                  // ),
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(
+              //     left: tDefaultSize,
+              //     right: tDefaultSize,
+              //     top: tDefaultSize,
+              //   ),
+              //   decoration: const BoxDecoration(
+              //     color: tPrimaryColor,
+              //     borderRadius: BorderRadius.only(
+              //         topRight: Radius.circular(tCardRadius * 1.5),
+              //         topLeft: Radius.circular(tCardRadius * 1.5)),
+              //   ),
+              //   child:
+              // ),
 
               // lesson content with TTS icon
               Expanded(
@@ -69,17 +53,33 @@ SizedBox lessonCardWithIndicatorAndModel(
                         margin: const EdgeInsets.only(
                             left: tDefaultSize,
                             right: tDefaultSize,
-                            // top: tDefaultSize,
+                            top: tDefaultSize,
                             bottom: tDefaultPadding),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: tPrimaryColor,
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(tCardRadius * 1.5),
-                              bottomLeft: Radius.circular(tCardRadius * 1.5)),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(tCardRadius * 1.5)),
                         ),
                         child: Column(
                           children: [
-                            Icon(Icons.volume_up), //******* add TTS
+                            Container(
+                              padding: const EdgeInsets.all(tDefaultPadding),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      controller.chapterContent.chapterName!,
+                                      style:
+                                          Theme.of(context).textTheme.headline5,
+                                    ),
+                                  ),
+                                  Icon(Icons.volume_up),
+                                ],
+                              ),
+                            ),
+                            //******* add TTS
                             Text(
                               //****** start from left */
                               chapterData[0].parts![index],
