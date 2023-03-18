@@ -1,8 +1,11 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Widgets/grayBar.dart';
 import 'package:alqgp/Src/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'lesson.dart';
 
 DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
   return DraggableScrollableSheet(
@@ -25,20 +28,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
             controller: scrollController,
             children: [
               // the stick gray bar
-              Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: tDefaultPadding / 2,
-                  horizontal: (size.width / 2) - (size.width * 0.15),
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(tCardRadius),
-                  ),
-                  color: Colors.grey,
-                ),
-                width: size.width * 0.15,
-                height: 5,
-              ),
+              grayBar(size),
 
               // the name and bookmark icon
               Row(
@@ -182,13 +172,25 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                   visible: controller.next.value,
                   child: ElevatedButton(
                     onPressed: () {
-                      // *********** add to next lesson / end of chapter
+                      // ********* fix it , not working
+                      if (controller.currentLessonIndex + 1 >=
+                          controller.lessonsList.length) {
+                        print("back");
+                        Get.back();
+                      } else {
+                        Get.off(() => Lesson(), arguments: {
+                          "lessonData": controller
+                              .lessonsList[controller.currentLessonIndex + 1],
+                          "lessonsList": controller.lessonsList,
+                          "currentIndex": controller.currentLessonIndex + 1,
+                        });
+                        print("lesson");
+                      }
                     },
                     child: Text(controller.currentPage >=
-                            controller.lessonContent.parts!
-                                .length //****** controller.next.value
-                        ? 'Finish!'
-                        : 'Next Organ'),
+                            controller.lessonContent.parts!.length - 1
+                        ? 'Contenue...'
+                        : 'Contenue...'),
                   ),
                 ),
               ),

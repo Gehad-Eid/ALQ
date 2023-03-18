@@ -1,7 +1,6 @@
 import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:alqgp/Src/Screens/Authenticate/ForgotPassword/forgotPass_OTP.dart';
 import 'package:alqgp/Src/Services/auth_repo.dart';
-import 'package:alqgp/Src/Services/user_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

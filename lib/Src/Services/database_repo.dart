@@ -27,40 +27,57 @@ class DatabaseRepository extends GetxController {
   }
 
   //get the Bookmark's Folders
-  Future<void> addBookmarkFolders(String title) async {
+  Future<void> addBookmarkFolders(String title, int color) async {
     final uid = _authRepo.firebaseUser.value?.uid;
     final snapshot =
         await _db.collection("Users").doc(uid).collection("bookmarks").add({
-      "title": "som",
-      "bgColor": "sin",
-      "btnColor": "sim",
-      "iconColor": "son",
+      "title": title,
+      "bgColor": color,
+      "btnColor": color,
+      "iconColor": color,
     });
   }
 
   //get the Bookmark's Folders
-  Future<List<bookmarkFolder>> getBookmarkFolders() async {
+  Stream<List<bookmarkFolder>> getBookmarkFolders() {
     final uid = _authRepo.firebaseUser.value?.uid;
-    final snapshot =
-        await _db.collection("Users").doc(uid).collection("bookmarks").get();
-
-    final bookmarkFoldersData =
-        snapshot.docs.map((data) => bookmarkFolder.fromSnapshot(data)).toList();
-
-    return bookmarkFoldersData;
+    return _db
+        .collection("Users")
+        .doc(uid)
+        .collection("bookmarks")
+        .snapshots()
+        .map((data) {
+      List<bookmarkFolder> folders = [];
+      data.docs.forEach((element) {
+        folders.add(bookmarkFolder.fromSnapshot(element));
+      });
+      folders.add(bookmarkFolder(isLast: true));
+      return folders;
+    });
   }
 
   //get the Bookmark's lessons
-  Future<List<Bookmark>> getBookmarksLessons(String folderID) async {
-    final snapshot = await _db
-        .collection("bookmark")
+  Stream<List<Bookmark>> getBookmarksLessons(String folderID) {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    return _db
+        .collection("Users")
+        .doc(uid)
+        .collection("bookmarks")
         .doc(folderID)
         .collection("lessons")
-        .get();
-
-    final bookmarkData =
-        snapshot.docs.map((data) => Bookmark.fromSnapshot(data)).toList();
-
-    return bookmarkData;
+        .snapshots()
+        .map((data) {
+      List<Bookmark> lessons = [];
+      data.docs.forEach((element) {
+        lessons.add(Bookmark.fromSnapshot(element));
+      });
+      return lessons;
+    });
   }
+
+  // delete bookmark
+
+  // add to bookmarks
+
+  //delete a bookmark folder
 }

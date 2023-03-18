@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
+import '../Screens/Authorized/Lessons/lesson.dart';
 import 'chapter_controller.dart';
 
 class LessonController extends GetxController {
   static LessonController get instance => Get.find();
 
   //prameter for this page
-  final lesson lessonContent = Get.arguments;
+  final lesson lessonContent = Get.arguments["lessonData"];
+  final List<lesson> lessonsList = Get.arguments["lessonsList"];
+  final int currentLessonIndex = Get.arguments["currentIndex"];
 
   // TTS instence
   FlutterTts flutterTts = FlutterTts();
@@ -43,7 +46,18 @@ class LessonController extends GetxController {
     next = RxBool(currentPage >= lessonContent.parts!.length - 1);
   }
 
-  nextLesson() {}
+  nextLesson() {
+    if (currentLessonIndex + 1 >= lessonsList.length) {
+      Get.back();
+    } else {
+      // ******** not working
+      Get.off(Lesson(), arguments: {
+        "lessonData": lessonsList[currentLessonIndex + 1],
+        "lessonsList": currentLessonIndex + 1,
+        "currentIndex": currentLessonIndex + 1,
+      });
+    }
+  }
 
   onPageChangedCallback(int activePageIndex) {
     currentPage.value = activePageIndex;

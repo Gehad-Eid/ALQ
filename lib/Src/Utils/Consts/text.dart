@@ -102,3 +102,7 @@ const String tJoinedAt = "31 October 2022";
 // -- Chapter content Screen - Text
 const String tQuiz = "Take the Quiz";
 const String tChapterHeading1 = "Organs";
+
+// -- Bookmarks Folders Screen - Text
+const String tAddBookmark = "Folder Name";
+const String tAddBookmarkTitle = "Add a new folder";

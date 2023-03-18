@@ -19,8 +19,11 @@ SizedBox lessonCardList(List<lesson> chapterData) {
                       horizontal: tDefaultPadding / 2,
                       vertical: tDefaultPadding),
                   child: GestureDetector(
-                    onTap: () =>
-                        Get.to(() => Lesson(), arguments: chapterData[index]),
+                    onTap: () => Get.to(() => Lesson(), arguments: {
+                      "lessonData": chapterData[index],
+                      "lessonsList": chapterData,
+                      "currentIndex": index,
+                    }),
                     child: Column(
                       children: [
                         Container(

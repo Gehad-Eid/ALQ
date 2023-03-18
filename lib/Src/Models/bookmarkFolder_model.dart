@@ -20,7 +20,7 @@ class bookmarkFolder {
     this.isLast = false,
   });
 
-  // Map user fetched from Firebase to UserModel
+  // Map bookmak folder fetched from Firebase to book mark folder rModel
   factory bookmarkFolder.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
@@ -28,13 +28,13 @@ class bookmarkFolder {
     return bookmarkFolder(
       id: document.id,
       title: data["title"],
-      bgColor: data["bgColor"],
-      btnColor: data["btnColor"],
-      iconColor: data["iconColor"],
+      bgColor: Color(data["bgColor"]),
+      btnColor: Color(data["btnColor"]),
+      iconColor: Color(data["iconColor"]),
     );
   }
 
-  // Map user data from UserModel to a map (json form)
+  // Map bookmark folder data from bookmark folder Model to a map (json form)
   toJson() {
     return {
       "title": title,
