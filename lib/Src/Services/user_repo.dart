@@ -31,13 +31,14 @@ class UserRepository extends GetxController {
           () => Get.snackbar(
               "Success", "Your account has been created successfully.",
               snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green.withOpacity(0.1),
+              backgroundColor: Colors.white.withOpacity(0.5),
               colorText: Colors.green),
         )
         .catchError((error, stackTrace) {
       Get.snackbar("Error", error.toString(), //somthing went wrong
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          backgroundColor: Colors.redAccent
+              .withOpacity(0.1), // ******* Colors.white.withOpacity(0.5),
           colorText: Colors.red);
       // print(error.toString());
     });

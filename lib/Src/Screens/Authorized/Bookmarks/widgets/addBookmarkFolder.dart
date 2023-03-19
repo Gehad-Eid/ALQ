@@ -6,8 +6,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../bookmarksFolders.dart';
-
 Widget addBookmarkFolder(BookmarksFolderController controller, context) {
   Size size = MediaQuery.of(context).size;
   return GestureDetector(
@@ -120,7 +118,20 @@ Future<dynamic> addFolderBottomSheet(
                     if (controller.FolderTitle.text != "") {
                       controller.addFolder(controller.FolderTitle.text);
                       controller.FolderTitle.clear();
-                      // ****** show snack bar that it was success
+                      // show snackbar that it was success
+                      Get.snackbar("Success",
+                          "The bookmark has been added successfully.",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.white.withOpacity(0.5),
+                          colorText: Colors.green);
+                      Get.close(1);
+                    } else {
+                      Get.snackbar(
+                          "Failed", "Something went wrong, Try again later.",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.white.withOpacity(0.5),
+                          colorText: Colors.green);
+                      Get.close(1);
                     }
                   },
                   child: const Center(child: Text("Add")),

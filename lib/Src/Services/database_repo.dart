@@ -26,7 +26,7 @@ class DatabaseRepository extends GetxController {
     return lessonData;
   }
 
-  //get the Bookmark's Folders
+  // add a Bookmark Folders
   Future<void> addBookmarkFolders(String title, int color) async {
     final uid = _authRepo.firebaseUser.value?.uid;
     final snapshot =
@@ -45,6 +45,7 @@ class DatabaseRepository extends GetxController {
         .collection("Users")
         .doc(uid)
         .collection("bookmarks")
+        .orderBy("title")
         .snapshots()
         .map((data) {
       List<bookmarkFolder> folders = [];
@@ -78,6 +79,35 @@ class DatabaseRepository extends GetxController {
   // delete bookmark
 
   // add to bookmarks
+  Future<void> addBookmark(String id, int chapterNum, String folderID) async {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    final snapshot = await _db
+        .collection("Users")
+        .doc(uid)
+        .collection("bookmarks")
+        .doc(folderID)
+        .collection("lessons")
+        .add({
+      "lessonID": id,
+      "chapterNum": chapterNum,
+    });
+  }
 
+  Future<bool> checkExist(String docID, String folderID) async {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    bool exist = false;
+    await _db
+        .collection("Users")
+        .doc(uid)
+        .collection("bookmarks")
+        .doc(folderID)
+        .collection("lessons")
+        .doc(docID)
+        .get()
+        .then((doc) {
+      exist = doc.exists;
+    });
+    return exist;
+  }
   //delete a bookmark folder
 }

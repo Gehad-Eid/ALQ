@@ -4,7 +4,7 @@ import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-SizedBox lessonCardList(List<lesson> chapterData) {
+SizedBox lessonCardList(List<lesson> chapterData, int chapNum) {
   return SizedBox(
     height: tChapterLessonsBoxHeight,
     child: ListView.builder(
@@ -23,6 +23,7 @@ SizedBox lessonCardList(List<lesson> chapterData) {
                       "lessonData": chapterData[index],
                       "lessonsList": chapterData,
                       "currentIndex": index,
+                      "chapterNum": chapNum,
                     }),
                     child: Column(
                       children: [

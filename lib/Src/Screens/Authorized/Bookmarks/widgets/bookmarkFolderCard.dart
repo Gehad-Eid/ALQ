@@ -12,10 +12,10 @@ Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
       Get.to(() => bookmarks(), arguments: bookmarkFolder.id);
     },
     child: Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15), // ***** check on that
       decoration: BoxDecoration(
         color: bookmarkFolder.bgColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(tCardRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,18 +24,21 @@ Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
             Icons.monitor_heart_rounded,
             color: bookmarkFolder.iconColor,
             size: 35,
-          ), // Icon
-          SizedBox(height: tDefaultPadding),
+          ),
+          const SizedBox(height: tDefaultPadding),
           Text(
             bookmarkFolder.title!,
             style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-          ), // Text
-          SizedBox(height: tDefaultPadding),
+          ),
+          const SizedBox(height: tDefaultPadding),
           Row(
             children: [
-              bookmarkCount(bookmarkFolder.iconColor, bookmarkFolder.btnColor,
+              bookmarkCount(
+                  bookmarkFolder.iconColor,
+                  bookmarkFolder.btnColor,
+                  // ******* add an icon ineastae of "Bookmark"
                   '${bookmarkFolder.count} Bookmark'),
-              // can add another btn👍
+              // ******* can add another btn👍
             ],
           ),
         ],

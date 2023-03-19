@@ -71,6 +71,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'Src/Screens/Authorized/Lessons/lesson.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp()
@@ -87,15 +89,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Stream Provider keeps listening to the changes
-    //on the user in the database through the app.
+    /* To keep code clean, manageable, and readable,
+       we are using GETX State management
+       to follow the seperation of concern principle.*/
+
     return
         // StreamProvider<UserModel?>.value(
         //   value: AuthService().user,
         //   initialData: null,
-        //   //To keep code clean, manageable, and readable,
-        //   //  we are using GETX State management
-        //   //  to follow the seperation of concern principle.
+        //
         //   child:
         GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -112,6 +114,9 @@ class MyApp extends StatelessWidget {
       // kick off with the splash screen.
       home: SplashScreen(),
       // ),
+      getPages: [
+        GetPage(name: "/lesson", page: () => Lesson()),
+      ],
     );
   }
 }

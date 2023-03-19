@@ -1,11 +1,10 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Widgets/findBookmarksFolders.dart';
 import 'package:alqgp/Src/Widgets/grayBar.dart';
 import 'package:alqgp/Src/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import 'lesson.dart';
 
 DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
   return DraggableScrollableSheet(
@@ -45,6 +44,14 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                   GestureDetector(
                     onTap: () {
                       // *********** add to/from bookmark
+                      Get.bottomSheet(
+                        backgroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(tCardRadius),
+                                topRight: Radius.circular(tCardRadius))),
+                        findBookmarksFolders(controller, context, false),
+                      );
                     },
                     child: Icon(
                       Icons.bookmark,
@@ -172,20 +179,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                   visible: controller.next.value,
                   child: ElevatedButton(
                     onPressed: () {
-                      // ********* fix it , not working
-                      if (controller.currentLessonIndex + 1 >=
-                          controller.lessonsList.length) {
-                        print("back");
-                        Get.back();
-                      } else {
-                        Get.off(() => Lesson(), arguments: {
-                          "lessonData": controller
-                              .lessonsList[controller.currentLessonIndex + 1],
-                          "lessonsList": controller.lessonsList,
-                          "currentIndex": controller.currentLessonIndex + 1,
-                        });
-                        print("lesson");
-                      }
+                      controller.nextLesson();
                     },
                     child: Text(controller.currentPage >=
                             controller.lessonContent.parts!.length - 1
