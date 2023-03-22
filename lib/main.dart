@@ -93,13 +93,7 @@ class MyApp extends StatelessWidget {
        we are using GETX State management
        to follow the seperation of concern principle.*/
 
-    return
-        // StreamProvider<UserModel?>.value(
-        //   value: AuthService().user,
-        //   initialData: null,
-        //
-        //   child:
-        GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
 
       //by default the theme will ba as the system's theme
@@ -113,7 +107,6 @@ class MyApp extends StatelessWidget {
 
       // kick off with the splash screen.
       home: SplashScreen(),
-      // ),
       getPages: [
         GetPage(name: "/lesson", page: () => Lesson()),
       ],

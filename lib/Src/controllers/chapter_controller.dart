@@ -9,6 +9,15 @@ class ChapterController extends GetxController {
   static ChapterController get instance => Get.find();
 
   final _databaseRepo = Get.put(DatabaseRepository());
+  RxList<lesson> lesoonssList = RxList<lesson>();
+  List<lesson> get lessons => lesoonssList;
+
+  @override
+  void onInit() {
+    super.onInit();
+    //  the lessons from data base to keep track of the changes
+    lesoonssList.bindStream(_databaseRepo.getLessons(chapterContent.chapNum!));
+  }
 
   final Chapter chapterContent = Get.arguments;
   final pageController = PageController();
@@ -16,9 +25,5 @@ class ChapterController extends GetxController {
 
   onPageChangedCallback(int activePageIndex) {
     currentPage.value = activePageIndex;
-  }
-
-  Future<List<lesson>> getAllLessons() async {
-    return await _databaseRepo.getLessons(chapterContent.chapNum!);
   }
 }

@@ -36,25 +36,42 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                   SizedBox(
                     height: size.height * 0.13 - 5 - tDefaultPadding,
                     child: Center(
-                      child: Text(
-                          controller.lessonContent.nameAndModle!.split(",")[0],
-                          style: Theme.of(context).textTheme.headline3),
+                      child: Obx(
+                        () => Text(
+                            controller
+                                .lessonsList[controller.currentLessonIndex]
+                                .nameAndModle
+                                .split(",")[0],
+                            style: Theme.of(context).textTheme.headline3),
+                      ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      // *********** add to/from bookmark
-                      Get.bottomSheet(
-                        backgroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(tCardRadius),
-                                topRight: Radius.circular(tCardRadius))),
-                        findBookmarksFolders(controller, context, false),
-                      );
-                    },
-                    child: Icon(
-                      Icons.bookmark,
+                  Obx(
+                    () => GestureDetector(
+                      onTap: () {
+                        // *********** add to/from bookmark
+                        controller.lessonsList[controller.currentLessonIndex]
+                                .bookmarked!
+                            ? Get.bottomSheet(
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(tCardRadius),
+                                        topRight:
+                                            Radius.circular(tCardRadius))),
+                                findBookmarksFolders(
+                                    controller, context, false),
+                              )
+                            : print("yaaaaaay");
+                      },
+                      child: Icon(
+                        Icons.bookmark,
+                        color: controller
+                                .lessonsList[controller.currentLessonIndex]
+                                .bookmarked!
+                            ? Colors.blue
+                            : Colors.amber,
+                      ),
                     ),
                   ),
                 ],
@@ -63,96 +80,117 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
               const SizedBox(height: tDefaultSpacing),
 
               //Lesson card and indecator
-              AspectRatio(
-                aspectRatio: 15 / 11,
-                child: PageView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (value) {
-                    controller.onPageChangedCallback(value);
-                    controller.showNextButton();
-                    controller.stoptTTS();
-                  },
-                  itemCount: controller.lessonContent.parts!.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: tDefaultPadding / 2),
-                      height: tDefaultSpacing,
-                      decoration: BoxDecoration(
-                        color: tPrimaryColor,
-                        borderRadius: BorderRadius.circular(tCardRadius * 1.5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(tDefaultPadding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // lesson's part title and TTS icon
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    controller.lessonContent.parts![index]
-                                        .split("+")[0],
-                                    style:
-                                        Theme.of(context).textTheme.headline4),
-                                Obx(
-                                  () => GestureDetector(
-                                    onTap: () {
-                                      controller.tts.value
-                                          ? controller.startTTS(controller
-                                              .lessonContent.parts![index]
-                                              .replaceAll("+", "\n"))
-                                          : controller.pauseTTS();
-                                    },
-                                    child: Icon(
-                                      color: controller.tts.value
-                                          ? Colors.amber
-                                          : Colors.red,
-                                      controller.tts.value
-                                          ? Icons.volume_up
-                                          : Icons.pause_circle,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: tDefaultPadding),
-
-                            // lesson's part content
-                            AspectRatio(
-                              aspectRatio: 10 / 5,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+              Obx(
+                () => AspectRatio(
+                  aspectRatio: 15 / 11,
+                  child: PageView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    onPageChanged: (value) {
+                      controller.onPageChangedCallback(value);
+                      controller.showNextButton();
+                      controller.stoptTTS();
+                    },
+                    itemCount: controller
+                        .lessonsList[controller.currentLessonIndex]
+                        .parts!
+                        .length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: tDefaultPadding / 2),
+                        height: tDefaultSpacing,
+                        decoration: BoxDecoration(
+                          color: tPrimaryColor,
+                          borderRadius:
+                              BorderRadius.circular(tCardRadius * 1.5),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(tDefaultPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // lesson's part title and TTS icon
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(tCardRadius),
-                                        topRight: Radius.circular(tCardRadius),
-                                      ),
-                                      child: SingleChildScrollView(
-                                        physics: const BouncingScrollPhysics(),
-                                        child: Text(
-                                            controller
-                                                .lessonContent.parts![index]
-                                                .split("+")[1]
-                                                .replaceAll("\\n", "\n"),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4),
+                                  Obx(
+                                    () => Text(
+                                        controller
+                                            .lessonsList[
+                                                controller.currentLessonIndex]
+                                            .parts![index]
+                                            .split("+")[0],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4),
+                                  ),
+                                  Obx(
+                                    () => GestureDetector(
+                                      onTap: () {
+                                        controller.tts.value
+                                            ? controller.startTTS(controller
+                                                .lessonsList[controller
+                                                    .currentLessonIndex]
+                                                .parts![index]
+                                                .replaceAll("+", "\n"))
+                                            : controller.pauseTTS();
+                                      },
+                                      child: Icon(
+                                        color: controller.tts.value
+                                            ? Colors.amber
+                                            : Colors.red,
+                                        controller.tts.value
+                                            ? Icons.volume_up
+                                            : Icons.pause_circle,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: tDefaultPadding),
+
+                              // lesson's part content
+                              AspectRatio(
+                                aspectRatio: 10 / 5,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(tCardRadius),
+                                          topRight:
+                                              Radius.circular(tCardRadius),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          child: Obx(
+                                            () => Text(
+                                                controller
+                                                    .lessonsList[controller
+                                                        .currentLessonIndex]
+                                                    .parts![index]
+                                                    .split("+")[1]
+                                                    .replaceAll("\\n", "\n"),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline5),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: tDefaultPadding),
@@ -162,7 +200,8 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                 () => Align(
                   alignment: Alignment.bottomCenter,
                   child: AnimatedSmoothIndicator(
-                    count: controller.lessonContent.parts!.length,
+                    count: controller.lessonsList[controller.currentLessonIndex]
+                        .parts!.length,
                     activeIndex: controller.currentPage.value,
                     effect: const ExpandingDotsEffect(
                       activeDotColor: tPrimaryColor,
@@ -176,15 +215,18 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
               // Next button
               Obx(
                 () => Visibility(
-                  visible: controller.next.value,
+                  visible: controller.next.value ||
+                      controller.lessonsList[controller.currentLessonIndex]
+                              .parts!.length ==
+                          1,
                   child: ElevatedButton(
                     onPressed: () {
                       controller.nextLesson();
                     },
-                    child: Text(controller.currentPage >=
-                            controller.lessonContent.parts!.length - 1
-                        ? 'Contenue...'
-                        : 'Contenue...'),
+                    child: Text(controller.currentLessonIndex + 1 >=
+                            controller.lessonsList.length
+                        ? 'Finished!'
+                        : 'Next organ ...'),
                   ),
                 ),
               ),

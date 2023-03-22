@@ -10,7 +10,11 @@ import 'package:get/get.dart';
 import 'grayBar.dart';
 
 GetX<BookmarksFolderController> findBookmarksFolders(
-    LessonController? controller, BuildContext context, bool fromBookmarks) {
+  LessonController? controller,
+  BuildContext context,
+  bool fromBookmarks,
+  // String? lessonName
+) {
   Size size = MediaQuery.of(context).size;
   return GetX<BookmarksFolderController>(
     init: Get.put<BookmarksFolderController>(BookmarksFolderController()),
@@ -28,8 +32,13 @@ GetX<BookmarksFolderController> findBookmarksFolders(
   );
 }
 
-Column lessonScreenbookmarksFolders(Size size, LessonController? controller,
-    BuildContext context, BookmarksFolderController folderController) {
+Column lessonScreenbookmarksFolders(
+  Size size,
+  LessonController? controller,
+  BuildContext context,
+  BookmarksFolderController folderController,
+  // String lessonName
+) {
   return Column(
     children: [
       // the stick gray bar
@@ -60,25 +69,31 @@ Column lessonScreenbookmarksFolders(Size size, LessonController? controller,
                       horizontal: tDefaultScreenPadding,
                       vertical: tDefaultPadding / 3,
                     ),
-                    child: ListTile(
-                      // ** icon from model
-                      leading: Icon(Icons.monitor_heart_rounded),
-                      title: Text(
-                        folderController.folders[index].title!,
-                        style: Theme.of(context).textTheme.headline5,
+                    child: Obx(
+                      () => ListTile(
+                        // ** icon from model
+                        leading: Icon(Icons.monitor_heart_rounded),
+                        title: Text(
+                          folderController.folders[index].title!,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        iconColor: folderController.folders[index].iconColor,
+                        trailing: bookmarkCount(
+                          folderController.folders[index].iconColor,
+                          folderController.folders[index].btnColor,
+                          // ***** add an icon inestade of "Bookmarks"
+                          '${folderController.folders[index].count} Bookmark',
+                        ),
+                        onTap: () {
+                          controller!.addBookmarkWithFolderID(
+                            folderController.folders[index].id!,
+                            controller
+                                .lessonsList[controller.currentLessonIndex]
+                                .nameAndModle
+                                .split(",")[0],
+                          );
+                        },
                       ),
-                      iconColor: folderController.folders[index].iconColor,
-                      trailing: bookmarkCount(
-                        folderController.folders[index].iconColor,
-                        folderController.folders[index].btnColor,
-                        // ***** add an icon inestade of "Bookmarks"
-                        '${folderController.folders[index].count} Bookmark',
-                      ),
-                      onTap: () {
-                        controller!.addBookmarkWithFolderID(
-                          folderController.folders[index].id!,
-                        );
-                      },
                     ),
                   );
           },

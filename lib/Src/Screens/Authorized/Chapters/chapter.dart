@@ -22,65 +22,66 @@ class Chaptercontent extends StatelessWidget {
         body: SingleChildScrollView(
           // child: Container(
           // padding: const EdgeInsets.all(tDefaultSize),
-          child: FutureBuilder(
-            future: controller.getAllLessons(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  List<lesson> chapterData = snapshot.data as List<lesson>;
-                  return Column(
-                    children: [
-                      //******** fullscreen in 3D
-                      lessonCardWithIndicatorAndModel(
-                          size, chapterData, controller),
-                      const SizedBox(height: tDefaultPadding),
-                      const Divider(),
-                      // const SizedBox(height: tDefaultPadding),
+          child: GetX<ChapterController>(
+            init: Get.put<ChapterController>(ChapterController()),
+            builder: (ChapterController chapterController) {
+              if (chapterController.lessons.isNotEmpty) {
+                // if (snapshot.hasData) {
+                // List<lesson> chapterData = snapshot.data as List<lesson>;
 
-                      //header and boxes of organes
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: tDefaultScreenPadding),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(tChapterHeading1,
-                                  style: Theme.of(context).textTheme.headline5),
-                            ),
-                            lessonCardList(chapterData,
-                                controller.chapterContent.chapNum!),
-                          ],
-                        ),
-                      ),
+                return Column(
+                  children: [
+                    //******** fullscreen in 3D
+                    lessonCardWithIndicatorAndModel(
+                        size, chapterController.lessons, controller),
+                    const SizedBox(height: tDefaultPadding),
+                    const Divider(),
+                    // const SizedBox(height: tDefaultPadding),
 
-                      //quiz button
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: tDefaultScreenPadding,
-                          right: tDefaultScreenPadding,
-                          // bottom: tDefaultScreenPadding
-                        ),
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            //****** go to quiz
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
+                    //header and boxes of organes
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: tDefaultScreenPadding),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(tChapterHeading1,
+                                style: Theme.of(context).textTheme.headline5),
                           ),
-                          child: Text(tQuiz.toUpperCase()),
-                        ),
+                          lessonCardList(chapterController.lessons,
+                              controller.chapterContent.chapNum!),
+                        ],
                       ),
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text(snapshot.error.toString()));
-                } else {
-                  return const Center(child: Text('Somthing went wrong.'));
-                }
+                    ),
+
+                    //quiz button
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: tDefaultScreenPadding,
+                        right: tDefaultScreenPadding,
+                        // bottom: tDefaultScreenPadding
+                      ),
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          //****** go to quiz
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                        child: Text(tQuiz.toUpperCase()),
+                      ),
+                    ),
+                  ],
+                );
+                // } else if (snapshot.hasError) {
+                //   return Center(child: Text(snapshot.error.toString()));
+                // } else {
+                //   return const Center(child: Text('Somthing went wrong.'));
+                // }
               } else {
                 //while loading data
                 return Container(

@@ -11,7 +11,7 @@ class LessonController extends GetxController {
 
   //prameter for this page
   final lesson lessonContent = Get.arguments["lessonData"];
-  final List<lesson> lessonsList = Get.arguments["lessonsList"];
+  final RxList<lesson> lessonsList = Get.arguments["lessonsList"];
   final int currentLessonIndex = Get.arguments["currentIndex"];
   final int chapterNum = Get.arguments["chapterNum"];
 
@@ -67,8 +67,12 @@ class LessonController extends GetxController {
   //   _databaseRepo.addBookmark(lessonContent.id!, chapterNum, folderName.text);
   // }
 
-  addBookmarkWithFolderID(String folder) {
-    _databaseRepo.addBookmark(lessonContent.id!, chapterNum, folder);
+  addBookmarkWithFolderID(String folder, String name) {
+    _databaseRepo.addBookmark(lessonContent.id!, chapterNum, folder, name);
+    _databaseRepo.chageBookmarked(
+        lessonContent.bookmarked!, lessonContent.id!, chapterNum);
+    // bookmarked.value = !bookmarked.value;
+    Get.close(1);
   }
 
   // check if it's in the bookmarks

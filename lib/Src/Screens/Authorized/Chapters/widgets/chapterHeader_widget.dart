@@ -13,7 +13,7 @@ SizedBox lessonCardWithIndicatorAndModel(
     child: Stack(
       children: [
         modelWidget(
-            size.height * 0.33, chapterData[0].nameAndModle!.split(",")[1]),
+            size.height * 0.33, chapterData[0].nameAndModle.split(",")[1]),
 
         //lessonCard
         Positioned(

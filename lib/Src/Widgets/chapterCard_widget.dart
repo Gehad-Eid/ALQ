@@ -1,4 +1,5 @@
 import 'package:alqgp/Src/Models/chapter_model.dart';
+import 'package:alqgp/Src/Services/database_repo.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,9 @@ class ChapterCard extends StatelessWidget {
   Chapter chapter;
   bool home, learning;
 
-  // Function onCardClick + the status + lesson count + progress + image size to half
+  // ******* Function onCardClick + the status + progress + image size to half
+
+  final controller = Get.put(DatabaseRepository());
 
   ChapterCard(
       {required this.chapter,
@@ -19,7 +22,7 @@ class ChapterCard extends StatelessWidget {
       this.home = true,
       super.key});
 
-//******************** theme frindly ?!!!!! */
+  //******************** theme frindly ?!!!!! */
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -77,7 +80,7 @@ class ChapterCard extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      Text('5',
+                      Text('${chapter.chapCont}',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                     ],
                   ),
@@ -87,13 +90,14 @@ class ChapterCard extends StatelessWidget {
               // step progress indecator
               Positioned(
                 top: 50,
-                left: 20,
+                left: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: CircularStepProgressIndicator(
                     selectedColor: tPrimaryColor,
                     totalSteps: 10,
-                    currentStep: 6,
+                    //********** add the progress of the user in thiis chapter */
+                    currentStep: 7 - 2,
                     width: 100,
                     height: 100,
                     stepSize: 17,
@@ -110,6 +114,7 @@ class ChapterCard extends StatelessWidget {
                         child: Row(
                           children: [
                             const SizedBox(width: 10),
+                            //********** set the status from the db */
                             Text(chapter.chapterName!,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25))

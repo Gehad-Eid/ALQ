@@ -17,7 +17,7 @@ class Lesson extends StatelessWidget {
           children: [
             // the 3D model
             modelWidget(size.height * 0.85,
-                controller.lessonContent.nameAndModle!.split(",")[1]),
+                controller.lessonContent.nameAndModle.split(",")[1]),
 
             // the lesson area
             lessonArea(size, controller),

@@ -9,7 +9,7 @@ import 'bookmarkCount.dart';
 Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
   return GestureDetector(
     onTap: () {
-      Get.to(() => bookmarks(), arguments: bookmarkFolder.id);
+      Get.to(() => bookmarks(), arguments: bookmarkFolder);
     },
     child: Container(
       padding: const EdgeInsets.all(15), // ***** check on that

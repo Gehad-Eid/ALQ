@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   String? uid, fullName, email, phoneNo;
-  int score, ch1prog, ch2prog, ch3prog, ch4prog, ch5prog;
+  int? score, ch1prog, ch2prog, ch3prog, ch4prog, ch5prog;
+
+  //******** add those to db && toJson method */
+  bool? statusCh1, statusCh2, statusCh3, statusCh4, statusCh5;
 
   UserModel({
     this.uid,
@@ -10,6 +13,11 @@ class UserModel {
     this.fullName,
     this.phoneNo,
     this.score = 0,
+    this.statusCh1 = false,
+    this.statusCh2 = false,
+    this.statusCh3 = false,
+    this.statusCh4 = false,
+    this.statusCh5 = false,
     this.ch1prog = 0,
     this.ch2prog = 0,
     this.ch3prog = 0,
@@ -28,6 +36,11 @@ class UserModel {
       email: data["Email"],
       phoneNo: data["Phone"],
       score: data["score"],
+      statusCh1: data["statusCh1"],
+      statusCh2: data["statusCh2"],
+      statusCh3: data["statusCh3"],
+      statusCh4: data["statusCh4"],
+      statusCh5: data["statusCh5"],
       ch1prog: data["ch1prog"],
       ch2prog: data["ch2prog"],
       ch3prog: data["ch3prog"],
