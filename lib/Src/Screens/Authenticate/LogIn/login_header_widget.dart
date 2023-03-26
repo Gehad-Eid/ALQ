@@ -10,12 +10,10 @@ class LoginHeaderWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image(
-            image: const AssetImage(tWelcomeScreenImage),
-            height: size.height * 0.2),
-        Text(tLoginTitle, style: Theme.of(context).textTheme.headline1),
+        Image(image: const AssetImage(tLogo), height: size.height * 0.3),
+        Text(tLoginTitle, style: Theme.of(context).textTheme.headline3),
         Text(tLoginSubTitle, style: Theme.of(context).textTheme.bodyText1),
       ],
     );

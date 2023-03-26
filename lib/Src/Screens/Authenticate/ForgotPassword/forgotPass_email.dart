@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Screens/Authenticate/LogIn/login.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
@@ -20,10 +21,9 @@ class ForgetPasswordMailScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: tDefaultSize * 4),
                 FormHeaderWidget(
-                  image: tLogo, //*********change
+                  image: tLogo,
                   title: tForgetPassword.toUpperCase(),
                   subTitle: tForgetPasswordSubTitle,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   heightBetween: 30.0,
                   textAlign: TextAlign.center,
                 ),
@@ -42,7 +42,15 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => const OTPScreen());
+                            Get.snackbar("Success",
+                                "The email has been sent successfully.",
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.green.withOpacity(0.33),
+                                colorText: Colors.green);
+                            Get.close(1);
+                            Get.off(() => const LoginScreen());
+
+                            // ********** add a snake bar if succses
                           },
                           child: const Text(tNext),
                         ),

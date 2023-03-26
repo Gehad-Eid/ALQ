@@ -17,15 +17,15 @@ class WelcomeScreen extends StatelessWidget {
     final controller = Get.put(FadeInAnimationController());
     controller.animationIn();
 
-    //**************** find y the f z bg aint changing
     var mediaQuery = MediaQuery.of(context);
     var height = mediaQuery.size.height;
-    var brightness = mediaQuery.platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
-    print(brightness == Brightness.dark);
+    // var brightness = mediaQuery.platformBrightness;
+    // // final isDarkMode = brightness == Brightness.dark;
+    // var isDarkMode =
+    //     MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
+      backgroundColor: tPrimaryColor, // **************** platformBrightness
       body: Stack(
         children: [
           TFadeInAnimation(
@@ -46,7 +46,8 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Image(
-                      image: const AssetImage(tWelcomeScreenImage),
+                      // ******* change image
+                      image: const AssetImage(tLogo),
                       height: height * 0.6),
                   Column(
                     children: [
@@ -59,6 +60,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
+                      // log in button
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () => Get.to(() => LoginScreen()),
@@ -66,6 +68,8 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10.0),
+
+                      // sign up button
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => SignUpScreen()),

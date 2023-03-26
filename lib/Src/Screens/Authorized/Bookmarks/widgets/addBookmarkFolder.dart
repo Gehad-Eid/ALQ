@@ -130,7 +130,7 @@ Future<dynamic> addFolderBottomSheet(
                           "Failed", "Something went wrong, Try again later.",
                           snackPosition: SnackPosition.BOTTOM,
                           backgroundColor: Colors.white.withOpacity(0.5),
-                          colorText: Colors.green);
+                          colorText: Colors.red);
                       Get.close(1);
                     }
                   },

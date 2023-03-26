@@ -2,6 +2,7 @@ import 'package:alqgp/Src/Models/bookmarkFolder_model.dart';
 import 'package:alqgp/Src/Models/bookmark_model.dart';
 import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Models/lesson_model.dart';
+import 'package:alqgp/Src/Models/quiz_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +40,6 @@ class DatabaseRepository extends GetxController {
   // }
 
   Stream<List<lesson>> getLessons(int chapterNumper) {
-    final uid = _authRepo.firebaseUser.value?.uid;
     return _db
         .collection("chapters")
         .doc("Chapter $chapterNumper")
@@ -167,5 +167,31 @@ class DatabaseRepository extends GetxController {
         .collection("Lessons")
         .doc(lessonID)
         .update({"bookmarked": !isbookmarked});
+  }
+
+  // get the chapter's Questions
+  Stream<List<Quiz>> getQuestions(int chapterNumper) {
+    return _db
+        .collection("chapters")
+        .doc("Chapter $chapterNumper")
+        .collection("Quiz")
+        .snapshots()
+        .map((data) {
+      List<Quiz> questions = [];
+      data.docs.forEach((element) {
+        questions.add(Quiz.fromsnapshot(element));
+      });
+      questions.shuffle();
+      return questions;
+    });
+  }
+
+  Future<void> updateChapterScore(int sum, int chapterNum) async {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    await _db.collection("Users").doc(uid).update({
+      "score": sum,
+      "ch${chapterNum}status": true,
+      "ch${chapterNum}quiz": true,
+    });
   }
 }

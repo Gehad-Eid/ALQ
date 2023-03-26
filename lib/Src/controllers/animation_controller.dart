@@ -7,18 +7,18 @@ class FadeInAnimationController extends GetxController {
   RxBool animate = false.obs;
   //To be used in Splash Screen due to auto calling of next activity.
   Future startSplashAnimation() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 1000));
     animate.value = true;
-    await Future.delayed(const Duration(milliseconds: 3000));
+    await Future.delayed(const Duration(milliseconds: 3400));
     animate.value = false;
-    await Future.delayed(const Duration(milliseconds: 3000));
+    await Future.delayed(const Duration(milliseconds: 3400));
     //*********************** the on time onboarding condition */
-    // Get.offAll(
-    //   // Get.off Instead of Get.offAll()
-    //   () => const OnBoardingScreen(),
-    //   duration: const Duration(milliseconds: 1000), //Transition Time
-    //   transition: Transition.fadeIn, //Screen Switch Transition
-    // );
+    Get.offAll(
+      // Get.off Instead of Get.offAll()
+      () => const OnBoardingScreen(),
+      duration: const Duration(milliseconds: 1000), //Transition Time
+      transition: Transition.fadeIn, //Screen Switch Transition
+    );
   }
 
   //Call where you need to animate In any widget.

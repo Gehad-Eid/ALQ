@@ -7,32 +7,28 @@ const String tEmail = "E-Mail";
 const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
-const String tFullName = "Full Name";
+const String tFullName = "Name";
 const String tForgetPassword = "Forget Password";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 // -- Splash Screen Text
-const String tAppName = ".appable/";
-const String tAppTagLine = "Learn To Code. \nFree For Everyone";
+const String tAppName = "ALQ";
+const String tAppTagLine = "solgan";
 
 // -- On Boarding Text
-const String tOnBoardingTitle1 = "Build Awesome Apps";
-const String tOnBoardingTitle2 = "Learn from YouTube";
-const String tOnBoardingTitle3 = "Get Code & Resources";
-const String tOnBoardingSubTitle1 =
-    "Let's start your journey with us on this amazing and easy platform.";
-const String tOnBoardingSubTitle2 =
-    "Get Video Tutorials of each topic to learn things easily.";
-const String tOnBoardingSubTitle3 =
-    "Save time by just copy pasting complete apps you learned from videos.";
+const String tOnBoardingTitle1 = "somthing 1";
+const String tOnBoardingTitle2 = "somthing 2";
+const String tOnBoardingTitle3 = "somthing 3";
+const String tOnBoardingSubTitle1 = "description 1";
+const String tOnBoardingSubTitle2 = "description 2";
+const String tOnBoardingSubTitle3 = "description 3";
 const String tOnBoardingCounter1 = "1/3";
 const String tOnBoardingCounter2 = "2/3";
 const String tOnBoardingCounter3 = "3/3";
 
 // -- Welcome Screen Text
-const String tWelcomeTitle = "Build Awesome Apps";
-const String tWelcomeSubTitle =
-    "Let's put your creativity on the development highway.";
+const String tWelcomeTitle = "ALQ";
+const String tWelcomeSubTitle = "When learning is enjoyable !";
 
 // -- Login Screen Text
 const String tLoginTitle = "Welcome Back,";
@@ -48,7 +44,7 @@ const String tAlreadyHaveAnAccount = "Already have an Account? ";
 // -- Forget Password Text
 const String tForgetPasswordTitle = "Make Selection!";
 const String tForgetPasswordSubTitle =
-    "Select one of the options given below to reset your password.";
+    "Enter your Email below, to resive a reset code";
 const String tResetViaEMail = "Reset via Mail Verification";
 const String tResetViaPhone = "Reset via Phone Verification";
 
@@ -84,8 +80,8 @@ const String tSeeAll = "See All";
 const String tProfile = "Profile";
 const String tEditProfile = "Edit Profile";
 const String tLogoutDialogHeading = "Logout";
-const String tProfileHeading = "Coding with T";
-const String tProfileSubHeading = "super Admin@codingwitht.com";
+const String tProfileHeading = "Gogo Alaq";
+const String tProfileSubHeading = "gg@gg.com";
 
 // -- Menu - Text
 const String tMenu1 = "Settings";

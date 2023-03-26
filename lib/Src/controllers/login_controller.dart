@@ -9,6 +9,12 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  RxBool notshowpass = true.obs;
+
+  changeShow() {
+    notshowpass.value = !notshowpass.value;
+  }
+
   //*******  TextField Validation
 
   //this Function will be called from Design & it will do the logec behind it

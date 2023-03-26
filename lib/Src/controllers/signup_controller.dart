@@ -15,21 +15,28 @@ class SignUpController extends GetxController {
 
   final authRepo = Get.put(AuthenticationRepository());
 
+  RxBool notshowpass = true.obs;
+
+  changeShow() {
+    notshowpass.value = !notshowpass.value;
+  }
+
   //Get phone No from user and pass it to Auth Repository for Firebase Authentication
   Future<void> createUser(UserModel user, String password) async {
     bool state = await authRepo.createUserWithEmailAndPassword(
         user.email!, password, user);
     state
-        ? phoneAuthentication(user.phoneNo!)
-            ? Get.to(() => const OTPScreen())
-            : Get.back()
+        // ? phoneAuthentication(user.phoneNo!)
+        ? Get.to(() => const OTPScreen())
         : Get.back();
+    // : Get.back();
   }
 
   //Get phoneNo from user (Screen) and pass it to Auth Repository for Firebase Authentication
-  bool phoneAuthentication(String phoneNo) {
-    bool state =
-        AuthenticationRepository.instance.phoneAuthentication(phoneNo) as bool;
-    return state;
-  }
+//   bool phoneAuthentication(String phoneNo) {
+//     bool state =
+//         AuthenticationRepository.instance.phoneAuthentication(phoneNo) as bool;
+
+//     return state;
+//   }
 }

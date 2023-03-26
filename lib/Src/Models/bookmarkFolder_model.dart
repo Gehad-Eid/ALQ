@@ -28,8 +28,8 @@ class bookmarkFolder {
     return bookmarkFolder(
       id: document.id,
       title: data["title"],
-      bgColor: Color(data["bgColor"]),
-      btnColor: Color(data["btnColor"]),
+      bgColor: Color(data["bgColor"]).withOpacity(0.30),
+      btnColor: Color(data["btnColor"]).withOpacity(0.50),
       iconColor: Color(data["iconColor"]),
     );
   }

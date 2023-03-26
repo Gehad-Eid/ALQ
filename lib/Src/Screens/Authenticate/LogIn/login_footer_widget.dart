@@ -1,6 +1,8 @@
+import 'package:alqgp/Src/Screens/Authenticate/SignUp/signup.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginFooterWidget extends StatelessWidget {
   const LoginFooterWidget({
@@ -13,6 +15,7 @@ class LoginFooterWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Text("OR"),
+
         const SizedBox(height: tFormHeight - 20),
         // SizedBox(
         //   width: double.infinity,
@@ -22,9 +25,12 @@ class LoginFooterWidget extends StatelessWidget {
         //     label: const Text(tSignInWithGoogle),
         //   ),
         // ),
+        Divider(thickness: 0),
         const SizedBox(height: tFormHeight - 20),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.off(() => SignUpScreen());
+          },
           child: Text.rich(
             TextSpan(
                 text: tDontHaveAnAccount,

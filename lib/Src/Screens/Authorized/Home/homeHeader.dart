@@ -22,7 +22,7 @@ class HomePageHeader extends StatelessWidget {
                 style: TextStyle(fontSize: 28),
               ),
               Text(
-                'Name',
+                'Gogo',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,

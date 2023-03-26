@@ -16,30 +16,53 @@ class LoginForm extends StatelessWidget {
     final controller = Get.put(LoginController());
     return Form(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10),
+        padding: const EdgeInsets.symmetric(vertical: tFormHeight),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
-                  labelText: tEmail,
-                  hintText: tEmail,
-                  border: OutlineInputBorder()),
-            ),
-            const SizedBox(height: tFormHeight - 20),
-            TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint),
-                labelText: tPassword,
-                hintText: tPassword,
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.remove_red_eye_sharp),
-                ),
+                label: Text(tEmail),
+                prefixIcon: Icon(Icons.person_outline_outlined),
               ),
             ),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //       prefixIcon: Icon(Icons.person_outline_outlined),
+            //       labelText: tEmail,
+            //       hintText: tEmail,
+            //       border: OutlineInputBorder()),
+            // ),
+            const SizedBox(height: tFormHeight - 20),
+            Obx(
+              () => TextFormField(
+                decoration: InputDecoration(
+                  label: Text(tPassword),
+                  prefixIcon: Icon(Icons.fingerprint),
+                  suffixIcon: IconButton(
+                    onPressed: (() {
+                      controller.changeShow();
+                    }),
+                    icon: controller.notshowpass.value
+                        ? Icon(Icons.remove_red_eye_sharp)
+                        : Icon(Icons.remove_red_eye_outlined),
+                  ),
+                ),
+                obscureText: controller.notshowpass.value,
+              ),
+            ),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     prefixIcon: Icon(Icons.fingerprint),
+            //     labelText: tPassword,
+            //     hintText: tPassword,
+            //     border: OutlineInputBorder(),
+            //     suffixIcon: IconButton(
+            //       onPressed: null,
+            //       icon: Icon(Icons.remove_red_eye_sharp),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: tFormHeight - 20),
             Align(
               alignment: Alignment.centerRight,
@@ -57,7 +80,7 @@ class LoginForm extends StatelessWidget {
                   // LoginController.instance.loginUser(
                   //     controller.email.text.trim(),
                   //     controller.password.text.trim());
-                  Get.to(() => HomeWrapper());
+                  Get.offAll(() => HomeWrapper());
                 },
                 child: Text(tLogin.toUpperCase()),
               ),

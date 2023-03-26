@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // -- List of colors --
-const tPrimaryColor = Color.fromARGB(255, 152, 120, 193);
+const tPrimaryColor = Color.fromARGB(255, 117, 162, 250);
 const tSecondaryColor = Color(0xFF272727);
 const tAccentColor = Color(0xFF001BFF);
 
@@ -21,7 +21,7 @@ const tDefaultSpacing = 50.0;
 const tDefaultSize = 30.0;
 
 // -- --
-const tSplashContainerSize = 30.0;
+const tSplashContainerSize = 300.0;
 const tNavBarPadding = 19.0;
 const tNavBarRadius = 15.0;
 const tButtonHeight = 15.0;

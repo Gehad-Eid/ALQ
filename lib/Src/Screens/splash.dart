@@ -15,27 +15,40 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(FadeInAnimationController());
     controller.startSplashAnimation();
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: Stack(
         children: [
           TFadeInAnimation(
-            durationInMs: 2400,
+            durationInMs: 3000,
             animate: TAnimatePosition(
-                bottomBefore: 0,
-                bottomAfter: 60,
-                rightBefore: tDefaultSize,
-                rightAfter: tDefaultSize),
+                topBefore: 0, topAfter: 30, leftBefore: -70, leftAfter: -20),
             child: Container(
               width: tSplashContainerSize,
               height: tSplashContainerSize,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: tPrimaryColor),
+                  borderRadius: BorderRadius.circular(1000),
+                  color: tPrimaryColor.withOpacity(0.45)),
             ),
           ),
           TFadeInAnimation(
-            durationInMs: 2000,
+            durationInMs: 3000,
+            animate: TAnimatePosition(
+                bottomBefore: 0,
+                bottomAfter: 30,
+                rightBefore: -70,
+                rightAfter: -20),
+            child: Container(
+              width: tSplashContainerSize,
+              height: tSplashContainerSize,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1000),
+                  color: tPrimaryColor.withOpacity(0.45)),
+            ),
+          ),
+          TFadeInAnimation(
+            durationInMs: 3000,
             animate: TAnimatePosition(
                 topBefore: 80,
                 topAfter: 80,
@@ -45,30 +58,30 @@ class SplashScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(tAppName, style: Theme.of(context).textTheme.headline3),
-                Text(tAppTagLine, style: Theme.of(context).textTheme.headline2),
+                Text(tAppTagLine, style: Theme.of(context).textTheme.headline4),
               ],
             ),
           ),
           TFadeInAnimation(
-            durationInMs: 2400,
-            animate: TAnimatePosition(bottomBefore: 0, bottomAfter: 100),
-            child: const Image(image: AssetImage(tLogo)),
+            durationInMs: 3000,
+            animate: TAnimatePosition(
+                bottomBefore: size.height * 0.25,
+                bottomAfter: size.height * 0.4,
+                leftBefore: size.width * 0.2,
+                leftAfter: size.width * 0.25),
+            child: Image(image: AssetImage(tLogo), width: size.width * 0.5),
           ),
           TFadeInAnimation(
-            durationInMs: 2400,
-            animate: TAnimatePosition(
-                bottomBefore: 0,
-                bottomAfter: 60,
-                rightBefore: tDefaultSize,
-                rightAfter: tDefaultSize),
-            child: Container(
-              width: tSplashContainerSize,
-              height: tSplashContainerSize,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: tPrimaryColor),
-            ),
-          ),
+              durationInMs: 3000,
+              animate: TAnimatePosition(
+                bottomBefore: tDefaultSpacing,
+                // bottomAfter: -10,
+                leftBefore: size.width * 0.39,
+              ),
+              child: Row(children: [
+                Icon(Icons.copyright),
+                Text("ALAQ 2023"),
+              ]))
         ],
       ),
     );

@@ -3,27 +3,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel {
   String? uid, fullName, email, phoneNo;
   int? score, ch1prog, ch2prog, ch3prog, ch4prog, ch5prog;
+  bool? ch1quiz, ch2quiz, ch3quiz, ch4quiz, ch5quiz;
 
   //******** add those to db && toJson method */
-  bool? statusCh1, statusCh2, statusCh3, statusCh4, statusCh5;
+  bool? ch1status, ch2status, ch3status, ch4status, ch5status;
 
-  UserModel({
-    this.uid,
-    this.email,
-    this.fullName,
-    this.phoneNo,
-    this.score = 0,
-    this.statusCh1 = false,
-    this.statusCh2 = false,
-    this.statusCh3 = false,
-    this.statusCh4 = false,
-    this.statusCh5 = false,
-    this.ch1prog = 0,
-    this.ch2prog = 0,
-    this.ch3prog = 0,
-    this.ch4prog = 0,
-    this.ch5prog = 0,
-  });
+  UserModel(
+      {this.uid,
+      this.email,
+      this.fullName,
+      this.phoneNo,
+      this.score = 0,
+      this.ch1status = false,
+      this.ch2status = false,
+      this.ch3status = false,
+      this.ch4status = false,
+      this.ch5status = false,
+      this.ch1prog = 0,
+      this.ch2prog = 0,
+      this.ch3prog = 0,
+      this.ch4prog = 0,
+      this.ch5prog = 0,
+      this.ch1quiz = false,
+      this.ch2quiz = false,
+      this.ch3quiz = false,
+      this.ch4quiz = false,
+      this.ch5quiz = false});
 
   // Map user fetched from Firebase to UserModel
   factory UserModel.fromSnapshot(
@@ -36,11 +41,16 @@ class UserModel {
       email: data["Email"],
       phoneNo: data["Phone"],
       score: data["score"],
-      statusCh1: data["statusCh1"],
-      statusCh2: data["statusCh2"],
-      statusCh3: data["statusCh3"],
-      statusCh4: data["statusCh4"],
-      statusCh5: data["statusCh5"],
+      ch1quiz: data["ch1quiz"],
+      ch2quiz: data["ch2quiz"],
+      ch3quiz: data["ch3quiz"],
+      ch4quiz: data["ch4quiz"],
+      ch5quiz: data["ch5quiz"],
+      ch1status: data["ch1status"],
+      ch2status: data["ch2status"],
+      ch3status: data["ch3status"],
+      ch4status: data["ch4status"],
+      ch5status: data["ch5status"],
       ch1prog: data["ch1prog"],
       ch2prog: data["ch2prog"],
       ch3prog: data["ch3prog"],
@@ -61,6 +71,16 @@ class UserModel {
       "ch3prog": ch3prog,
       "ch4prog": ch4prog,
       "ch5prog": ch5prog,
+      "ch1quiz": ch1quiz,
+      "ch2quiz": ch2quiz,
+      "ch3quiz": ch3quiz,
+      "ch4quiz": ch4quiz,
+      "ch5quiz": ch5quiz,
+      "ch1status": ch1status,
+      "ch2status": ch2status,
+      "ch3status": ch3status,
+      "ch4status": ch4status,
+      "ch5status": ch5status,
     };
   }
 }

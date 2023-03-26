@@ -1,5 +1,7 @@
+import 'package:alqgp/Src/Screens/Authenticate/LogIn/login.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUpFooterWidget extends StatelessWidget {
   const SignUpFooterWidget({
@@ -23,7 +25,9 @@ class SignUpFooterWidget extends StatelessWidget {
         //   ),
         // ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.off(() => LoginScreen());
+          },
           child: Text.rich(TextSpan(children: [
             TextSpan(
               text: tAlreadyHaveAnAccount,

@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Models/lesson_model.dart';
+import 'package:alqgp/Src/Screens/Authorized/Quiz/quiz.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/controllers/chapter_controller.dart';
@@ -17,18 +17,13 @@ class Chaptercontent extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        //scan and back
+        //*******scan and back
 
         body: SingleChildScrollView(
-          // child: Container(
-          // padding: const EdgeInsets.all(tDefaultSize),
           child: GetX<ChapterController>(
             init: Get.put<ChapterController>(ChapterController()),
             builder: (ChapterController chapterController) {
               if (chapterController.lessons.isNotEmpty) {
-                // if (snapshot.hasData) {
-                // List<lesson> chapterData = snapshot.data as List<lesson>;
-
                 return Column(
                   children: [
                     //******** fullscreen in 3D
@@ -36,7 +31,6 @@ class Chaptercontent extends StatelessWidget {
                         size, chapterController.lessons, controller),
                     const SizedBox(height: tDefaultPadding),
                     const Divider(),
-                    // const SizedBox(height: tDefaultPadding),
 
                     //header and boxes of organes
                     Padding(
@@ -65,7 +59,9 @@ class Chaptercontent extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          //****** go to quiz
+                          Get.to(() => quiz(),
+                              arguments:
+                                  chapterController.chapterContent.chapNum);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -77,11 +73,6 @@ class Chaptercontent extends StatelessWidget {
                     ),
                   ],
                 );
-                // } else if (snapshot.hasError) {
-                //   return Center(child: Text(snapshot.error.toString()));
-                // } else {
-                //   return const Center(child: Text('Somthing went wrong.'));
-                // }
               } else {
                 //while loading data
                 return Container(
@@ -92,41 +83,6 @@ class Chaptercontent extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-// ****** delete that shit woman
-  Container listofChap(List<lesson> chapterData) {
-    return Container(
-      child: ListView.builder(
-          shrinkWrap: true,
-          // physics: const BouncingScrollPhysics(),
-          //     scrollDirection: Axis.horizontal,
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                SizedBox(
-                  child: Text("Name: ${chapterData[1].parts![index]}"),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(chapterData[index].id!),
-                    // ListView.builder(
-                    //   itemCount: chapterData[index].parts!.length,
-                    //   itemBuilder: (context, i) {
-                    //     Text(chapterData[index].parts![i]);
-                    //   },
-                    // )
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                )
-              ],
-            );
-          }),
     );
   }
 }

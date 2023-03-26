@@ -42,10 +42,23 @@ class SignUpFormWidget extends StatelessWidget {
                   label: Text(tPhoneNo), prefixIcon: Icon(Icons.phone)),
             ),
             const SizedBox(height: tFormHeight - 20),
-            TextFormField(
-              controller: controller.password,
-              decoration: const InputDecoration(
-                  label: Text(tPassword), prefixIcon: Icon(Icons.fingerprint)),
+            Obx(
+              () => TextFormField(
+                controller: controller.password,
+                decoration: InputDecoration(
+                  label: Text(tPassword),
+                  prefixIcon: Icon(Icons.fingerprint),
+                  suffixIcon: IconButton(
+                    onPressed: (() {
+                      controller.changeShow();
+                    }),
+                    icon: controller.notshowpass.value
+                        ? Icon(Icons.remove_red_eye_sharp)
+                        : Icon(Icons.remove_red_eye_outlined),
+                  ),
+                ),
+                obscureText: controller.notshowpass.value,
+              ),
             ),
             const SizedBox(height: tFormHeight - 10),
             SizedBox(
