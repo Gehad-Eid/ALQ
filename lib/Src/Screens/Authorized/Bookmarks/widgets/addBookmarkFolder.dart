@@ -126,12 +126,11 @@ Future<dynamic> addFolderBottomSheet(
                           colorText: Colors.green);
                       Get.close(1);
                     } else {
-                      Get.snackbar(
-                          "Failed", "Something went wrong, Try again later.",
+                      Get.snackbar("error", "Please enter a name",
                           snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.white.withOpacity(0.5),
+                          backgroundColor: Colors.red.withOpacity(0.3),
                           colorText: Colors.red);
-                      Get.close(1);
+                      // Get.close(1);
                     }
                   },
                   child: const Center(child: Text("Add")),

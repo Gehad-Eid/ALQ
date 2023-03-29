@@ -51,6 +51,14 @@ class UserRepository extends GetxController {
     return userData;
   }
 
+  Stream<UserModel> theUser(String uid) {
+    return _db.collection("Users").doc(uid).snapshots().map((data) {
+      UserModel user = UserModel.fromSnapshot(data);
+
+      return user;
+    });
+  }
+
   // Future<UserModel> getUserDetails(String email) async {
   //   final snapshot =
   //       await _db.collection("Users").where("Email", isEqualTo: email).get();

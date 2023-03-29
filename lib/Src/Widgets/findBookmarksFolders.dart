@@ -83,6 +83,7 @@ Column lessonScreenbookmarksFolders(
                           folderController.folders[index].btnColor,
                           // ***** add an icon inestade of "Bookmarks"
                           '${folderController.folders[index].count} Bookmark',
+                          context,
                         ),
                         onTap: () {
                           controller!.addBookmarkWithFolderID(
@@ -115,6 +116,6 @@ GridView bookmarksScreenFolders(
       itemBuilder: (_, index) {
         return folderController.folders[index].isLast
             ? addBookmarkFolder(folderController, context)
-            : bookmarkFolderCard(folderController.folders[index]);
+            : bookmarkFolderCard(folderController.folders[index], context);
       });
 }

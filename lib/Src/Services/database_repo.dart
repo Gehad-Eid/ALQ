@@ -186,6 +186,7 @@ class DatabaseRepository extends GetxController {
     });
   }
 
+//updates the user's score
   Future<void> updateChapterScore(int sum, int chapterNum) async {
     final uid = _authRepo.firebaseUser.value?.uid;
     await _db.collection("Users").doc(uid).update({

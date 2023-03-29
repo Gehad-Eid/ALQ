@@ -1,46 +1,29 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
+import 'package:alqgp/Src/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class HomePageHeader extends StatelessWidget {
-  const HomePageHeader({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: tDefaultScreenPadding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Text(
-                // **************change
-                tHomeTitle,
-                style: TextStyle(fontSize: 28),
-              ),
-              Text(
-                'Gogo',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ), // TextStyle
-              ), // Text
-            ],
+Padding HomePageHeader(HomeController controller) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: tDefaultScreenPadding),
+    child: Row(
+      children: [
+        Text(
+          // ************** cheak on it again
+          tHomeTitle,
+          style: TextStyle(fontSize: 28),
+        ),
+        Obx(
+          () => Text(
+            controller.theUser.fullName!.split(" ")[0],
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          // ************* Plus button
-          // Container(
-          //   padding: EdgeInsets.all(8),
-          //   decoration: BoxDecoration(
-          //     color: Colors.grey[400],
-          //     shape: BoxShape.circle,
-          //   ), // BoxDecoration
-          //   child: Icon(Icons.add),
-          // ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }

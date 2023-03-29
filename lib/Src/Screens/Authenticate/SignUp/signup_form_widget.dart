@@ -28,18 +28,50 @@ class SignUpFormWidget extends StatelessWidget {
               decoration: const InputDecoration(
                   label: Text(tFullName),
                   prefixIcon: Icon(Icons.person_outline_rounded)),
+              validator: (value) {
+                RegExp regex = new RegExp(r'^[a-z A-Z,.\-]+$');
+                if (value!.isEmpty) {
+                  return ("Name cannot be Empty");
+                }
+                if (!regex.hasMatch(value)) {
+                  return ("Enter a valid name");
+                }
+                return null;
+              },
             ),
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
               controller: controller.email,
               decoration: const InputDecoration(
                   label: Text(tEmail), prefixIcon: Icon(Icons.email_outlined)),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("Please Enter Your Email");
+                }
+                // reg expression for email validation
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return ("Please Enter a valid email");
+                }
+                return null;
+              },
             ),
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
               controller: controller.phoneNo,
               decoration: const InputDecoration(
-                  label: Text(tPhoneNo), prefixIcon: Icon(Icons.phone)),
+                label: Text(tPhoneNo),
+                prefixIcon: Icon(Icons.phone),
+              ),
+              validator: (value) {
+                RegExp regex = new RegExp(r'^(?:[+0]9)[0-9]{10,}$');
+                if (value!.isEmpty) {
+                  return ("Please enter your phone number ");
+                }
+                if (!regex.hasMatch(value)) {
+                  return ("Please enter a valid phone number (+966 000000000)");
+                }
+              },
             ),
             const SizedBox(height: tFormHeight - 20),
             Obx(
@@ -57,6 +89,15 @@ class SignUpFormWidget extends StatelessWidget {
                         : Icon(Icons.remove_red_eye_outlined),
                   ),
                 ),
+                validator: (value) {
+                  RegExp regex = new RegExp(r'^.{6,}$');
+                  if (value!.isEmpty) {
+                    return ("Please enter your password ");
+                  }
+                  if (!regex.hasMatch(value)) {
+                    return ("Please enter a valid Password (Min. 6 Character)");
+                  }
+                },
                 obscureText: controller.notshowpass.value,
               ),
             ),
@@ -71,8 +112,8 @@ class SignUpFormWidget extends StatelessWidget {
                       fullName: controller.fullName.text.trim(),
                       phoneNo: controller.phoneNo.text.trim(),
                     );
-                    SignUpController.instance
-                        .createUser(user, controller.password.text.trim());
+                    controller.createUser(
+                        user, controller.password.text.trim());
                   }
                 },
                 child: Text(tSignup.toUpperCase()),

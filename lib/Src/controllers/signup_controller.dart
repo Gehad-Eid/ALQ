@@ -26,6 +26,8 @@ class SignUpController extends GetxController {
     bool state = await authRepo.createUserWithEmailAndPassword(
         user.email!, password, user);
     state
+
+        //*************** fix phone auth  */
         // ? phoneAuthentication(user.phoneNo!)
         ? Get.to(() => const OTPScreen())
         : Get.back();

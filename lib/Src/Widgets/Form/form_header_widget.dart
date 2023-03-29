@@ -1,3 +1,4 @@
+import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,14 @@ class FormHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image(
+
+            /// ********** change photo
             image: AssetImage(tLogo),
             color: imageColor,
             height: size.height * 0.3),
         SizedBox(height: heightBetween),
-        Text(title, style: Theme.of(context).textTheme.headline3),
+        Text(title, style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: tDefaultPadding - 5),
         Text(subTitle,
             textAlign: textAlign, style: Theme.of(context).textTheme.bodyText1),
       ],

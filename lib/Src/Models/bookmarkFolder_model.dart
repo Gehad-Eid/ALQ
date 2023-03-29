@@ -16,7 +16,7 @@ class bookmarkFolder {
     this.title,
     this.btnColor,
     // this.done,
-    this.count,
+    this.count = 0,
     this.isLast = false,
   });
 

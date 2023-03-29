@@ -8,7 +8,7 @@ const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
 const String tFullName = "Name";
-const String tForgetPassword = "Forget Password";
+const String tForgetPassword = "Forgot Password?";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 // -- Splash Screen Text
@@ -73,7 +73,7 @@ const String tDashboardTopCourses = "Top Courses";
 const String tHomeTitle = "Welcome Back ";
 const String tHomeHeading = "Keep It Up !";
 const String tHomeHeading2 = "Peers Rank";
-const String tHomeHeading3 = "Your Progress";
+const String tHomeHeading3 = "Your Achievements";
 const String tSeeAll = "See All";
 
 // -- Profile Screen - Text
@@ -81,7 +81,7 @@ const String tProfile = "Profile";
 const String tEditProfile = "Edit Profile";
 const String tLogoutDialogHeading = "Logout";
 const String tProfileHeading = "Gogo Alaq";
-const String tProfileSubHeading = "gg@gg.com";
+const String tProfileSubHeading = "gogo@gmail.com";
 
 // -- Menu - Text
 const String tMenu1 = "Settings";

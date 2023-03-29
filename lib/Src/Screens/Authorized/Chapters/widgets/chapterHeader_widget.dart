@@ -43,13 +43,16 @@ SizedBox lessonCardWithIndicatorAndModel(
               Expanded(
                 child: PageView.builder(
                     controller: controller.pageController,
-                    onPageChanged: (value) =>
-                        controller.onPageChangedCallback(value),
+                    onPageChanged: (value) {
+                      controller.onPageChangedCallback(value);
+                      controller.stoptTTS();
+                    },
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: chapterData[0].parts!.length,
                     itemBuilder: (context, index) {
                       return Container(
+                        padding: const EdgeInsets.all(tDefaultPadding),
                         margin: const EdgeInsets.only(
                             left: tDefaultSize,
                             right: tDefaultSize,
@@ -63,7 +66,6 @@ SizedBox lessonCardWithIndicatorAndModel(
                         child: Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(tDefaultPadding),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -75,15 +77,47 @@ SizedBox lessonCardWithIndicatorAndModel(
                                           Theme.of(context).textTheme.headline5,
                                     ),
                                   ),
-                                  Icon(Icons.volume_up),
+                                  Obx(
+                                    () => GestureDetector(
+                                      onTap: () {
+                                        controller.tts.value
+                                            ? controller.startTTS(chapterData[0]
+                                                .parts![index]
+                                                .replaceAll("+", "\n")
+                                                .replaceAll("\\n", "\n"))
+                                            : controller.pauseTTS();
+                                      },
+                                      child: Icon(
+                                        color: controller.tts.value
+                                            ? Colors.amber
+                                            : Colors.red,
+                                        controller.tts.value
+                                            ? Icons.volume_up
+                                            : Icons.pause_circle,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            //******* add TTS
-                            Text(
-                              //****** start from left */
-                              chapterData[0].parts![index],
-                              style: Theme.of(context).textTheme.titleMedium,
+                            const SizedBox(height: tDefaultPadding),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                child: Container(
+                                  // child: Align(
+                                  //   alignment: Alignment.center, // *** left
+                                  child: Text(
+                                    chapterData[0]
+                                        .parts![index]
+                                        .replaceAll("+", "\n")
+                                        .replaceAll("\\n", "\n"),
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ),
+                                // ),
+                              ),
                             ),
                           ],
                         ),

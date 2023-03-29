@@ -39,9 +39,15 @@ SizedBox lessonCardList(List<lesson> chapterData, int chapNum) {
                             ),
                           ),
                         ),
-                        //break line in name
-                        Text(chapterData[index].nameAndModle.split(",")[0],
-                            style: Theme.of(context).textTheme.bodyLarge),
+                        // ******** break line in name
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                                chapterData[index].nameAndModle.split(",")[0],
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ),
+                        ),
                       ],
                     ),
                   ))

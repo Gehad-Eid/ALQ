@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../bookmarks.dart';
 import 'bookmarkCount.dart';
 
-Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
+Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder, BuildContext context) {
   return GestureDetector(
     onTap: () {
       Get.to(() => bookmarks(), arguments: bookmarkFolder);
@@ -26,18 +26,17 @@ Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder) {
             size: 35,
           ),
           const SizedBox(height: tDefaultPadding),
-          Text(
-            bookmarkFolder.title!,
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-          ),
+          Text(bookmarkFolder.title!,
+              style: Theme.of(context).textTheme.headline5),
           const SizedBox(height: tDefaultPadding),
           Row(
             children: [
               bookmarkCount(
-                  bookmarkFolder.iconColor,
-                  bookmarkFolder.btnColor,
-                  // ******* add an icon ineastae of "Bookmark"
-                  '${bookmarkFolder.count} Bookmark'),
+                bookmarkFolder.iconColor,
+                bookmarkFolder.btnColor,
+                // ******* add an icon ineastae of "Bookmark"
+                '${bookmarkFolder.count} Bookmarks', context,
+              ),
               // ******* can add another btn👍
             ],
           ),

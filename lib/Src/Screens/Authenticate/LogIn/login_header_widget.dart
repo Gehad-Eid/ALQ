@@ -13,7 +13,10 @@ class LoginHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image(image: const AssetImage(tLogo), height: size.height * 0.3),
+
         Text(tLoginTitle, style: Theme.of(context).textTheme.headline3),
+
+        //********** change the text */
         Text(tLoginSubTitle, style: Theme.of(context).textTheme.bodyText1),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Services/database_repo.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/controllers/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -11,9 +12,7 @@ class ChapterCard extends StatelessWidget {
   Chapter chapter;
   bool home, learning;
 
-  // ******* Function onCardClick + the status + progress + image size to half
-
-  final controller = Get.put(DatabaseRepository());
+  // ******* Function onCardClick +  image size to half
 
   ChapterCard(
       {required this.chapter,
@@ -25,7 +24,11 @@ class ChapterCard extends StatelessWidget {
   //******************** theme frindly ?!!!!! */
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DatabaseRepository());
+    final homeController = Get.put(HomeController());
+
     final size = MediaQuery.of(context).size;
+    homeController.setChapterStatusAndProgress(chapter.chapNum!);
     return GestureDetector(
       onTap: () {
         Get.to(() => Chaptercontent(), arguments: chapter);
@@ -95,9 +98,9 @@ class ChapterCard extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: CircularStepProgressIndicator(
                     selectedColor: tPrimaryColor,
-                    totalSteps: 10,
-                    //********** add the progress of the user in thiis chapter */
-                    currentStep: 7 - 2,
+                    totalSteps: chapter.chapCont!,
+                    // the progress of the user in this chapter
+                    currentStep: homeController.progress.value,
                     width: 100,
                     height: 100,
                     stepSize: 17,
@@ -131,11 +134,27 @@ class ChapterCard extends StatelessWidget {
                     children: [
                       const SizedBox(width: 10),
                       Text(
-                        learning ? 'this status' : chapter.chapterName!,
+                        learning
+                            ? homeController.status.value
+                                // ********* "Status:" ?????!
+                                ? "Status: Completed"
+                                : "Status: Incomplete"
+                            : chapter.chapterName!,
                         style: learning
                             ? TextStyle(color: Colors.white, fontSize: 19)
                             : TextStyle(color: Colors.white, fontSize: 25),
-                      )
+                      ),
+                      learning
+                          ? homeController.status.value
+                              ? Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                )
+                              : Icon(
+                                  Icons.close_rounded,
+                                  color: Colors.red,
+                                )
+                          : SizedBox(),
                     ],
                   ),
                 ),

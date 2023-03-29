@@ -5,6 +5,8 @@ import 'package:alqgp/Src/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../allUsers.dart';
+
 class PeerRankWithAvatarAndName extends StatelessWidget {
   const PeerRankWithAvatarAndName({
     super.key,
@@ -21,7 +23,7 @@ class PeerRankWithAvatarAndName extends StatelessWidget {
           children: [
             Text(tHomeHeading2, style: Theme.of(context).textTheme.headline5),
             TextButton(
-                onPressed: () => {},
+                onPressed: () => {Get.to(() => allPeerRankWithAvatarAndName())},
                 child:
                     Text(tSeeAll, style: Theme.of(context).textTheme.headline5))
           ],
@@ -29,6 +31,7 @@ class PeerRankWithAvatarAndName extends StatelessWidget {
         const SizedBox(height: tDefaultPadding),
 
         //the avatar and name
+        // ******** getx bulder for stream
         FutureBuilder(
           future: controller.getAllUsers(),
           builder: (context, snapshot) {
@@ -36,8 +39,11 @@ class PeerRankWithAvatarAndName extends StatelessWidget {
               if (snapshot.hasData) {
                 List<UserModel> userData = snapshot.data as List<UserModel>;
                 return SizedBox(
-                  height: 110,
-                  child: ListView.builder(
+                  height: 100,
+                  child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(width: 12);
+                      },
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: userData.length,
@@ -48,12 +54,12 @@ class PeerRankWithAvatarAndName extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 backgroundImage:
-                                    AssetImage('images/muscular.png'),
+                                    AssetImage(userData[index].photo!),
                                 radius: 39,
                               ),
                               //break line
-                              Text(userData[index].fullName!,
-                                  style: Theme.of(context).textTheme.headline6),
+                              Text(userData[index].fullName!.split(" ")[0],
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ],
                           ),
                         );

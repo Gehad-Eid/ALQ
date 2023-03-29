@@ -27,7 +27,7 @@ class SignWithEmailAndPasswordFailure {
             'There is no user corresponding to the given email.');
       case 'wrong-password':
         return const SignWithEmailAndPasswordFailure(
-            'wrong email or password , lrease try again');
+            'wrong email or password , Please try again');
       default:
         return const SignWithEmailAndPasswordFailure();
     }

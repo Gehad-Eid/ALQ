@@ -96,6 +96,7 @@ class AuthenticationRepository extends GetxController {
     return state;
   }
 
+// Log in the user with thier email and password
   Future<String?> loginWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -110,5 +111,21 @@ class AuthenticationRepository extends GetxController {
     return null;
   }
 
+// Logs out the user
   Future<void> logout() async => await _auth.signOut();
+
+//resets the user password
+//**** add snake bar  */
+  Future<String?> resetPass(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.code);
+      return ex.message;
+    } catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.toString());
+      return ex.message;
+    }
+    return null;
+  }
 }

@@ -10,6 +10,22 @@ class ProfileController extends GetxController {
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
 
+  RxBool isDark = false.obs;
+  changeTheme() {
+    if (isDark.value == true) {
+      Get.changeTheme(ThemeData.light());
+    } else if (isDark.value == false) {
+      Get.changeTheme(ThemeData.dark());
+    }
+    isDark.value = !isDark.value;
+  }
+
+  RxBool notshowpass = true.obs;
+
+  changeShow() {
+    notshowpass.value = !notshowpass.value;
+  }
+
 // Get User Email and pass to UserRepository to fetch user record.
   getUserData() {
     final uid = _authRepo.firebaseUser.value?.uid;

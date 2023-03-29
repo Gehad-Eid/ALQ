@@ -1,4 +1,5 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Widgets/backButton.dart';
 import 'package:alqgp/Src/Widgets/findBookmarksFolders.dart';
 import 'package:flutter/material.dart';
 
@@ -9,17 +10,9 @@ class bookmarksFolders extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          //************** change appBar themeData */
-          title: const Text(
-            'Bookmarks',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-        ),
         body: Container(
-          padding:
-              const EdgeInsets.symmetric(horizontal: tDefaultScreenPadding),
+          padding: const EdgeInsets.symmetric(
+              horizontal: tDefaultScreenPadding, vertical: tDefaultSize),
           child: findBookmarksFolders(null, context, true),
         ),
       ),

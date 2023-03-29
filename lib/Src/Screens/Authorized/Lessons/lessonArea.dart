@@ -33,16 +33,18 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: size.height * 0.13 - 5 - tDefaultPadding,
-                    child: Center(
-                      child: Obx(
-                        () => Text(
-                            controller
-                                .lessonsList[controller.currentLessonIndex]
-                                .nameAndModle
-                                .split(",")[0],
-                            style: Theme.of(context).textTheme.headline3),
+                  Expanded(
+                    child: SizedBox(
+                      height: size.height * 0.13 - 5,
+                      child: Center(
+                        child: Obx(
+                          () => Text(
+                              controller
+                                  .lessonsList[controller.currentLessonIndex]
+                                  .nameAndModle
+                                  .split(",")[0],
+                              style: Theme.of(context).textTheme.headline3),
+                        ),
                       ),
                     ),
                   ),
@@ -124,7 +126,7 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                                             .split("+")[0],
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline4),
+                                            .headline5),
                                   ),
                                   Obx(
                                     () => GestureDetector(
@@ -160,7 +162,8 @@ DraggableScrollableSheet lessonArea(Size size, LessonController controller) {
                                     Expanded(
                                       child: ClipRRect(
                                         borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(tCardRadius),
+                                          topLeft:
+                                              Radius.circular(tCardRadius / 2),
                                           topRight:
                                               Radius.circular(tCardRadius),
                                         ),

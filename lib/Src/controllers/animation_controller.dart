@@ -13,6 +13,7 @@ class FadeInAnimationController extends GetxController {
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 3400));
     //*********************** the on time onboarding condition */
+
     Get.offAll(
       // Get.off Instead of Get.offAll()
       () => const OnBoardingScreen(),
