@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 Padding HomePageHeader(HomeController controller) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: tDefaultScreenPadding),
+
+    //************** fix the nullcheck error */
     child: Row(
       children: [
         Text(

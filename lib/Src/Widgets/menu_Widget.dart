@@ -1,8 +1,8 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMenuWidget extends StatelessWidget {
-  const ProfileMenuWidget({
+class MenuWidget extends StatelessWidget {
+  const MenuWidget({
     Key? key,
     required this.title,
     required this.icon,

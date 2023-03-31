@@ -1,13 +1,14 @@
+import 'package:alqgp/Src/Screens/Authorized/Settings/Settings.dart';
+import 'package:alqgp/Src/Screens/Authorized/Settings/info.dart';
 import 'package:alqgp/Src/Services/auth_repo.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
-import 'package:alqgp/Src/Widgets/backButton.dart';
 import 'package:alqgp/Src/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'profileMenu_Widget.dart';
+import '../../../../Widgets/menu_Widget.dart';
 import 'updateProfile.dart';
 
 class profile extends StatelessWidget {
@@ -38,14 +39,16 @@ class profile extends StatelessWidget {
                         controller.changeTheme();
                       },
                       icon: Icon(!controller.isDark.value
-                          ? Icons.wb_sunny
-                          : Icons.nightlight)),
+                          ? Icons.nights_stay_sharp
+                          : Icons.light_mode)),
                 ),
               ),
             ),
+
+            // Profile
             Container(
               padding: const EdgeInsets.all(tDefaultScreenPadding),
-              margin: const EdgeInsets.only(top: tDefaultSize),
+              margin: const EdgeInsets.only(top: tDefaultSpacing * 1.33),
               child: Column(
                 children: [
                   GestureDetector(
@@ -100,21 +103,28 @@ class profile extends StatelessWidget {
                   const SizedBox(height: 10),
 
                   ///MENU
-                  ProfileMenuWidget(
-                      title: "Settings", icon: Icons.settings, onPress: () {}),
-                  ProfileMenuWidget(
-                      title: "Billing Details",
-                      icon: Icons.wallet,
-                      onPress: () {}),
-                  ProfileMenuWidget(
+                  MenuWidget(
+                      title: "Settings",
+                      icon: Icons.settings,
+                      onPress: () {
+                        Get.to(Settings());
+                      }),
+
+                  MenuWidget(
                       title: "User Management",
-                      icon: Icons.person,
-                      onPress: () {}),
+                      icon: Icons.supervisor_account,
+                      onPress: () {
+                        Get.to(Settings());
+                      }),
                   const Divider(),
                   const SizedBox(height: 10),
-                  ProfileMenuWidget(
-                      title: "Information", icon: Icons.info, onPress: () {}),
-                  ProfileMenuWidget(
+                  MenuWidget(
+                      title: "Information",
+                      icon: Icons.info,
+                      onPress: () {
+                        Get.to(Info());
+                      }),
+                  MenuWidget(
                     title: "Logout",
                     icon: Icons.logout_outlined,
                     textColor: Colors.red,

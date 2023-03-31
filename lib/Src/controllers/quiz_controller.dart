@@ -24,9 +24,10 @@ class QuizController extends GetxController {
   List<int> indexs = List<int>.filled(2, -1, growable: true);
   RxBool delete = true.obs;
 
-  double presentage = 0.0;
-  String photo = "";
-  String what2do = "somthing went wrong";
+  RxDouble presentage = 0.0.obs;
+  RxString photo = "".obs;
+  RxString what2do = "somthing went wrong".obs;
+  RxString title = "".obs;
 
   @override
   void onInit() {
@@ -42,26 +43,36 @@ class QuizController extends GetxController {
         sum += scores[i];
       }
     }
-    presentage = sum / questions.length;
+    presentage.value = sum / questions.length;
     _databaseRepo.updateChapterScore(sum, chapterNum);
+    update();
     return sum;
   }
 
-// defines the grade ot the user and what too write in the UI
+// defines the grade of the user and what too write in the UI
   ABC() {
-    if (presentage >= 0.8) {
-      photo = "images/rating.png";
-      what2do = " WoW you nailed it";
-      return "Perfect";
-    } else if (presentage >= 0.5) {
-      photo = "images/star.png";
-      what2do = "oh yeah, you got that";
-      return "Good";
+    if (presentage.value >= 0.8) {
+      photo.value = "images/rating.png";
+      what2do.value = " WoW you nailed it";
+      title.value = "Perfect";
+      return title.value;
+    } else if (presentage.value >= 0.5) {
+      photo.value = "images/star.png";
+      what2do.value = "oh yeah, you got that";
+      title.value = "Good";
+      return title.value;
     } else {
-      photo = "images/star.png";
-      what2do = "oooh, you can do better";
-      return "Oh No";
+      photo.value = "images/sad.png";
+      what2do.value = "oooh, you can do better";
+      title.value = "Oh No";
+      return title.value;
     }
+  }
+
+  updateAchievements() {
+    //************ change to chapter name */
+    _databaseRepo.updateAchievement((presentage * questions.length).toInt(),
+        chapterNum.toString(), photo.value, title.value);
   }
 
 // keeps track on the selected answers by the user to change its color

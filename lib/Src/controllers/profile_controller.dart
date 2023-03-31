@@ -29,19 +29,16 @@ class ProfileController extends GetxController {
 // Get User Email and pass to UserRepository to fetch user record.
   getUserData() {
     final uid = _authRepo.firebaseUser.value?.uid;
-    if (uid != null) {
-      return _userRepo.getUserDetails(uid);
-    } else {
-      Get.snackbar("Error", "Please login to continue.");
-      throw '';
-    }
+
+    return _userRepo.getUserDetails(uid!);
   }
 
   /// Fetch List of user records.
   Future<List<UserModel>> getAllUsers() async => await _userRepo.allUsers();
 
-  //calling the
+  //calling the update to update the user
   updateRecord(UserModel user) async {
-    await _userRepo.updateUserRecord(user);
+    final uid = _authRepo.firebaseUser.value?.uid;
+    await _userRepo.updateUserRecord(user, uid!);
   }
 }

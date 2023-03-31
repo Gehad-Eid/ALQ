@@ -21,14 +21,17 @@ class ChapterCard extends StatelessWidget {
       this.home = true,
       super.key});
 
+  // final controller = Get.put(DatabaseRepository());
+  final homeController = Get.put(HomeController());
+
   //******************** theme frindly ?!!!!! */
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DatabaseRepository());
-    final homeController = Get.put(HomeController());
-
     final size = MediaQuery.of(context).size;
-    homeController.setChapterStatusAndProgress(chapter.chapNum!);
+    Future.delayed(Duration.zero, () {
+      homeController.setChapterStatusAndProgress(chapter.chapNum!);
+    });
+
     return GestureDetector(
       onTap: () {
         Get.to(() => Chaptercontent(), arguments: chapter);
@@ -117,7 +120,6 @@ class ChapterCard extends StatelessWidget {
                         child: Row(
                           children: [
                             const SizedBox(width: 10),
-                            //********** set the status from the db */
                             Text(chapter.chapterName!,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25))

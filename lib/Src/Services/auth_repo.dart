@@ -115,10 +115,27 @@ class AuthenticationRepository extends GetxController {
   Future<void> logout() async => await _auth.signOut();
 
 //resets the user password
-//**** add snake bar  */
   Future<String?> resetPass(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.code);
+      return ex.message;
+    } catch (e) {
+      final ex = SignWithEmailAndPasswordFailure.code(e.toString());
+      return ex.message;
+    }
+    return null;
+  }
+
+  //Change the user's password
+  Future<String?> changetPass(String email, String pass, String newPass) async {
+    var cred = EmailAuthProvider.credential(email: email, password: pass);
+    try {
+      await firebaseUser.value!
+          .reauthenticateWithCredential(cred)
+          .then((value) => firebaseUser.value!.updatePassword(newPass));
+      // await ;
     } on FirebaseAuthException catch (e) {
       final ex = SignWithEmailAndPasswordFailure.code(e.code);
       return ex.message;

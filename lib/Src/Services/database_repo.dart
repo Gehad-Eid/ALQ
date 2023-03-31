@@ -1,9 +1,11 @@
+import 'package:alqgp/Src/Models/achievements_model.dart';
 import 'package:alqgp/Src/Models/bookmarkFolder_model.dart';
 import 'package:alqgp/Src/Models/bookmark_model.dart';
 import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Models/lesson_model.dart';
 import 'package:alqgp/Src/Models/quiz_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'auth_repo.dart';
@@ -194,5 +196,73 @@ class DatabaseRepository extends GetxController {
       "ch${chapterNum}status": true,
       "ch${chapterNum}quiz": true,
     });
+  }
+
+//updates the Achievements for the user
+  Future<void> updateAchievement(
+      int score, String chapterName, String photo, String title) async {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    await _db.collection("Users").doc(uid).collection("Scores").add({
+      "title": title,
+      "chapterName": chapterName,
+      "photo": photo,
+      "score": score,
+    });
+  }
+
+// Streams the Achievements from db
+  Stream<List<Achievement>> getAchievement() {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    return _db
+        .collection("Users")
+        .doc(uid)
+        .collection("Scores")
+        // .orderBy("title")
+        .snapshots()
+        .map((data) {
+      List<Achievement> achievement = [];
+      data.docs.forEach((element) {
+        achievement.add(Achievement.fromSnapshot(element));
+      });
+      return achievement;
+    });
+  }
+
+// add a bug  report in the db
+  reportAbug(String title, String problem) async {
+    try {
+      await _db.collection('ReportABug').doc(title).set({
+        'timestamp': FieldValue.serverTimestamp(),
+        'ReportABug': problem,
+      });
+      Get.snackbar("Thank you", "The Report has been sent successfully.",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.33),
+          colorText: Colors.green);
+    } catch (e) {
+      Get.snackbar("error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.3),
+          colorText: Colors.red);
+    }
+  }
+
+  // add a feedback in the db
+  addFeedback(String title, String problem) async {
+    try {
+      await _db.collection('feedback').doc(title).set({
+        'timestamp': FieldValue.serverTimestamp(),
+        'feedback': problem,
+      });
+      Get.snackbar("Thank you", "Your feedback has been sent successfully.",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.33),
+          colorText: Colors.green);
+    } catch (e) {
+      Get.snackbar("error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.3),
+          colorText: Colors.red);
+    }
   }
 }

@@ -27,9 +27,7 @@ class FormHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image(
-
-            /// ********** change photo
-            image: AssetImage(tLogo),
+            image: AssetImage(image),
             color: imageColor,
             height: size.height * 0.3),
         SizedBox(height: heightBetween),

@@ -17,8 +17,10 @@ Container scoreArea(
     child: Column(
       children: [
         Center(
-          child: Text(quizController.ABC(),
-              style: Theme.of(context).textTheme.headline5),
+          child: Obx(
+            () => Text(quizController.ABC(),
+                style: Theme.of(context).textTheme.headline5),
+          ),
         ),
         Container(
           margin: const EdgeInsets.symmetric(
@@ -26,11 +28,13 @@ Container scoreArea(
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-                width: size.width / 2.3,
-                alignment: Alignment.topRight,
-                quizController.photo,
-                fit: BoxFit.contain),
+            child: Obx(
+              () => Image.asset(
+                  width: size.width / 2.3,
+                  alignment: Alignment.topRight,
+                  quizController.photo.value,
+                  fit: BoxFit.contain),
+            ),
           ),
         ),
         Center(
@@ -40,8 +44,10 @@ Container scoreArea(
         ),
 
         Center(
-          child: Text(quizController.what2do,
-              style: Theme.of(context).textTheme.headline5),
+          child: Obx(
+            () => Text(quizController.what2do.value,
+                style: Theme.of(context).textTheme.headline5),
+          ),
         ),
 
         // the question card
@@ -86,6 +92,7 @@ Container scoreArea(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
+              quizController.updateAchievements();
               Get.back();
             },
             style: ElevatedButton.styleFrom(

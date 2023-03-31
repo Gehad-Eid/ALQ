@@ -1,6 +1,5 @@
 import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:alqgp/Src/Models/lesson_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,11 +14,6 @@ class UserRepository extends GetxController {
   // set user(UserModel value) => this._currentUser.value = value;
 
   final _db = FirebaseFirestore.instance;
-
-  //clearing the var after logout
-  // void clear() {
-  //   _currentUser.value = UserModel();
-  // }
 
   // Store the user in Firestore
   createUser(UserModel user, String uid) async {
@@ -40,17 +34,17 @@ class UserRepository extends GetxController {
           backgroundColor: Colors.redAccent
               .withOpacity(0.1), // ******* Colors.white.withOpacity(0.5),
           colorText: Colors.red);
-      // print(error.toString());
     });
   }
 
-  // Fetch User details
+  // Fetch User details for the edit profile
   Future<UserModel> getUserDetails(String uid) async {
     final snapshot = await _db.collection("Users").doc(uid).get();
     final userData = UserModel.fromSnapshot(snapshot);
     return userData;
   }
 
+// Fetch User details and sync it
   Stream<UserModel> theUser(String uid) {
     return _db.collection("Users").doc(uid).snapshots().map((data) {
       UserModel user = UserModel.fromSnapshot(data);
@@ -75,7 +69,7 @@ class UserRepository extends GetxController {
   }
 
   //update the user's data
-  Future<void> updateUserRecord(UserModel user) async {
-    await _db.collection("Users").doc(user.uid).update(user.toJson());
+  Future<void> updateUserRecord(UserModel user, String uid) async {
+    await _db.collection("Users").doc(uid).update(user.toJson());
   }
 }

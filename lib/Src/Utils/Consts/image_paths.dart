@@ -10,3 +10,6 @@ const String tOnBoardingImage3 = "images/result.png";
 
 // -- welcome screen images --
 const String tWelcomeScreenImage = 'images/rating.png';
+
+// -- Reset / Change Password --
+const String tResetPass = "images/reset-password(1).png";

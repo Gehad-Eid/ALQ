@@ -121,7 +121,7 @@ class updateProfile extends StatelessWidget {
                                       return null;
                                     },
                                   ),
-                                  const SizedBox(height: tFormHeight - 20),
+                                  const SizedBox(height: tFormHeight),
                                   TextFormField(
                                     validator: (value) {
                                       RegExp regex =
@@ -138,36 +138,36 @@ class updateProfile extends StatelessWidget {
                                         label: Text(tPhoneNo),
                                         prefixIcon: Icon(Icons.phone)),
                                   ),
-                                  const SizedBox(height: tFormHeight - 20),
-                                  Obx(
-                                    () => TextFormField(
-                                      validator: (value) {
-                                        RegExp regex = new RegExp(r'^.{6,}$');
-                                        if (value!.isEmpty) {
-                                          return ("Please enter your password ");
-                                        }
-                                        if (!regex.hasMatch(value)) {
-                                          return ("Please enter a valid Password (Min. 6 Character)");
-                                        }
-                                      },
-                                      obscureText: controller.notshowpass.value,
-                                      controller: password,
-                                      decoration: InputDecoration(
-                                        label: Text(tPassword),
-                                        prefixIcon: Icon(Icons.fingerprint),
-                                        suffixIcon: IconButton(
-                                          onPressed: (() {
-                                            controller.changeShow();
-                                          }),
-                                          icon: controller.notshowpass.value
-                                              ? Icon(Icons.remove_red_eye_sharp)
-                                              : Icon(Icons
-                                                  .remove_red_eye_outlined),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: tFormHeight),
+                                  // const SizedBox(height: tFormHeight - 20),
+                                  // Obx(
+                                  //   () => TextFormField(
+                                  //     validator: (value) {
+                                  //       RegExp regex = new RegExp(r'^.{6,}$');
+                                  //       if (value!.isEmpty) {
+                                  //         return ("Please enter your password ");
+                                  //       }
+                                  //       if (!regex.hasMatch(value)) {
+                                  //         return ("Please enter a valid Password (Min. 6 Character)");
+                                  //       }
+                                  //     },
+                                  //     obscureText: controller.notshowpass.value,
+                                  //     controller: password,
+                                  //     decoration: InputDecoration(
+                                  //       label: Text(tPassword),
+                                  //       prefixIcon: Icon(Icons.fingerprint),
+                                  //       suffixIcon: IconButton(
+                                  //         onPressed: (() {
+                                  //           controller.changeShow();
+                                  //         }),
+                                  //         icon: controller.notshowpass.value
+                                  //             ? Icon(Icons.remove_red_eye_sharp)
+                                  //             : Icon(Icons
+                                  //                 .remove_red_eye_outlined),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  const SizedBox(height: tDefaultSpacing * 2),
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
