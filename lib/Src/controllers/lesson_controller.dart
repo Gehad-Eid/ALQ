@@ -67,8 +67,9 @@ class LessonController extends GetxController {
   //   _databaseRepo.addBookmark(lessonContent.id!, chapterNum, folderName.text);
   // }
 
-  addBookmarkWithFolderID(String folder, String name) {
-    _databaseRepo.addBookmark(lessonContent.id!, chapterNum, folder, name);
+  addBookmarkWithFolderID(String folder, String name, int count) {
+    _databaseRepo.addBookmark(
+        lessonContent.id!, chapterNum, folder, name, count);
     _databaseRepo.chageBookmarked(
         lessonContent.bookmarked!, lessonContent.id!, chapterNum);
     // bookmarked.value = !bookmarked.value;

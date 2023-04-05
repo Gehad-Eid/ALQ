@@ -65,6 +65,7 @@ class DatabaseRepository extends GetxController {
       "bgColor": color,
       "btnColor": color,
       "iconColor": color,
+      "count": 0,
     });
   }
 
@@ -99,8 +100,8 @@ class DatabaseRepository extends GetxController {
   }
 
   // add to bookmark
-  Future<void> addBookmark(
-      String id, int chapterNum, String folderID, String name) async {
+  Future<void> addBookmark(String id, int chapterNum, String folderID,
+      String name, int count) async {
     final uid = _authRepo.firebaseUser.value?.uid;
     final snapshot = await _db
         .collection("Users")
@@ -112,6 +113,15 @@ class DatabaseRepository extends GetxController {
       "name": name,
       "lessonID": id,
       "chapterNum": chapterNum,
+    });
+
+    final snapshot1 = await _db
+        .collection("Users")
+        .doc(uid)
+        .collection("bookmarks")
+        .doc(folderID)
+        .update({
+      "count": count,
     });
   }
 
@@ -229,7 +239,7 @@ class DatabaseRepository extends GetxController {
   }
 
 // add a bug  report in the db
-  reportAbug(String title, String problem) async {
+  Future<void> reportAbug(String title, String problem) async {
     try {
       await _db.collection('ReportABug').doc(title).set({
         'timestamp': FieldValue.serverTimestamp(),
@@ -248,7 +258,7 @@ class DatabaseRepository extends GetxController {
   }
 
   // add a feedback in the db
-  addFeedback(String title, String problem) async {
+  Future<void> addFeedback(String title, String problem) async {
     try {
       await _db.collection('feedback').doc(title).set({
         'timestamp': FieldValue.serverTimestamp(),

@@ -28,9 +28,9 @@ class ChapterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    Future.delayed(Duration.zero, () {
-      homeController.setChapterStatusAndProgress(chapter.chapNum!);
-    });
+    // Future.delayed(Duration.zero, () {
+    // homeController.setChapterStatusAndProgress(chapter.chapNum!);
+    // });
 
     return GestureDetector(
       onTap: () {
@@ -99,14 +99,17 @@ class ChapterCard extends StatelessWidget {
                 left: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
-                  child: CircularStepProgressIndicator(
-                    selectedColor: tPrimaryColor,
-                    totalSteps: chapter.chapCont!,
-                    // the progress of the user in this chapter
-                    currentStep: homeController.progress.value,
-                    width: 100,
-                    height: 100,
-                    stepSize: 17,
+                  child: Obx(
+                    () => CircularStepProgressIndicator(
+                      selectedColor: tPrimaryColor,
+                      totalSteps: chapter.chapCont!,
+                      // the progress of the user in this chapter
+                      currentStep:
+                          homeController.setChapterProgress(chapter.chapNum!),
+                      width: 100,
+                      height: 100,
+                      stepSize: 17,
+                    ),
                   ),
                 ),
               ),
@@ -137,7 +140,7 @@ class ChapterCard extends StatelessWidget {
                       const SizedBox(width: 10),
                       Text(
                         learning
-                            ? homeController.status.value
+                            ? homeController.setChapterStatus(chapter.chapNum!)
                                 // ********* "Status:" ?????!
                                 ? "Status: Completed"
                                 : "Status: Incomplete"
@@ -147,7 +150,7 @@ class ChapterCard extends StatelessWidget {
                             : TextStyle(color: Colors.white, fontSize: 25),
                       ),
                       learning
-                          ? homeController.status.value
+                          ? homeController.setChapterStatus(chapter.chapNum!)
                               ? Icon(
                                   Icons.check_circle,
                                   color: Colors.green,

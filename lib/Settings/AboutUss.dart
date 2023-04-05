@@ -87,7 +87,7 @@ class _aboutus extends State<aboutUss> {
               height: 15,
             ),
             // Text(
-            //   "ALQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University",
+            //   "ALAQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University",
             //   style: TextStyle(fontSize: 16, height: 1.4,fontWeight: FontWeight.bold,color:Color(0xFF8EA3E2).withOpacity(0.75),),
             // ),
             // const SizedBox(height: 10,),
@@ -117,7 +117,7 @@ class _aboutus extends State<aboutUss> {
                   child: Column(
                     children: [
                       Text(
-                        "ALQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University.\n",
+                        "ALAQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University.\n",
                         style: TextStyle(
                           fontSize: 16,
                           height: 1.4,

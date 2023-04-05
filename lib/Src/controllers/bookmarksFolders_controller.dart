@@ -11,13 +11,13 @@ class BookmarksFolderController extends GetxController {
   final FolderTitle = TextEditingController();
 
   final List<Color> predefinedColors = [
-    Color(0xfffafafa), // canvas
+    Color.fromARGB(255, 110, 182, 255),
     Color(0xfffa8072), // salmon
     Color(0xfffedc56), // mustard
     Color(0xffd0f0c0), // tea
     Color(0xfffca3b7), // flamingo
     Color(0xff997950), // tortilla
-    Color(0xfffffdd0), // cream
+    Color.fromARGB(255, 196, 147, 245),
   ];
 
   RxInt choosenColor = 0.obs;

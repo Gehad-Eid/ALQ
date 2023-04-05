@@ -47,14 +47,15 @@ class bookmarks extends StatelessWidget {
                       controller.deleteFolder();
                     },
                     icon: const Icon(
-                      Icons.delete_forever,
+                      Icons.folder_delete_rounded,
                       color: Colors.red,
+                      size: 30,
                     )),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(tDefaultScreenPadding),
-              margin: const EdgeInsets.only(top: tDefaultSize),
+              margin: const EdgeInsets.only(top: tDefaultSpacing * 2),
               child: GetX<BookmarksController>(
                 init: Get.put<BookmarksController>(BookmarksController()),
                 builder: (BookmarksController bookmarkController) {
@@ -70,11 +71,21 @@ class bookmarks extends StatelessWidget {
                     }
                   } else if (controller.NotExsit.value &&
                       !bookmarkController.lessons.isNotEmpty) {
-                    return Center(
-                      child: Text("No Bookmarks!",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3), //***** add null photo */
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "images/man.png",
+                          fit: BoxFit.contain,
+                        ),
+                        SizedBox(
+                          height: tDefaultPadding,
+                        ),
+                        Center(
+                          child: Text("No Bookmarks!",
+                              style: Theme.of(context).textTheme.headline3),
+                        ),
+                      ],
                     );
                   } else {
                     return const Center(child: CircularProgressIndicator());

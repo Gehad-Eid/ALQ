@@ -92,7 +92,13 @@ Column lessonScreenbookmarksFolders(
                                 .lessonsList[controller.currentLessonIndex]
                                 .nameAndModle
                                 .split(",")[0],
+                            folderController.folders[index].count! + 1,
                           );
+                          Get.snackbar("Success",
+                              "The bookmark has been added successfully.",
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.green.withOpacity(0.33),
+                              colorText: Colors.green);
                         },
                       ),
                     ),

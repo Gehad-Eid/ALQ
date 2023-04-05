@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:alqgp/Src/Models/chapter_model.dart';
 import 'package:alqgp/Src/Models/quiz_model.dart';
 import 'package:alqgp/Src/Services/database_repo.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ class QuizController extends GetxController {
 
   final _databaseRepo = Get.put(DatabaseRepository());
 
-  final int chapterNum = Get.arguments;
+  final Chapter chapter = Get.arguments;
 
   RxList<Quiz> questionsList = RxList<Quiz>();
   List<Quiz> get questions => questionsList;
@@ -32,8 +33,8 @@ class QuizController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // the questions from data base to keep track of the changes
-    questionsList.bindStream(_databaseRepo.getQuestions(chapterNum));
+    // qstream the questions from database to keep track of the changes
+    questionsList.bindStream(_databaseRepo.getQuestions(chapter.chapNum!));
   }
 
   updateScore() {
@@ -44,7 +45,7 @@ class QuizController extends GetxController {
       }
     }
     presentage.value = sum / questions.length;
-    _databaseRepo.updateChapterScore(sum, chapterNum);
+    _databaseRepo.updateChapterScore(sum, chapter.chapNum!);
     update();
     return sum;
   }
@@ -69,10 +70,10 @@ class QuizController extends GetxController {
     }
   }
 
+// updatets the achievemnets in the database
   updateAchievements() {
-    //************ change to chapter name */
     _databaseRepo.updateAchievement((presentage * questions.length).toInt(),
-        chapterNum.toString(), photo.value, title.value);
+        chapter.chapterName!, photo.value, title.value);
   }
 
 // keeps track on the selected answers by the user to change its color

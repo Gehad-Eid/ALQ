@@ -34,7 +34,7 @@ class Info extends StatelessWidget {
             padding: const EdgeInsets.all(tDefaultScreenPadding),
             margin: const EdgeInsets.only(top: tDefaultSpacing * 2),
             child: Column(children: [
-              Text("In this section you can know about ALQ more",
+              Text("In this section you can know about ALAQ more",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyText1),
               const SizedBox(height: tDefaultSpacing),

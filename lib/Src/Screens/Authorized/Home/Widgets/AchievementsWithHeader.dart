@@ -1,4 +1,4 @@
-import 'package:alqgp/Src/Screens/Authorized/Home/achievements.dart';
+import 'package:alqgp/Src/Screens/Authorized/Users/achievements.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/controllers/home_controller.dart';
@@ -23,7 +23,7 @@ class AchievementsWithHeader extends StatelessWidget {
             children: [
               Text(tHomeHeading3, style: Theme.of(context).textTheme.headline5),
               TextButton(
-                  onPressed: () => {Get.to(() => achievements())},
+                  onPressed: () => {Get.to(() => Achievements())},
                   child: Text(tSeeAll,
                       style: Theme.of(context).textTheme.headline5))
             ],

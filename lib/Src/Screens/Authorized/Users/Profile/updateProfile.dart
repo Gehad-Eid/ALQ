@@ -59,7 +59,6 @@ class updateProfile extends StatelessWidget {
                                     bottom: 0,
                                     right: 0,
                                     child: Container(
-                                      //the back btn u smart asss ahahahahaha (???????????!)
                                       width: 35,
                                       height: 35,
                                       decoration: BoxDecoration(
@@ -101,10 +100,13 @@ class updateProfile extends StatelessWidget {
                                         prefixIcon:
                                             Icon(Icons.person_outline_rounded)),
                                   ),
-                                  const SizedBox(height: tFormHeight - 20),
+                                  const SizedBox(height: tFormHeight),
                                   TextFormField(
                                     controller: email,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
+                                      enabled: false, //disabel this field input
+                                      filled: true,
+                                      fillColor: Colors.grey.withOpacity(0.33),
                                       label: Text(tEmail),
                                       prefixIcon: Icon(Icons.email_outlined),
                                     ),
@@ -167,7 +169,7 @@ class updateProfile extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                  const SizedBox(height: tDefaultSpacing * 2),
+                                  const SizedBox(height: tDefaultSpacing * 1.5),
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
@@ -178,7 +180,10 @@ class updateProfile extends StatelessWidget {
                                             fullName: fullName.text.trim(),
                                             phoneNo: phoneNo.text.trim(),
                                           );
-                                          await controller.updateRecord(user);
+                                          await controller.updateRecord(
+                                            fullName.text.trim(),
+                                            phoneNo.text.trim(),
+                                          );
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -196,11 +201,11 @@ class updateProfile extends StatelessWidget {
                                     children: [
                                       const Text.rich(
                                         TextSpan(
-                                          text: tJoined,
+                                          text: "", //tJoined
                                           style: TextStyle(fontSize: 12),
                                           children: [
                                             TextSpan(
-                                                text: tJoinedAt,
+                                                text: "", //tJoinedAt
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12))
@@ -246,7 +251,6 @@ class updateProfile extends StatelessWidget {
     );
   }
 }
-
 
 // pic files
 

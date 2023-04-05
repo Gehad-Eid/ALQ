@@ -16,8 +16,8 @@ class HomeController extends GetxController {
   Rx<UserModel> user = UserModel().obs;
   UserModel get theUser => user.value;
 
-  RxBool status = false.obs;
-  RxInt progress = 0.obs;
+  // RxBool status = false.obs;
+  // RxInt progress = 0.obs;
 
   RxList<Achievement> achievementList = RxList<Achievement>();
   List<Achievement> get achievements => achievementList;
@@ -31,28 +31,49 @@ class HomeController extends GetxController {
     achievementList.bindStream(_databaseRepo.getAchievement());
   }
 
-  setChapterStatusAndProgress(int chapterNumber) {
+  setChapterProgress(int chapterNumber) {
     switch (chapterNumber) {
       case 1:
-        status.value = theUser.ch1status!;
-        progress.value = theUser.ch1prog!;
-        break;
+        // status.value = theUser.ch1status!;
+        // progress.value =
+
+        return theUser.ch1prog!;
+      // break;
       case 2:
-        status.value = theUser.ch2status!;
-        progress.value = theUser.ch2prog!;
-        break;
+        // status.value = theUser.ch2status!;
+        // progress.value =
+        return theUser.ch2prog!;
+      // break;
       case 3:
-        status.value = theUser.ch3status!;
-        progress.value = theUser.ch3prog!;
-        break;
+        // status.value = theUser.ch3status!;
+        // progress.value =
+        return theUser.ch3prog!;
+      // break;
       case 4:
-        status.value = theUser.ch4status!;
-        progress.value = theUser.ch4prog!;
-        break;
+        // status.value = theUser.ch4status!;
+        // progress.value =
+        return theUser.ch4prog!;
+      // break;
       case 5:
-        status.value = theUser.ch5status!;
-        progress.value = theUser.ch5prog!;
-        break;
+        // status.value = theUser.ch5status!;
+        // progress.value =
+        return theUser.ch5prog!;
+      // break;
+    }
+  }
+
+  setChapterStatus(int chapterNumber) {
+    switch (chapterNumber) {
+      case 1:
+        return theUser.ch1status!;
+      case 2:
+        return theUser.ch2status!;
+      case 3:
+        return theUser.ch3status!;
+      case 4:
+        return theUser.ch4status!;
+      case 5:
+        return theUser.ch5status!;
     }
   }
 }

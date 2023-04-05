@@ -61,6 +61,7 @@ class _ARState extends State<AR> {
               height: MediaQuery.of(context).size.height * .8,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(22),
+                // using the AR extention
                 child: ARView(
                   onARViewCreated: onARViewCreated,
                 ),
@@ -125,6 +126,8 @@ class _ARState extends State<AR> {
   //   }
   // }
 
+// a function that selects the 3D model absed on the chapter number
+// then it creates a node for it to show on the display
   Future<void> onWebObjectAtButtonPressed(int name) async {
     String urlLink = '';
     switch (name) {

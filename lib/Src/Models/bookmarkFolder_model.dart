@@ -31,18 +31,20 @@ class bookmarkFolder {
       bgColor: Color(data["bgColor"]).withOpacity(0.30),
       btnColor: Color(data["btnColor"]).withOpacity(0.50),
       iconColor: Color(data["iconColor"]),
+      count: data["count"],
     );
   }
 
   // Map bookmark folder data from bookmark folder Model to a map (json form)
-  toJson() {
-    return {
-      "title": title,
-      "bgColor": bgColor,
-      "btnColor": btnColor,
-      "iconColor": iconColor,
-    };
-  }
+  // toJson() {
+  //   return {
+  //     "title": title,
+  //     "bgColor": bgColor,
+  //     "btnColor": btnColor,
+  //     "iconColor": iconColor,
+  //     "count": count,
+  //   };
+  // }
 
   static List<bookmarkFolder> generateBookmark() {
     return [

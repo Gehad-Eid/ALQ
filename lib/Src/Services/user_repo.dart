@@ -61,15 +61,21 @@ class UserRepository extends GetxController {
   // }
 
   // Fetch All Users details
-  Future<List<UserModel>> allUsers() async {
-    final snapshot = await _db.collection("Users").get();
-    final userData =
-        snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
-    return userData;
+  Stream<List<UserModel>> allUsers() {
+    return _db.collection("Users").orderBy("score").snapshots().map((data) {
+      List<UserModel> users = [];
+      data.docs.forEach((element) {
+        users.add(UserModel.fromSnapshot(element));
+      });
+      return users;
+    });
   }
 
   //update the user's data
-  Future<void> updateUserRecord(UserModel user, String uid) async {
-    await _db.collection("Users").doc(uid).update(user.toJson());
+  Future<void> updateUserRecord(String name, String phone, String uid) async {
+    await _db.collection("Users").doc(uid).update({
+      "FullName": name,
+      "Phone": phone,
+    });
   }
 }

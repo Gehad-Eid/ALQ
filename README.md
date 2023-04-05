@@ -1,4 +1,4 @@
-Hello and welcome to ALQ عَلَق!
+Hello and welcome to ALAQ عَلَق!
  
 In this project, we will develop an augmented reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.
 

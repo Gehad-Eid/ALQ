@@ -63,6 +63,7 @@ Future<dynamic> addFolderBottomSheet(
                 padding:
                     const EdgeInsets.symmetric(horizontal: tDefaultPadding),
                 child: TextFormField(
+                  maxLength: 10,
                   controller: controller.FolderTitle,
                   decoration: const InputDecoration(
                       label: Text(tAddBookmark),

@@ -21,13 +21,15 @@ Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
-            Icons.monitor_heart_rounded,
+            Icons.folder,
             color: bookmarkFolder.iconColor,
             size: 35,
           ),
           const SizedBox(height: tDefaultPadding),
-          Text(bookmarkFolder.title!,
-              style: Theme.of(context).textTheme.headline5),
+          Expanded(
+            child: Text(bookmarkFolder.title!,
+                style: Theme.of(context).textTheme.headline5),
+          ),
           const SizedBox(height: tDefaultPadding),
           Row(
             children: [
@@ -37,7 +39,6 @@ Widget bookmarkFolderCard(bookmarkFolder bookmarkFolder, BuildContext context) {
                 // ******* add an icon ineastae of "Bookmark"
                 '${bookmarkFolder.count} Bookmarks', context,
               ),
-              // ******* can add another btn👍
             ],
           ),
         ],

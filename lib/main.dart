@@ -23,7 +23,7 @@
 //       defaultValue: false,
 //       builder: (_, isDarkMood, __) => MaterialApp(
 //         debugShowCheckedModeBanner: false,
-//         title: 'ALQ',
+//         title: 'ALAQ',
 //         theme: isDarkMood
 //             ? ThemeData.dark().copyWith(
 //                 primaryColor: Colors.black,

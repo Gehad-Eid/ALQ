@@ -13,7 +13,7 @@ const String tChangePassword = "Change Password";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 // -- Splash Screen Text
-const String tAppName = "ALQ";
+const String tAppName = "ALAQ";
 const String tAppTagLine = "solgan";
 
 // -- On Boarding Text
@@ -28,7 +28,7 @@ const String tOnBoardingCounter2 = "2/3";
 const String tOnBoardingCounter3 = "3/3";
 
 // -- Welcome Screen Text
-const String tWelcomeTitle = "ALQ";
+const String tWelcomeTitle = "ALAQ";
 const String tWelcomeSubTitle = "When learning is enjoyable !";
 
 // -- Login Screen Text
@@ -112,7 +112,7 @@ const String tChangePassHeader3 = "Renter your New Password";
 
 // -- About Us - Text
 const List<String> aboutUsText = [
-  "ALQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University.\n",
+  "ALAQ is reality smartphone app that will teach young learners aged 10-15 years old about human anatomy and organs.\n\nIt was developed by a wonderful team consisting of 5 programmers and a supervisor, affiliated with King Saud University.\n",
   "We are a team of five information technology student who datecated or eforrt and time to make this application to help you understand the beuty of anatomy",
   "To launch the application, the user must first sign up in order to have an account, then log in.\nWhen the user logs in, a welcome page appears, and the user can choose to start learning or go to their profile.\nIf the user starts learning, then human body systems chapters will appear, and the user can choose a chapter and take lessons and see a 3D model, view AR, or take a quiz.\nIf the user goes to their profile, they can see their information, score, and achievements.\nWhen the user has finished learning, they can log out.",
 ];

@@ -65,10 +65,15 @@ class Chaptercontent extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               Get.to(() => quiz(),
-                                  arguments:
-                                      chapterController.chapterContent.chapNum);
+                                  arguments: chapterController.chapterContent);
                             },
                             style: ElevatedButton.styleFrom(
+                              /// ****** remove
+                              backgroundColor: Colors.grey,
+
+                              /// ****** remove
+                              side: BorderSide(color: Colors.grey),
+
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100),
                               ),
