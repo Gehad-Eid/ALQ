@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class updateProfile extends StatelessWidget {
-  const updateProfile({super.key});
+  final String photo;
+  const updateProfile({super.key, required this.photo});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,8 @@ class updateProfile extends StatelessWidget {
                         return Column(
                           children: [
                             GestureDetector(
-                              onTap: () => Get.to(() => updateProfile()),
+                              onTap: () =>
+                                  Get.to(() => updateProfile(photo: photo)),
                               // image & icon
                               child: Stack(
                                 children: [
@@ -52,8 +54,7 @@ class updateProfile extends StatelessWidget {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        child: const Image(
-                                            image: AssetImage(tLogo))),
+                                        child: Image(image: AssetImage(photo))),
                                   ),
                                   Positioned(
                                     bottom: 0,

@@ -61,7 +61,8 @@ class profile extends StatelessWidget {
                       child: Column(
                         children: [
                           GestureDetector(
-                            onTap: () => Get.to(() => updateProfile()),
+                            onTap: () => Get.to(
+                                () => updateProfile(photo: userData.photo!)),
                             child: Stack(
                               children: [
                                 SizedBox(
@@ -98,7 +99,8 @@ class profile extends StatelessWidget {
                           SizedBox(
                             width: 200,
                             child: ElevatedButton(
-                              onPressed: () => Get.to(() => updateProfile()),
+                              onPressed: () => Get.to(
+                                  () => updateProfile(photo: userData.photo!)),
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: tPrimaryColor,
                                   side: BorderSide.none,
