@@ -20,10 +20,11 @@ class HomeWrapper extends StatelessWidget {
           onPageChanged: _mainWrapperController.updatePage,
           children: [..._mainWrapperController.pages],
         ),
+
+        // nav bar
         bottomNavigationBar: Container(
-          margin: const EdgeInsets.symmetric(
-              horizontal: tDefaultScreenPadding - 10,
-              vertical: tDefaultPadding - 5),
+          margin: EdgeInsets.symmetric(
+              horizontal: size.width * 0.03, vertical: tDefaultPadding - 5),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(tNavBarRadius)),
             child: Obx(
