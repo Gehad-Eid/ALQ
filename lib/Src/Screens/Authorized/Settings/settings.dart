@@ -45,6 +45,12 @@ class Settings extends StatelessWidget {
                   onPress: () {
                     Get.to(ChangePassword());
                   }),
+              // MenuWidget(
+              // title: "Delete account",
+              // icon: Icons.password,
+              // onPress: () {
+              //   Get.to(ChangePassword());
+              // }),
               MenuWidget(
                   title: "Report A Bug",
                   icon: Icons.bug_report,

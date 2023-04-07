@@ -40,7 +40,7 @@ Padding bookmarkCardWithDelete(
                 "${ChaptersList[bookmarkController.lessons[index].chapterNum - 1].chapterName}"),
 
             // ******** get the icon forom the folder // *******chap photo here
-            leading: Icon(Icons.heart_broken_rounded, size: 50),
+            leading: Icon(Icons.bookmark, size: 50),
           ),
         ),
       ),

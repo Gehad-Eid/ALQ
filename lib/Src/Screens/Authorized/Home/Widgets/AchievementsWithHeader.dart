@@ -87,49 +87,57 @@ class AchievementsWithHeader extends StatelessWidget {
           // ),
 
           Obx(
-            () => Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return const SizedBox(width: 12);
-                },
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: homeController.achievements.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.all(tDefaultPadding / 3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(tCardRadius),
-                      color: Colors.grey.shade200, // ***** change
+            () => homeController.achievements.length > 0
+                ? Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(width: 12);
+                      },
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: homeController.achievements.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.all(tDefaultPadding / 3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(tCardRadius),
+                            color: Colors.grey.shade200, // ***** change
+                          ),
+                          height: 100,
+                          child: Column(
+                            children: [
+                              Image(
+                                  image: AssetImage(homeController
+                                      .achievements[index].photo!),
+                                  height: 100),
+                              const SizedBox(height: 5),
+                              //break line
+                              Text(homeController.achievements[index].title!,
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                              const SizedBox(height: 5),
+                              Text(
+                                  "${homeController.achievements[index].score!}/10",
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                              const SizedBox(height: 5),
+                              Text(
+                                  homeController
+                                          .achievements[index].chapterName!
+                                          .split(" ")[0] +
+                                      " ...",
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
+                              // Text("system",
+                              //     style: Theme.of(context).textTheme.bodyMedium),
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                    height: 100,
-                    child: Column(
-                      children: [
-                        Image(
-                            image: AssetImage(
-                                homeController.achievements[index].photo!),
-                            height: 100),
-                        const SizedBox(height: 5),
-                        //break line
-                        Text(homeController.achievements[index].title!,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(height: 5),
-                        Text("${homeController.achievements[index].score!}/10",
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(height: 5),
-                        Text(
-                            homeController.achievements[index].chapterName!
-                                    .split(" ")[0] +
-                                " ...",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        // Text("system",
-                        //     style: Theme.of(context).textTheme.bodyMedium),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+                  )
+                : Center(
+                    child: Text("No achievements",
+                        style: Theme.of(context).textTheme.headline3),
+                  ),
           ),
         ],
       ),

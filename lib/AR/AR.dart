@@ -1,4 +1,5 @@
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
+import 'package:alqgp/Src/Widgets/backButton.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
@@ -42,49 +43,71 @@ class _ARState extends State<AR> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'AR',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF8EA3E2),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return SafeArea(
+      child: Scaffold(
+        // appBar: AppBar(
+        //   elevation: 0,
+        //   title: const Text(
+        //     'AR',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        //   centerTitle: true,
+        //   backgroundColor: Color(0xFF8EA3E2),
+        // ),
+        body: Stack(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .8,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(22),
-                // using the AR extention
-                child: ARView(
-                  onARViewCreated: onARViewCreated,
-                ),
+            backButton(),
+            //title
+            Positioned(
+              top: tDefaultSize,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text("AR", style: Theme.of(context).textTheme.headline5),
               ),
             ),
-            Row(
-              children: [
-                // Expanded(
-                //   child: ElevatedButton(
-                //       onPressed: () => onLocalObjectButtonPressed(),
-                //       child:  Text("Add / Remove Local Object")),
-                // ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(155, 165, 71, 197)),
-                      onPressed: () => onWebObjectAtButtonPressed(chapnum),
-                      child: Text("Add / Remove the object")),
-                )
-              ],
+            Container(
+              padding: const EdgeInsets.all(tDefaultScreenPadding),
+              margin: const EdgeInsets.only(top: tDefaultSpacing * 1.5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(22),
+                        // using the AR extention
+                        child: ARView(
+                          onARViewCreated: onARViewCreated,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      // Expanded(
+                      //   child: ElevatedButton(
+                      //       onPressed: () => onLocalObjectButtonPressed(),
+                      //       child:  Text("Add / Remove Local Object")),
+                      // ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
+                            // style: ElevatedButton.styleFrom(
+                            //     backgroundColor:
+                            //         Color.fromARGB(155, 165, 71, 197)),
+                            onPressed: () =>
+                                onWebObjectAtButtonPressed(chapnum),
+                            child: Text("Add / Remove the object")),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

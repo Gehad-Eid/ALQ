@@ -8,16 +8,13 @@ class UserModel {
   //******** add those to db && toJson method */
   bool? ch1status, ch2status, ch3status, ch4status, ch5status;
 
-  List<int>? scores;
-
   UserModel(
       {this.uid,
       this.email,
       this.fullName,
-      this.phoneNo = "images/profile2.png",
-      this.photo,
+      this.phoneNo,
+      this.photo = "images/profile2.png",
       this.score = 0,
-      this.scores,
       this.ch1status = false,
       this.ch2status = false,
       this.ch3status = false,
@@ -61,7 +58,6 @@ class UserModel {
       ch3prog: data["ch3prog"],
       ch4prog: data["ch4prog"],
       ch5prog: data["ch5prog"],
-      scores: data['scores'] is Iterable ? List.from(data['scores']) : null,
     );
   }
 
@@ -88,7 +84,6 @@ class UserModel {
       "ch3status": ch3status,
       "ch4status": ch4status,
       "ch5status": ch5status,
-      "scores": scores,
     };
   }
 }

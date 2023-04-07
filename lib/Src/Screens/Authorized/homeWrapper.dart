@@ -22,7 +22,8 @@ class HomeWrapper extends StatelessWidget {
         ),
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(
-              horizontal: tDefaultScreenPadding, vertical: tDefaultPadding),
+              horizontal: tDefaultScreenPadding - 10,
+              vertical: tDefaultPadding - 5),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(tNavBarRadius)),
             child: Obx(
