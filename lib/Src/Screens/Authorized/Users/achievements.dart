@@ -31,60 +31,87 @@ class Achievements extends StatelessWidget {
             margin: const EdgeInsets.only(top: tDefaultSpacing * 2),
             child: Column(children: [
               Obx(
-                () => Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: homeController.achievements.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(tDefaultPadding / 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(tCardRadius),
-                          color: tPrimaryColor, // ***** change
+                () => homeController.achievements.length > 0
+                    ? Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 12);
+                          },
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: homeController.achievements.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding:
+                                  const EdgeInsets.all(tDefaultPadding / 3),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(tCardRadius),
+                                color: tPrimaryColor, // ***** change
+                              ),
+                              height: 100,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image(
+                                      image: AssetImage(homeController
+                                          .achievements[index].photo!),
+                                      height: 100),
+                                  const SizedBox(height: 5),
+                                  //break line
+                                  Text(
+                                      homeController.achievements[index].title!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                      "${homeController.achievements[index].score!}/10",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge),
+                                  const SizedBox(height: 5),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          homeController
+                                              .achievements[index].chapterName!
+                                              .split(" ")[0],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium),
+                                      Text(
+                                          homeController
+                                              .achievements[index].chapterName!
+                                              .split(" ")[1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                        height: 100,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image(
-                                image: AssetImage(
-                                    homeController.achievements[index].photo!),
-                                height: 100),
-                            const SizedBox(height: 5),
-                            //break line
-                            Text(homeController.achievements[index].title!,
-                                style: Theme.of(context).textTheme.bodyLarge),
-                            const SizedBox(height: 5),
-                            Text(
-                                "${homeController.achievements[index].score!}/10",
-                                style: Theme.of(context).textTheme.bodyLarge),
-                            const SizedBox(height: 5),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                    homeController
-                                        .achievements[index].chapterName!
-                                        .split(" ")[0],
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                                Text(
-                                    homeController
-                                        .achievements[index].chapterName!
-                                        .split(" ")[1],
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "images/man.png",
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(
+                            height: tDefaultPadding,
+                          ),
+                          Center(
+                            child: Text("No achievements",
+                                style: Theme.of(context).textTheme.headline3),
+                          ),
+                        ],
+                      ),
               ),
             ]),
           ),

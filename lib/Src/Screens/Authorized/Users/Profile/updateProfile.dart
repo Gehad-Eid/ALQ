@@ -1,15 +1,22 @@
+import 'dart:io';
+
 import 'package:alqgp/Src/Models/user_model.dart';
 import 'package:alqgp/Src/Utils/Consts/consts.dart';
 import 'package:alqgp/Src/Utils/Consts/image_paths.dart';
 import 'package:alqgp/Src/Utils/Consts/text.dart';
 import 'package:alqgp/Src/Widgets/backButton.dart';
 import 'package:alqgp/Src/controllers/profile_controller.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class updateProfile extends StatelessWidget {
   final String photo;
-  const updateProfile({super.key, required this.photo});
+  updateProfile({super.key, required this.photo});
+
+  // String imageUrl = '';
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +50,6 @@ class updateProfile extends StatelessWidget {
                         return Column(
                           children: [
                             GestureDetector(
-                              onTap: () =>
-                                  Get.to(() => updateProfile(photo: photo)),
                               // image & icon
                               child: Stack(
                                 children: [
@@ -54,7 +59,14 @@ class updateProfile extends StatelessWidget {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        child: Image(image: AssetImage(photo))),
+                                        child: Obx(
+                                          () => Image(
+                                              image: NetworkImage(
+                                                  controller.photo.value == ""
+                                                      ? photo
+                                                      : controller
+                                                          .photo.value)),
+                                        )),
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -73,6 +85,51 @@ class updateProfile extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              onTap: () async {
+                                // picking the image
+                                ImagePicker imagepicker = ImagePicker();
+                                XFile? file = await imagepicker.pickImage(
+                                    source: ImageSource.gallery);
+
+                                // check if there's an image
+                                if (file == null) {
+                                  Get.snackbar("error", "Please pick a picture",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      backgroundColor:
+                                          Colors.red.withOpacity(0.3),
+                                      colorText: Colors.red);
+                                } else {
+                                  //give the image a name using the current time in miliseconds
+                                  String uniqueFileName = DateTime.now()
+                                      .millisecondsSinceEpoch
+                                      .toString();
+
+                                  //Get a reference to storage root
+                                  Reference referenceRoot =
+                                      FirebaseStorage.instance.ref();
+                                  Reference referenceDirImages =
+                                      referenceRoot.child('images');
+                                  //Create a reference for the image to be stored
+                                  Reference referenceImageToUpload =
+                                      referenceDirImages.child(uniqueFileName);
+
+                                  try {
+                                    //Store the file
+                                    await referenceImageToUpload
+                                        .putFile(File(file.path));
+                                    //Success: get the download URL
+                                    controller.photo.value =
+                                        await referenceImageToUpload
+                                            .getDownloadURL();
+                                  } catch (error) {
+                                    Get.snackbar("error", "$error",
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        backgroundColor:
+                                            Colors.red.withOpacity(0.3),
+                                        colorText: Colors.red);
+                                  }
+                                }
+                              },
                             ),
                             const SizedBox(height: 30), // delete from here
                             const Divider(), // & replase it with const SizedBox(height: 50),
@@ -171,6 +228,8 @@ class updateProfile extends StatelessWidget {
                                   //   ),
                                   // ),
                                   const SizedBox(height: tDefaultSpacing * 1.5),
+
+                                  // edit button
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
@@ -184,6 +243,7 @@ class updateProfile extends StatelessWidget {
                                           await controller.updateRecord(
                                             fullName.text.trim(),
                                             phoneNo.text.trim(),
+                                            controller.photo.value,
                                           );
                                         }
                                       },
@@ -196,6 +256,8 @@ class updateProfile extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: tFormHeight),
+
+                                  //..
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -213,9 +275,11 @@ class updateProfile extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+
+                                      //delete button
                                       ElevatedButton(
                                         onPressed: () {
-                                          // ****** delete account
+                                          controller.deleteUser();
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.redAccent

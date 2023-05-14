@@ -46,7 +46,7 @@ class UserManagement extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage(userData.photo!),
+                              backgroundImage: NetworkImage(userData.photo!),
                               radius: size.width * 0.15,
                             ),
                             const Divider(),

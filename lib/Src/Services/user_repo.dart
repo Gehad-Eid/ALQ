@@ -62,7 +62,11 @@ class UserRepository extends GetxController {
 
   // Fetch All Users details
   Stream<List<UserModel>> allUsers() {
-    return _db.collection("Users").orderBy("score").snapshots().map((data) {
+    return _db
+        .collection("Users")
+        .orderBy("score", descending: false) //******** */
+        .snapshots()
+        .map((data) {
       List<UserModel> users = [];
       data.docs.forEach((element) {
         users.add(UserModel.fromSnapshot(element));
@@ -72,10 +76,47 @@ class UserRepository extends GetxController {
   }
 
   //update the user's data
-  Future<void> updateUserRecord(String name, String phone, String uid) async {
-    await _db.collection("Users").doc(uid).update({
-      "FullName": name,
-      "Phone": phone,
+  Future<void> updateUserRecord(
+      String name, String phone, photo, String uid) async {
+    await _db
+        .collection("Users")
+        .doc(uid)
+        .update({"FullName": name, "Phone": phone, "photo": photo})
+        .whenComplete(
+          () => Get.snackbar(
+              "Success", "Your profile has been updated successfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.white.withOpacity(0.5),
+              colorText: Colors.green),
+        )
+        .catchError((error, stackTrace) {
+          Get.snackbar("Error", error.toString(), //somthing went wrong
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent
+                  .withOpacity(0.1), // ******* Colors.white.withOpacity(0.5),
+              colorText: Colors.red);
+        });
+  }
+
+//update the user's data
+  Future<void> deleteUser(String uid) async {
+    await _db
+        .collection("Users")
+        .doc(uid)
+        .delete()
+        .whenComplete(
+          () => Get.snackbar(
+              "Success", "Your profile has been deleted successfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.white.withOpacity(0.5),
+              colorText: Colors.green),
+        )
+        .catchError((error, stackTrace) {
+      Get.snackbar("Error", error.toString(), //somthing went wrong
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent
+              .withOpacity(0.1), // ******* Colors.white.withOpacity(0.5),
+          colorText: Colors.red);
     });
   }
 }

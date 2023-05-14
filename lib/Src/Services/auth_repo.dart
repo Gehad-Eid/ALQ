@@ -114,6 +114,8 @@ class AuthenticationRepository extends GetxController {
 // Logs out the user
   Future<void> logout() async => await _auth.signOut();
 
+  Future<void> deleteUser() async => await firebaseUser.value!.delete();
+
 //resets the user password
   Future<String?> resetPass(String email) async {
     try {

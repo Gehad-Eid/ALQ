@@ -36,34 +36,41 @@ class PeerRankWithAvatarAndName extends StatelessWidget {
           child: Column(
             children: [
               Obx(
-                () => Expanded(
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(width: 12);
-                      },
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.allUsers.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          // height: 100,
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    controller.allUsers[index].photo!),
-                                radius: 39,
-                              ),
-                              //break line
-                              Text(
-                                  controller.allUsers[index].fullName!
-                                      .split(" ")[0],
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
+                () => controller.allUsers.length > 0
+                    ? Expanded(
+                        child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(width: 12);
+                            },
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.allUsers.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                // height: 100,
+                                child: Column(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          controller.allUsers[index].photo!),
+                                      radius: 39,
+                                    ),
+                                    //break line
+                                    Text(
+                                        controller.allUsers[index].fullName!
+                                            .split(" ")[0],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge),
+                                  ],
+                                ),
+                              );
+                            }),
+                      )
+                    : Center(
+                        child: Text("No achievements",
+                            style: Theme.of(context).textTheme.headline3),
+                      ),
               ),
             ],
           ),

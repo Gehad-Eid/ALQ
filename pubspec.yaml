@@ -79,6 +79,7 @@ dependencies:
 
   # -- user --
   image_picker: ^0.8.6+1
+  file_picker: ^5.2.7
 
 
 dev_dependencies:

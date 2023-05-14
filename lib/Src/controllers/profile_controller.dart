@@ -13,6 +13,8 @@ class ProfileController extends GetxController {
   RxList<UserModel> users = RxList<UserModel>();
   List<UserModel> get allUsers => users;
 
+  RxString photo = ''.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -43,9 +45,19 @@ class ProfileController extends GetxController {
     return _userRepo.getUserDetails(uid!);
   }
 
-  //calling the update to update the user
-  updateRecord(String name, String phone) async {
+// delete the user form the db
+  deleteUser() async {
     final uid = _authRepo.firebaseUser.value?.uid;
-    await _userRepo.updateUserRecord(name, phone, uid!);
+
+    await _userRepo.deleteUser(uid!);
+    _authRepo.deleteUser();
+  }
+
+  //calling the update to update the user
+  updateRecord(String name, String phone, String photoPram) async {
+    final uid = _authRepo.firebaseUser.value?.uid;
+    await _userRepo.updateUserRecord(name, phone, photoPram, uid!);
+    photo.value = "";
+    Get.close(1);
   }
 }

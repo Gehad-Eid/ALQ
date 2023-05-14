@@ -32,51 +32,77 @@ class AllUsers extends StatelessWidget {
             margin: const EdgeInsets.only(top: tDefaultSpacing * 2),
             child: Column(children: [
               Obx(
-                () => Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: homeController.allUsers.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(tDefaultPadding / 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(tCardRadius),
-                          color: tPrimaryColor, // ***** change
-                        ),
-                        height: 100,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    homeController.allUsers[index].photo!),
-                                radius: 50),
-                            const SizedBox(height: 5),
-                            //break line
-                            Text(homeController.allUsers[index].fullName!,
-                                style: Theme.of(context).textTheme.bodyLarge),
-                            const SizedBox(height: 5),
+                () => homeController.allUsers.length > 0
+                    ? Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 12);
+                          },
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: homeController.allUsers.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding:
+                                  const EdgeInsets.all(tDefaultPadding / 3),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(tCardRadius),
+                                color: tPrimaryColor, // ***** change
+                              ),
+                              height: 100,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          homeController
+                                              .allUsers[index].photo!),
+                                      radius: 50),
+                                  const SizedBox(height: 5),
+                                  //break line
+                                  Text(homeController.allUsers[index].fullName!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge),
+                                  const SizedBox(height: 5),
 
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Score",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                                Text("${homeController.allUsers[index].score!}",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium),
-                              ],
-                            ),
-                          ],
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Score",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium),
+                                      Text(
+                                          "${homeController.allUsers[index].score!}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "images/man.png",
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(
+                            height: tDefaultPadding,
+                          ),
+                          Center(
+                            child: Text("No achievements",
+                                style: Theme.of(context).textTheme.headline3),
+                          ),
+                        ],
+                      ),
               ),
             ]),
           ),
